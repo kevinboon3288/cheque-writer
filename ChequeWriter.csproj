@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ChequeModule\" />
+    <Folder Include="ReportModule\ViewModels\" />
+    <Folder Include="ReportModule\Views\" />
+    <Folder Include="ChequeModule\ViewModels\" />
+    <Folder Include="ChequeModule\Views\" />
+    <Folder Include="DataServices\" />
+  </ItemGroup>
+
+</Project>
