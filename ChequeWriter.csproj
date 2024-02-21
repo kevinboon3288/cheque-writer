@@ -2,19 +2,23 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+	<LangVersion>10.0</LangVersion>
+	<TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+	<Platforms>AnyCPU;x64</Platforms>
+	<EnableNETAnalyzers>True</EnableNETAnalyzers>
+	<AnalysisLevel>latest-recommended</AnalysisLevel>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ChequeModule\" />
-    <Folder Include="ReportModule\ViewModels\" />
-    <Folder Include="ReportModule\Views\" />
-    <Folder Include="ChequeModule\ViewModels\" />
-    <Folder Include="ChequeModule\Views\" />
-    <Folder Include="DataServices\" />
+    <Folder Include="Modules\ChequeModule\ViewModels\" />
+    <Folder Include="Modules\ChequeModule\Views\" />
+    <Folder Include="Modules\ReportModule\ViewModels\" />
+    <Folder Include="Modules\ReportModule\Views\" />
+    <Folder Include="Resources\Images\" />
+    <Folder Include="Services\DataService\" />
   </ItemGroup>
 
 </Project>
