@@ -13,12 +13,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\ChequeModule\ViewModels\" />
-    <Folder Include="Modules\ChequeModule\Views\" />
-    <Folder Include="Modules\ReportModule\ViewModels\" />
-    <Folder Include="Modules\ReportModule\Views\" />
-    <Folder Include="Resources\Images\" />
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+    <Page Remove="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Services\DataService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Resources\Resources.csproj" />
   </ItemGroup>
 
 </Project>
