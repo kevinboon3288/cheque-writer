@@ -38,6 +38,7 @@ namespace ChequeWriter
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
+            moduleCatalog.AddModule<Modules.MainModule.MainModule>();
             moduleCatalog.AddModule<Modules.ChequeModule.ChequeModule>();
             moduleCatalog.AddModule<Modules.ChequeModule.ReportModule>();
         }
