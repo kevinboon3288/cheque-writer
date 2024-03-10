@@ -14,9 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ChequeWriter.DatabaseInitializer\**" />
     <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="ChequeWriter.DatabaseInitializer\**" />
     <EmbeddedResource Remove="Resources\**" />
+    <None Remove="ChequeWriter.DatabaseInitializer\**" />
     <None Remove="Resources\**" />
+    <Page Remove="ChequeWriter.DatabaseInitializer\**" />
     <Page Remove="Resources\**" />
   </ItemGroup>
 
