@@ -23,7 +23,6 @@ namespace ChequeWriter.Modules.ChequeModule.ViewModels
             region.RequestNavigate("MainView");
         }
 
-
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             // Entry Point when navigate to ChequeView

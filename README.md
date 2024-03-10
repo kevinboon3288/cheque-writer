@@ -12,3 +12,4 @@ A financial tools to automate the information writing process on the cheque and 
 ## Contributors
 
 - [@kevinboon3288](https://github.com/kevinboon3288)
+- [@Yawhou](https://github.com/Yawhou)

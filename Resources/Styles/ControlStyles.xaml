@@ -10,12 +10,12 @@
         <Setter Property="FontFamily" Value="Sora" />
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontSize" Value="18" />
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Margin" Value="5"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-    
+
     <Style x:Key="RoundBtnStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="50" />
@@ -23,17 +23,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="SeaGreen"
-                            BorderBrush="DarkOliveGreen"
-                            BorderThickness="2"
-                            CornerRadius="5">
+                    <Border
+                        Background="SeaGreen"
+                        BorderBrush="DarkOliveGreen"
+                        BorderThickness="2"
+                        CornerRadius="5">
                         <ContentPresenter
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
                             TextElement.FontFamily="Sora"
                             TextElement.FontSize="12"
                             TextElement.FontWeight="SemiBold"
-                            TextElement.Foreground="GhostWhite" 
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"/>
+                            TextElement.Foreground="GhostWhite" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
