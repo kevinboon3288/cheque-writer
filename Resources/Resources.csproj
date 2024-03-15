@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting> <!-- Added 10 Mar 24 to solve:
+    /usr/local/share/dotnet/sdk/8.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Sdk.FrameworkReferenceResolution.targets(90,5): 
+    error NETSDK1100: To build a project targeting Windows on this operating system, set the EnableWindowsTargeting property to true.
+    -->
   </PropertyGroup>
 
 </Project>
