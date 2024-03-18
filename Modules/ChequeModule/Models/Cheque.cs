@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChequeWriter.Modules.ChequeModule.Models
 {
-    public class ChequeModel
+    public class Cheque
     {
         public int Id { get; set; }
 
@@ -16,12 +12,12 @@ namespace ChequeWriter.Modules.ChequeModule.Models
 
         public DateTime DateCreated { get; set; }
 
-        public string AmountInWord { get; set; }
+        public string AmountInWord { get; set; } = string.Empty;
 
-        public ChequeModel(string name, string amtInWord)
+        public Cheque(string name, double amt)
         {
             Name = name;
-            AmountInWord = amtInWord;
+            Amount = amt;
         }
     }
 }
