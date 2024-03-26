@@ -12,7 +12,7 @@ namespace ChequeWriter.Modules.ChequeModule.Models
 
         public DateTime DateCreated { get; set; }
 
-        public string AmountInWord { get; set; } = string.Empty;
+        public string? AmountInWord { get; set; }
 
         public Cheque(string name, double amt)
         {
