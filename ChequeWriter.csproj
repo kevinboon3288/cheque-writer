@@ -10,6 +10,7 @@
 	  <Platforms>AnyCPU;x64</Platforms>
 	  <EnableNETAnalyzers>True</EnableNETAnalyzers>
 	  <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <ItemGroup>
