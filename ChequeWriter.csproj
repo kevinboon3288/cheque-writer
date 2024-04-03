@@ -11,12 +11,18 @@
 	  <EnableNETAnalyzers>True</EnableNETAnalyzers>
 	  <AnalysisLevel>latest-recommended</AnalysisLevel>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ChequeWriter.DbInitializer\**" />
     <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="ChequeWriter.DbInitializer\**" />
     <EmbeddedResource Remove="Resources\**" />
+    <None Remove="ChequeWriter.DbInitializer\**" />
     <None Remove="Resources\**" />
+    <Page Remove="ChequeWriter.DbInitializer\**" />
     <Page Remove="Resources\**" />
   </ItemGroup>
 
@@ -30,6 +36,13 @@
 
   <ItemGroup>
     <Folder Include="Services\DataService\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
