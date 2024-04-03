@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeWriter", "ChequeWrite
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "Resources\Resources.csproj", "{0275084E-8932-4B43-BD43-979A82D0AA6F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeWriter.DatabaseInitializer", "ChequeWriter.DatabaseInitializer\ChequeWriter.DatabaseInitializer.csproj", "{91274B72-F9EE-4EF5-9CB5-6ACA4550558C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeWriter.DbInitializer", "ChequeWriter.DbInitializer\ChequeWriter.DbInitializer.csproj", "{91274B72-F9EE-4EF5-9CB5-6ACA4550558C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿namespace ChequeWriter.DatabaseInitializer
+﻿namespace ChequeWriter.DbInitializer.DbModels
 {
     public class Cheque
     {
