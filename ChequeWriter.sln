@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeWriter", "ChequeWrite
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "Resources\Resources.csproj", "{0275084E-8932-4B43-BD43-979A82D0AA6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChequeWriter.DatabaseInitializer", "ChequeWriter.DatabaseInitializer\ChequeWriter.DatabaseInitializer.csproj", "{68A6561C-3934-4E27-98BE-280253774331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeWriter.DatabaseInitializer", "ChequeWriter.DatabaseInitializer\ChequeWriter.DatabaseInitializer.csproj", "{91274B72-F9EE-4EF5-9CB5-6ACA4550558C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{0275084E-8932-4B43-BD43-979A82D0AA6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0275084E-8932-4B43-BD43-979A82D0AA6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0275084E-8932-4B43-BD43-979A82D0AA6F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68A6561C-3934-4E27-98BE-280253774331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68A6561C-3934-4E27-98BE-280253774331}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68A6561C-3934-4E27-98BE-280253774331}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68A6561C-3934-4E27-98BE-280253774331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91274B72-F9EE-4EF5-9CB5-6ACA4550558C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91274B72-F9EE-4EF5-9CB5-6ACA4550558C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91274B72-F9EE-4EF5-9CB5-6ACA4550558C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91274B72-F9EE-4EF5-9CB5-6ACA4550558C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

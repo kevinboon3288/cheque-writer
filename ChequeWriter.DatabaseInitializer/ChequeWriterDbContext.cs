@@ -1,22 +1,20 @@
-﻿using ChequeWriter.DatabaseInitializer.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace ChequeWriter.DatabaseInitializer;
-
-public class ChequeWriterDbContext : DbContext
+﻿namespace EfCoreTest
 {
-    public ChequeWriterDbContext(DbContextOptions<ChequeWriterDbContext> options) :
-        base(options)
+    public class ChequeWriterDbContext: DbContext
     {
-    }
+        public ChequeWriterDbContext() : base() { }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Cheque>()
-            .Property(d => d.DateCreated)
-            .HasDefaultValue("CURRENT_TIMESTAMP")
-            .HasColumnType("timestamp without time zone");
-    }
+        public ChequeWriterDbContext(DbContextOptions<ChequeWriterDbContext> options) : base(options) { }
 
-    public DbSet<Cheque> Cheques { get; set; }
+        public DbSet<Cheque> Cheque { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            string? connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["cheque"].ConnectionString;
+
+            ArgumentNullException.ThrowIfNull(connectionString);
+
+            optionsBuilder.UseNpgsql(connectionString);
+        }
+    }
 }
