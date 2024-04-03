@@ -1,4 +1,4 @@
-﻿namespace EfCoreTest
+﻿namespace ChequeWriter.DatabaseInitializer
 {
     public class ChequeWriterDbContext: DbContext
     {
