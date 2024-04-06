@@ -2,16 +2,16 @@
 
 A financial tools to automate the information writing process on the cheque and generate the financial report
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
 ## 🛠 Languages and Technologies
 
 - ASP .NET
 - C#
 - WPF Framework
 - MVVM Architectural Design
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
 
 ## Contributors
 
