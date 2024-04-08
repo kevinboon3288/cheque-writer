@@ -1,11 +1,4 @@
-﻿using Prism.Ioc;
-using Prism.Modularity;
-using Prism.Mvvm;
-using Prism.Regions;
-using ChequeWriter.Modules.ReportModule.Views;
-using ChequeWriter.Modules.ReportModule.ViewModels;
-
-namespace ChequeWriter.Modules.ChequeModule
+﻿namespace ChequeWriter.Modules.ChequeModule
 {
     public class ReportModule : IModule
     {

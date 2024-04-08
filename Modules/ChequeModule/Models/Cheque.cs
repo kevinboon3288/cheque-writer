@@ -1,5 +1,4 @@
-﻿
-namespace ChequeWriter.Modules.ChequeModule.Models
+﻿namespace ChequeWriter.Modules.ChequeModule.Models
 {
     public class Cheque
     {

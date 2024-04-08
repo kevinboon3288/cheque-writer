@@ -15,18 +15,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="ChequeWriter.DbInitializer\**" />
+    <Compile Remove="Modules\**" />
     <Compile Remove="Resources\**" />
     <EmbeddedResource Remove="ChequeWriter.DbInitializer\**" />
+    <EmbeddedResource Remove="Modules\**" />
     <EmbeddedResource Remove="Resources\**" />
     <None Remove="ChequeWriter.DbInitializer\**" />
-    <None Remove="Resources\**" />
+    <None Remove="Modules\**" />
+	<None Remove="Resources\**" />
     <Page Remove="ChequeWriter.DbInitializer\**" />
+    <Page Remove="Modules\**" />
     <Page Remove="Resources\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Modules\ChequeModule\ChequeModule.csproj" />
+    <ProjectReference Include="Modules\MainModule\MainModule.csproj" />
+    <ProjectReference Include="Modules\ReportModule\ReportModule.csproj" />
     <ProjectReference Include="Resources\Resources.csproj" />
   </ItemGroup>
   <ItemGroup>
