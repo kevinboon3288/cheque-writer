@@ -1,6 +1,4 @@
-﻿using ChequeWriter.Modules.ChequeModule.Models;
-
-namespace ChequeWriter.Modules.ChequeModule.Core
+﻿namespace ChequeWriter.Modules.ChequeModule.Core
 {
     public interface IChequeManager
     {

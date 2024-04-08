@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ChequeWriter.Modules.ChequeModule.Core;
+﻿namespace ChequeWriter.Modules.ChequeModule.Core;
 
 public class ChequeManager : IChequeManager
 {
-    private List<Models.Cheque> _cheques = new();
+    private List<Cheque> _cheques = new();
 
-    public List<Models.Cheque> Cheques => _cheques;
+    public List<Cheque> Cheques => _cheques;
 
-    public Models.Cheque? GetCheque(int id)
+    public Cheque? GetCheque(int id)
     {
         return _cheques.Any(x => x.Id == id) ? _cheques[id] : null;
     }
 
-    public void AddCheque(Models.Cheque cheque)
+    public void AddCheque(Cheque cheque)
     {
         if (!_cheques.Any(x => x.Id == cheque.Id))
         {
@@ -25,9 +19,9 @@ public class ChequeManager : IChequeManager
         }
     }
 
-    public void UpdateCheque(Models.Cheque cheque)
+    public void UpdateCheque(Cheque cheque)
     {
-        Models.Cheque? selectedCheque = _cheques.FirstOrDefault(x => x.Id == cheque.Id);
+        Cheque? selectedCheque = _cheques.FirstOrDefault(x => x.Id == cheque.Id);
 
         if (selectedCheque != null)
         {
@@ -39,7 +33,7 @@ public class ChequeManager : IChequeManager
 
     public void DeleteCheque(int id)
     {
-        Models.Cheque? selectedCheque = _cheques.FirstOrDefault(x => x.Id == id);
+        Cheque? selectedCheque = _cheques.FirstOrDefault(x => x.Id == id);
 
         if (selectedCheque != null)
         {

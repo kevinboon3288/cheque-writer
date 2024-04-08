@@ -1,5 +1,4 @@
-﻿using ChequeWriter.Modules.ChequeModule.Core;
-using Prism.Events;
+﻿using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -23,7 +22,7 @@ namespace ChequeWriter
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IChequeManager, ChequeManager>();
+            containerRegistry.Register<Modules.ChequeModule.Core.IChequeManager, Modules.ChequeModule.Core.ChequeManager>();
 
             IEventAggregator eventAggregator = containerRegistry.GetContainer().Resolve<IEventAggregator>();
             IRegionManager _regionManager = containerRegistry.GetContainer().Resolve<IRegionManager>();
@@ -42,7 +41,7 @@ namespace ChequeWriter
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<Modules.MainModule.MainModule>();
-            moduleCatalog.AddModule<Modules.ChequeModule.ChequeModule>();
+            moduleCatalog.AddModule<Modules.ChequeModule.ChequeModule > ();
             moduleCatalog.AddModule<Modules.ChequeModule.ReportModule>();
         }
 

@@ -1,8 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
-
-namespace ChequeWriter.Modules.ChequeModule.ViewModels
+﻿namespace ChequeWriter.Modules.ChequeModule.ViewModels
 {
     public class ChequeViewModel : BindableBase, INavigationAware
     {
