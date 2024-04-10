@@ -14,18 +14,22 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="ChequeWriter.DbInitializer.Console\**" />
     <Compile Remove="ChequeWriter.DbInitializer\**" />
     <Compile Remove="Modules\**" />
     <Compile Remove="Resources\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="ChequeWriter.DbInitializer.Console\**" />
     <EmbeddedResource Remove="ChequeWriter.DbInitializer\**" />
     <EmbeddedResource Remove="Modules\**" />
     <EmbeddedResource Remove="Resources\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="ChequeWriter.DbInitializer.Console\**" />
     <None Remove="ChequeWriter.DbInitializer\**" />
     <None Remove="Modules\**" />
 	<None Remove="Resources\**" />
 	<None Remove="Services\**" />
+	<Page Remove="ChequeWriter.DbInitializer.Console\**" />
     <Page Remove="ChequeWriter.DbInitializer\**" />
     <Page Remove="Modules\**" />
     <Page Remove="Resources\**" />

@@ -1,14 +1,14 @@
-﻿
-
-namespace ChequeWriter.DbInitializer;
+﻿namespace DataServices;
 
 public class ChequeWriterDbContext: DbContext
 {
+    public DbSet<Cheque> Cheque => Set<Cheque>();
+    public DbSet<User> User => Set<User>();
+    public DbSet<UserLevel> UserLevel => Set<UserLevel>();
+
     public ChequeWriterDbContext() : base() { }
 
     public ChequeWriterDbContext(DbContextOptions<ChequeWriterDbContext> options) : base(options) { }
-
-    public DbSet<Cheque> Cheque { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -17,5 +17,10 @@ public class ChequeWriterDbContext: DbContext
         ArgumentNullException.ThrowIfNull(connectionString);
 
         optionsBuilder.UseNpgsql(connectionString);
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
     }
 }

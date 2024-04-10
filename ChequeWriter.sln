@@ -13,13 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{53EF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeModule", "Modules\ChequeModule\ChequeModule.csproj", "{986D83AF-F5C7-4E8E-A36E-F09CE727F9E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportModule", "Modules\ReportModule\ReportModule.csproj", "{F4E7B129-DB3E-4FCA-826A-56241A1E6162}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportModule", "Modules\ReportModule\ReportModule.csproj", "{F4E7B129-DB3E-4FCA-826A-56241A1E6162}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainModule", "Modules\MainModule\MainModule.csproj", "{122DB8FF-66D4-4599-8A4B-7BD1860D2D53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainModule", "Modules\MainModule\MainModule.csproj", "{122DB8FF-66D4-4599-8A4B-7BD1860D2D53}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2F6BAEED-3FF9-40C1-A725-70D27FC040F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataServices", "Services\DataServices\DataServices.csproj", "{1AC5EA38-2F42-4518-95FD-70B88E6E7763}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataServices", "Services\DataServices\DataServices.csproj", "{1AC5EA38-2F42-4518-95FD-70B88E6E7763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChequeWriter.DbInitializer.Console", "ChequeWriter.DbInitializer.Console\ChequeWriter.DbInitializer.Console.csproj", "{2EEDB513-9C66-4287-89A3-7BF908137EF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{1AC5EA38-2F42-4518-95FD-70B88E6E7763}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AC5EA38-2F42-4518-95FD-70B88E6E7763}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AC5EA38-2F42-4518-95FD-70B88E6E7763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EEDB513-9C66-4287-89A3-7BF908137EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EEDB513-9C66-4287-89A3-7BF908137EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EEDB513-9C66-4287-89A3-7BF908137EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EEDB513-9C66-4287-89A3-7BF908137EF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

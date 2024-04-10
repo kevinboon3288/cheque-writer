@@ -1,3 +1,3 @@
-﻿global using System.ComponentModel.DataAnnotations;
+﻿global using System;
+global using DataServices;
 global using Microsoft.EntityFrameworkCore;
-global using ChequeWriter.DbInitializer.DbModels;
