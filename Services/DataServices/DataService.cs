@@ -1,6 +1,6 @@
 ﻿namespace DataServices;
 
-public class DataService
+public class DataService : IDataService
 {
     private const string _connectionString = "Host=localhost;Database=cheque-writer-ui;Username=postgres;Password=postgres";
     private readonly IDesignTimeDbContextFactory<ChequeWriterDbContext> _dbContextFactory;
@@ -10,7 +10,7 @@ public class DataService
         _dbContextFactory = dbContextFactory;
     }
 
-    public Cheque? GetCheque(int id)
+    public Cheque? GetCheques(int id)
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
@@ -20,5 +20,23 @@ public class DataService
             select c;
 
         return queryResult.FirstOrDefault();
+    }
+
+    public List<UserLevel>? GetUserLevels()
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        var queryResult =
+            from ul in db.UserLevel.ToList()
+            select ul;
+
+        List<UserLevel>? userLevels = new();
+
+        foreach (UserLevel? userLevel in queryResult)
+        {
+            userLevels.Add(userLevel);
+        }
+
+        return userLevels;
     }
 }
