@@ -8,6 +8,5 @@
         void DeleteCheque(int id);
         Cheque? GetCheque(int id);
         void UpdateCheque(Cheque cheque);
-        List<UserLevel> GetUserLevels();
     }
 }
