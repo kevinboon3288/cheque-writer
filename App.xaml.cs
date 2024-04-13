@@ -48,6 +48,7 @@ namespace ChequeWriter
             moduleCatalog.AddModule<Modules.MainModule.MainModule>();
             moduleCatalog.AddModule<Modules.ChequeModule.ChequeModule > ();
             moduleCatalog.AddModule<Modules.ChequeModule.ReportModule>();
+            moduleCatalog.AddModule<Modules.UserModule.UserModule>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
