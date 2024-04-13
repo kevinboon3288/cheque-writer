@@ -3,12 +3,14 @@
     public class ChequeViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
+        private readonly IChequeManager _chequeManager;
 
         public DelegateCommand NavigateBack { get; set; }
 
-        public ChequeViewModel(IRegionManager regionManager)
+        public ChequeViewModel(IRegionManager regionManager, IChequeManager chequeManager)
         {
             _regionManager = regionManager;
+            _chequeManager = chequeManager;
 
             NavigateBack = new DelegateCommand(OnReturn);
         }
@@ -21,7 +23,6 @@
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            // Entry Point when navigate to ChequeView
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

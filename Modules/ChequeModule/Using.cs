@@ -1,9 +1,10 @@
-﻿global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Text;
-global using System.Threading.Tasks;
+﻿global using Prism.Ioc;
+global using Prism.Modularity;
 global using Prism.Commands;
 global using Prism.Mvvm;
 global using Prism.Regions;
 global using ChequeWriter.Modules.ChequeModule.Models;
+global using DataServices;
+global using ChequeWriter.Modules.ChequeModule.Views;
+global using ChequeWriter.Modules.ChequeModule.ViewModels;
+global using ChequeWriter.Modules.ChequeModule.Core;

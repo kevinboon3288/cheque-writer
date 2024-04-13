@@ -1,11 +1,4 @@
-﻿using Prism.Ioc;
-using Prism.Modularity;
-using Prism.Mvvm;
-using Prism.Regions;
-using ChequeWriter.Modules.ChequeModule.Views;
-using ChequeWriter.Modules.ChequeModule.ViewModels;
-
-namespace ChequeWriter.Modules.ChequeModule
+﻿namespace ChequeWriter.Modules.ChequeModule
 {
     public class ChequeModule : IModule
     {
@@ -23,6 +16,7 @@ namespace ChequeWriter.Modules.ChequeModule
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterScoped<IDataService, DataService>();
             containerRegistry.RegisterForNavigation<ChequeView>();
 
             ViewModelLocationProvider.Register<ChequeView, ChequeViewModel>();

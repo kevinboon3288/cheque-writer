@@ -2,9 +2,15 @@
 
 public class ChequeManager : IChequeManager
 {
+    private readonly IDataService _dataService;
     private List<Cheque> _cheques = new();
 
     public List<Cheque> Cheques => _cheques;
+
+    public ChequeManager(IDataService dataService)
+    {
+        _dataService = dataService;
+    }
 
     public Cheque? GetCheque(int id)
     {
