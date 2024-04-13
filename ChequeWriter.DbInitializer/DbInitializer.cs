@@ -6,11 +6,8 @@ public static class DbInitializer
     {
         ArgumentNullException.ThrowIfNull(nameof(connectionString));
 
-        DbContextOptionsBuilder<ChequeWriterDbContext> optionsBuilder = new();
-        optionsBuilder.UseNpgsql(connectionString);
-
-        using ChequeWriterDbContext db = new ChequeWriterDbContext(optionsBuilder.Options);
-
+        ChequeWriterDbContextFactory dbContextFactory = new ChequeWriterDbContextFactory();
+        ChequeWriterDbContext db = dbContextFactory.CreateDbContext([connectionString]);
         db.Database.EnsureCreated();
 
         ClearAllData(db);

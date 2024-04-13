@@ -13,7 +13,7 @@ public class ChequeWriterDbContext: DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         string? connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["cheque-writer-ui"].ConnectionString;
-
+        
         ArgumentNullException.ThrowIfNull(connectionString);
 
         optionsBuilder.UseNpgsql(connectionString);
