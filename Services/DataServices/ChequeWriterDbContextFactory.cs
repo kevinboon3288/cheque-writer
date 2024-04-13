@@ -4,14 +4,13 @@ public class ChequeWriterDbContextFactory : IDesignTimeDbContextFactory<ChequeWr
 {
     public ChequeWriterDbContext CreateDbContext(string[] args)
     {
-        if (args.Length == 0 || args is null) 
-        { 
-            throw new ArgumentNullException(nameof(args));
+        //TODO: Temporary get connectionString from args or config file for Add-Migration. Find a better way to resolve this more dynamically.
+        string? connectionString = (args.Length != 0) ? args[0] : ConfigurationManager.ConnectionStrings["cheque-writer-ui"].ConnectionString;
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new ArgumentException("Connection string is required.");
         }
-
-        string connectionString = args[0];
-
-        ArgumentNullException.ThrowIfNull(connectionString);
 
         DbContextOptionsBuilder<ChequeWriterDbContext> optionsBuilder = new();
         optionsBuilder.UseNpgsql(connectionString);

@@ -1,18 +1,16 @@
-﻿using ChequeWriter.Modules.ChequeModule.Core;
-
-namespace ChequeWriter.Modules.ChequeModule.ViewModels
+﻿namespace ChequeWriter.Modules.ChequeModule.ViewModels
 {
     public class ChequeViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
-        private readonly IDataService _dataService;
+        private readonly IChequeManager _chequeManager;
 
         public DelegateCommand NavigateBack { get; set; }
 
-        public ChequeViewModel(IRegionManager regionManager, IDataService dataService)
+        public ChequeViewModel(IRegionManager regionManager, IChequeManager chequeManager)
         {
             _regionManager = regionManager;
-            _dataService = dataService;
+            _chequeManager = chequeManager;
 
             NavigateBack = new DelegateCommand(OnReturn);
         }
@@ -25,9 +23,6 @@ namespace ChequeWriter.Modules.ChequeModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            // Entry Point when navigate to ChequeView
-
-            var userLevels = _dataService.GetUserLevels();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataServices.Migrations
 {
     [DbContext(typeof(ChequeWriterDbContext))]
-    [Migration("20240410143826_initial-db")]
-    partial class initialdb
+    [Migration("20240413051435_InitialDb")]
+    partial class InitialDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -2,15 +2,15 @@
 
 public class ChequeManager : IChequeManager
 {
-    //private readonly IDataService _dataService;
+    private readonly IDataService _dataService;
     private List<Cheque> _cheques = new();
 
     public List<Cheque> Cheques => _cheques;
 
-    //public ChequeManager(IDataService dataService)
-    //{
-    //    _dataService = dataService;
-    //}
+    public ChequeManager(IDataService dataService)
+    {
+        _dataService = dataService;
+    }
 
     public Cheque? GetCheque(int id)
     {
@@ -47,22 +47,22 @@ public class ChequeManager : IChequeManager
         }
     }
 
-    //public List<UserLevel> GetUserLevels()
-    //{
-    //    var result = _dataService.GetUserLevels();
+    public List<UserLevel> GetUserLevels()
+    {
+        var result = _dataService.GetUserLevels();
 
-    //    ArgumentNullException.ThrowIfNull(nameof(result));
+        ArgumentNullException.ThrowIfNull(nameof(result));
 
-    //    List<UserLevel> userLevels = new();
-    //    foreach (var userLevel in result!) 
-    //    {
-    //        userLevels.Add(new UserLevel() 
-    //        {
-    //            Id = userLevel.Id,
-    //            Name = userLevel.Name
-    //        });
-    //    }
+        List<UserLevel> userLevels = new();
+        foreach (var userLevel in result!)
+        {
+            userLevels.Add(new UserLevel()
+            {
+                Id = userLevel.Id,
+                Name = userLevel.Name
+            });
+        }
 
-    //    return userLevels;
-    //}
+        return userLevels;
+    }
 }
