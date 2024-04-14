@@ -17,8 +17,11 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<UserView>();
+            containerRegistry.RegisterForNavigation<UserLoginView>();
 
             ViewModelLocationProvider.Register<UserView, UserViewModel>();
+            ViewModelLocationProvider.Register<UserLoginView, UserLoginViewModel>();
+
         }
     }
 }
