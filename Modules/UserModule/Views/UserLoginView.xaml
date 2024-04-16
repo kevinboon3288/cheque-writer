@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Border Padding="40">
+    <Border Padding="40" Background="{StaticResource Secondary}" BorderBrush="{StaticResource Text-Dark}" BorderThickness="5">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -25,7 +25,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Text="User Login" Style="{StaticResource ModuleTitleTextStyle}"/>
-            <Border Grid.Row="1" Margin="50, 10" Padding="20" BorderThickness="5" BorderBrush="Black" CornerRadius="5">
+            <Border Grid.Row="1" Margin="50, 10" Padding="20" BorderThickness="5" BorderBrush="Black" CornerRadius="5" Background="{StaticResource Tertiary}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -35,19 +35,18 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="UserName :" Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="10"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="10" Text="{Binding UserName}" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Password :" Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="10"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Job Title :" Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="10"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Authority :" Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <ComboBox Grid.Row="3" Grid.Column="1" Margin="10"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="10" Text="{Binding Password}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Authority :" Style="{StaticResource UserLoginTitleTextStyle}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="10"
+                              ItemsSource="{Binding UserLevels}" SelectedItem="{Binding SelectedUserLevel}" DisplayMemberPath="Name" />
                 </Grid>
             </Border>
-            <Button Grid.Row="2" Content="Login" Margin="50, 10" Width="200" Height="30" HorizontalAlignment="Center" Style="{StaticResource RoundBtnStyle}"/>
+            <Button Grid.Row="2" Content="Login" Margin="50, 10" Width="200" Height="30" HorizontalAlignment="Center" Style="{StaticResource RoundBtnStyle}"
+                    Command="{Binding LoginCommand}"/>
         </Grid>
     </Border>
 </UserControl>

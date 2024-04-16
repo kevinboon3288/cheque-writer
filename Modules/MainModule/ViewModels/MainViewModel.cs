@@ -26,13 +26,13 @@ namespace ChequeWriter.Modules.MainModule.ViewModels
 
         private void OnNavigateToCheque()
         {
-            IRegion region = _regionManager.Regions["MainContentRegion"];
+            IRegion region = _regionManager.Regions["UserContentRegion"];
             region.RequestNavigate("ChequeView");
         }
 
         private void OnNavigateToReport()
         {
-            IRegion region = _regionManager.Regions["MainContentRegion"];
+            IRegion region = _regionManager.Regions["UserContentRegion"];
             region.RequestNavigate("ReportView");
         }
 

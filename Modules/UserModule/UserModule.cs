@@ -12,6 +12,7 @@
         public void OnInitialized(IContainerProvider containerProvider)
         {
             _regionManager.RegisterViewWithRegion("UserContentRegion", typeof(UserView));
+            _regionManager.RegisterViewWithRegion("UserLoginContentRegion", typeof(UserLoginView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

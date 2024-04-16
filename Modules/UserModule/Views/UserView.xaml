@@ -18,22 +18,6 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Button
-                Grid.Column="0"
-                Command="{Binding NavigateBack}"
-                Content="Back"
-                Style="{StaticResource RoundBtnStyle}" />
-        <TextBlock
-                Grid.Column="1"
-                Style="{StaticResource ModuleTitleTextStyle}"
-                Text="User Management" />
+        <ContentControl prism:RegionManager.RegionName="UserLoginContentRegion"/>
     </Grid>
 </UserControl>

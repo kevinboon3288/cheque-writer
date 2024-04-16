@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataServices.Migrations
 {
     [DbContext(typeof(ChequeWriterDbContext))]
-    [Migration("20240413051435_InitialDb")]
+    [Migration("20240416134320_InitialDb")]
     partial class InitialDb
     {
         /// <inheritdoc />
@@ -60,7 +60,13 @@ namespace DataServices.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("JobTitle")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
                         .HasColumnType("text");
 
                     b.Property<int>("UserLevelId")

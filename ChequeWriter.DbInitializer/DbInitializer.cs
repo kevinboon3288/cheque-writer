@@ -12,7 +12,7 @@ public static class DbInitializer
 
         ClearAllData(db);
         AddUserLevel(db);
-        db.SaveChanges();
+        AddDefaultAdminUser(db);
     }
 
     private static void ClearAllData(ChequeWriterDbContext db) 
@@ -22,9 +22,17 @@ public static class DbInitializer
         db.UserLevel.RemoveRange(db.UserLevel);
     }
 
+    private static void AddDefaultAdminUser(ChequeWriterDbContext db) 
+    {
+        DataServices.Models.UserLevel? userLevel = db.UserLevel.FirstOrDefault(x => x.Name == "Admin");
+        db.User.Add(new DataServices.Models.User() { Name = "Admin", Password="admin123", JobTitle = "Admin", UserLevel = userLevel });
+        db.SaveChanges();
+    }
+
     private static void AddUserLevel(ChequeWriterDbContext db) 
     {
-        db.UserLevel.Add(new DataServices.Models.UserLevel() { Name = "User" });
         db.UserLevel.Add(new DataServices.Models.UserLevel() { Name = "Admin" });
+        db.UserLevel.Add(new DataServices.Models.UserLevel() { Name = "User" });
+        db.SaveChanges();
     }
 }

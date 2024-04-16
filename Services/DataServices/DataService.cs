@@ -39,4 +39,24 @@ public class DataService : IDataService
 
         return userLevels;
     }
+
+    public bool IsValidUser(string? name, string? password, int userLevel) 
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        User user = new() 
+        { 
+            Name = name, 
+            Password = password, 
+            UserLevelId = userLevel 
+        };
+
+        var queryResult =
+            from u in db.User.ToList()
+            join ul in db.UserLevel on u.Id equals userLevel
+            where u.Name == name && u.Password == password && u.UserLevelId == userLevel
+            select u;
+
+        return queryResult.Any();
+    }
 }

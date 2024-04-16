@@ -13,6 +13,6 @@
     mc:Ignorable="d">
 
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="MainContentRegion"/>
+        <ContentControl prism:RegionManager.RegionName="UserContentRegion"/>
     </Grid>
 </Window>

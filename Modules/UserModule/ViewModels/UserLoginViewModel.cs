@@ -1,27 +1,77 @@
-﻿namespace ChequeWriter.Modules.UserModule.ViewModels
+﻿using ChequeWriter.Modules.UserModule.Core;
+
+namespace ChequeWriter.Modules.UserModule.ViewModels
 {
     public class UserLoginViewModel: BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
+        private readonly IUserManager _userManager;
+        private List<UserLevel> _userLevels = new();
+        private UserLevel? _selectedUserLevel = new();
+        private string? _userName;
+        private string? _password;
 
-        public DelegateCommand NavigateBack { get; set; }
-
-        public UserLoginViewModel(IRegionManager regionManager)
+        public string? UserName 
         {
-            _regionManager = regionManager;
-
-            NavigateBack = new DelegateCommand(OnReturn);
+            get { return _userName; }
+            set { SetProperty(ref _userName, value); } 
         }
 
-        private void OnReturn()
+        public string? Password
         {
-            IRegion region = _regionManager.Regions["MainContentRegion"];
-            region.RequestNavigate("MainView");
+            get { return _password; }
+            set { SetProperty(ref _password, value); }
+        }
+
+        public UserLevel? SelectedUserLevel
+        {
+            get { return _selectedUserLevel; }
+            set { SetProperty(ref _selectedUserLevel, value); }
+        }
+
+        public List<UserLevel> UserLevels
+        {
+            get { return _userLevels; }
+            set { SetProperty(ref _userLevels, value); }
+        }
+
+        public DelegateCommand LoginCommand { get; set; }
+
+        public UserLoginViewModel(IRegionManager regionManager, IUserManager userManager)
+        {
+            _regionManager = regionManager;
+            _userManager = userManager;
+
+            LoginCommand = new DelegateCommand(OnLogin);
+
+            OnRefresh();
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            // Entry Point when navigate to UserView
+            OnRefresh();
+        }
+
+        private void OnRefresh() 
+        {
+            UserName = String.Empty;
+            Password = String.Empty;
+            SelectedUserLevel = new();
+            UserLevels = _userManager.GetUserLevels();
+        }
+
+        private void OnLogin()
+        {
+            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password) || _selectedUserLevel is null) 
+            {
+                throw new ArgumentNullException("Empty username or password.");
+            }
+
+            if (_userManager.IsValidUser(UserName, Password, SelectedUserLevel!.Id)) 
+            {
+                IRegion region = _regionManager.Regions["UserContentRegion"];
+                region.RequestNavigate("MainView");               
+            }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
