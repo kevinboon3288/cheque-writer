@@ -36,13 +36,27 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="UserName :" Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="10" Text="{Binding UserName}" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Password :" Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="10" Text="{Binding Password}"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Authority :" Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="10"
-                              ItemsSource="{Binding UserLevels}" SelectedItem="{Binding SelectedUserLevel}" DisplayMemberPath="Name" />
+                    <TextBlock Grid.Row="0" Grid.Column="0" 
+                               Text="UserName :" 
+                               Style="{StaticResource UserLoginTitleTextStyle}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" 
+                             Text="{Binding UserName}" 
+                             Style="{StaticResource UserNameTextBoxStyle}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" 
+                               Text="Password :" 
+                               Style="{StaticResource UserLoginTitleTextStyle}"/>
+                    <!--TODO: Will Implement PasswordBox control instead of Textbox in future-->
+                    <TextBox Grid.Row="1" Grid.Column="1" 
+                             Text="{Binding Password}" 
+                             Style="{StaticResource PasswordTextBoxStyle}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" 
+                               Text="Authority :" 
+                               Style="{StaticResource UserLoginTitleTextStyle}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1"
+                              ItemsSource="{Binding UserLevels}" 
+                              SelectedItem="{Binding SelectedUserLevel}" 
+                              DisplayMemberPath="Name" 
+                              Style="{StaticResource UserLoginComboBoxStyle}"/>
                 </Grid>
             </Border>
             <Button Grid.Row="2" Content="Login" Margin="50, 10" Width="200" Height="30" HorizontalAlignment="Center" Style="{StaticResource RoundBtnStyle}"
