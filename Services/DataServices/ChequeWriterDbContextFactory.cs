@@ -4,8 +4,7 @@ public class ChequeWriterDbContextFactory : IDesignTimeDbContextFactory<ChequeWr
 {
     public ChequeWriterDbContext CreateDbContext(string[] args)
     {
-        //TODO: Temporary get connectionString from args or config file for Add-Migration. Find a better way to resolve this more dynamically.
-        string? connectionString = (args.Length != 0) ? args[0] : ConfigurationManager.ConnectionStrings["cheque-writer-ui"].ConnectionString;
+        string? connectionString = (args.Length != 0) ? args[0] : throw new ArgumentNullException(nameof(args));
 
         if (string.IsNullOrEmpty(connectionString))
         {

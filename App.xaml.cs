@@ -1,4 +1,5 @@
 ﻿using ChequeWriter.Modules.ChequeModule.Core;
+using ChequeWriter.Modules.UserModule.Core;
 using DataServices;
 using Microsoft.EntityFrameworkCore.Design;
 using Prism.Events;
@@ -25,10 +26,11 @@ namespace ChequeWriter
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<Modules.ChequeModule.Core.IChequeManager, Modules.ChequeModule.Core.ChequeManager>();
+            containerRegistry.Register<IChequeManager, ChequeManager>();
+            containerRegistry.Register<IUserManager, UserManager>();
             containerRegistry.Register<IDesignTimeDbContextFactory<ChequeWriterDbContext>, ChequeWriterDbContextFactory>();
-            containerRegistry.Register<IDataService, DataService>()
-                ;
+            containerRegistry.Register<IDataService, DataService>();
+
             IEventAggregator eventAggregator = containerRegistry.GetContainer().Resolve<IEventAggregator>();
             IRegionManager _regionManager = containerRegistry.GetContainer().Resolve<IRegionManager>();
         }

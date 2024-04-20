@@ -10,3 +10,5 @@ global using Prism.Regions;
 global using Prism.Commands;
 global using ChequeWriter.Modules.UserModule.Views;
 global using ChequeWriter.Modules.UserModule.ViewModels;
+global using ChequeWriter.Modules.UserModule.Models;
+global using DataServices;

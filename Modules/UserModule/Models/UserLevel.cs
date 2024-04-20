@@ -1,4 +1,4 @@
-﻿namespace ChequeWriter.Modules.ChequeModule.Models;
+﻿namespace ChequeWriter.Modules.UserModule.Models;
 
 public class UserLevel
 {

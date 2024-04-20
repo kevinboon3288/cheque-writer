@@ -17,7 +17,7 @@
 
         private void OnReturn()
         {
-            IRegion region = _regionManager.Regions["MainContentRegion"];
+            IRegion region = _regionManager.Regions["UserContentRegion"];
             region.RequestNavigate("MainView");
         }
 
