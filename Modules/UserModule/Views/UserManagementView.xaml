@@ -31,7 +31,7 @@
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Name" Style="{StaticResource UserInfoHeaderTextStyle}"/>
         <TextBlock Grid.Row="0" Grid.Column="2" Text="Job TItle" Style="{StaticResource UserInfoHeaderTextStyle}"/>
         <TextBlock Grid.Row="0" Grid.Column="3" Text="Authority" Style="{StaticResource UserInfoHeaderTextStyle}"/>
-        <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center"/>
+        <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center" Background="Black"/>
         <ItemsControl Grid.Row="2" Grid.Column="0" 
                       Grid.ColumnSpan="4" 
                       ItemsSource="{Binding Users}">

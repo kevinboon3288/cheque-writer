@@ -19,7 +19,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     
-    <Grid Background="LightYellow">
+    <Grid Background="{StaticResource Secondary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>

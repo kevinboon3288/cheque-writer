@@ -8,8 +8,8 @@
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True"
     Title="Cheque Writer"
-    Width="800"
-    Height="450"
+    Width="900"
+    Height="600"
     mc:Ignorable="d">
 
     <Grid>

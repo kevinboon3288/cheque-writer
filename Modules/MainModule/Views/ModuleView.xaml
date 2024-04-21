@@ -20,7 +20,7 @@
     <StackPanel
             HorizontalAlignment="Center"
             Orientation="Horizontal">
-        <Button Content="Go to Cheque" Command="{Binding NavigateToCheque}" Style="{StaticResource RoundBtnStyle}" />
-        <Button Content="Go to Report" Command="{Binding NavigateToReport}" Style="{StaticResource RoundBtnStyle}" />
+        <Button Content="Cheque" Command="{Binding NavigateToCheque}" Style="{StaticResource RoundBtnStyle}" Width="150" Height="200"/>
+        <Button Content="Report" Command="{Binding NavigateToReport}" Style="{StaticResource RoundBtnStyle}" Width="150" Height="200"/>
     </StackPanel>
 </UserControl>

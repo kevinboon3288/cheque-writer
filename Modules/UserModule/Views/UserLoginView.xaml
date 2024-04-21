@@ -59,7 +59,7 @@
                               Style="{StaticResource UserLoginComboBoxStyle}"/>
                 </Grid>
             </Border>
-            <Button Grid.Row="2" Content="Login" Margin="50, 10" Width="200" Height="30" HorizontalAlignment="Center" Style="{StaticResource RoundBtnStyle}"
+            <Button Grid.Row="2" Content="Login" Margin="50, 10" Width="200" Height="30" HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}"
                     Command="{Binding LoginCommand}"/>
         </Grid>
     </Border>

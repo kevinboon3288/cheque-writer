@@ -17,15 +17,16 @@
         </ResourceDictionary>
     </UserControl.Resources>
     
-    <Grid Background="AliceBlue" Grid.Row="0" Height="60">
+    <Grid Background="{StaticResource Primary}" Grid.Row="0" Height="60">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Style="{StaticResource ImageRoundBtnStyle}" Visibility="Hidden"/>
+        <Button Grid.Column="0" Style="{StaticResource LogoImageButtonStyle}" Visibility="Visible"/>
+        <TextBlock Grid.Column="1" Text="Cheque Writer" Style="{StaticResource MainHeaderTitleTextStyle}"/>
         <TextBlock Grid.Column="1" Text="{Binding Title}" Style="{StaticResource ModuleTitleTextStyle}"/>
-        <Button Grid.Column="2" Style="{StaticResource ImageRoundBtnStyle}"
+        <Button Grid.Column="2" Style="{StaticResource ProfileImageButtonStyle}"
                 Command="{Binding NavigateCommand}"/>
     </Grid>
 </UserControl>
