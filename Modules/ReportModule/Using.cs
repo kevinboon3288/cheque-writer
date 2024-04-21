@@ -8,5 +8,6 @@ global using Prism.Mvvm;
 global using Prism.Regions;
 global using Prism.Ioc;
 global using Prism.Modularity;
+global using Prism.Events;
 global using ChequeWriter.Modules.ReportModule.Views;
 global using ChequeWriter.Modules.ReportModule.ViewModels;

@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Resources\Resources.csproj" />
+    <ProjectReference Include="..\CommonModule\CommonModule.csproj" />
   </ItemGroup>
 
 </Project>

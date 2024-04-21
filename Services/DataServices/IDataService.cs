@@ -6,5 +6,6 @@ namespace DataServices
         Cheque? GetCheques(int id);
         List<UserLevel>? GetUserLevels();
         bool IsValidUser(string? name, string? password, int userLevel);
+        List<User> GetAllUsers();
     }
 }

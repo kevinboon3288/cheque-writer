@@ -83,6 +83,23 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ImageRoundBtnStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        Background="Transparent"
+                        CornerRadius="5"
+                        Margin="10">
+                        <Image Source="pack://application:,,,/Resources;component/Icons/Profile16x16.png"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="CommonTextBoxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="AcceptsReturn" Value="false"/>

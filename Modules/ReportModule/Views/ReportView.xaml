@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Background="MediumPurple">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />

@@ -1,14 +1,18 @@
-﻿namespace ChequeWriter.Modules.ReportModule.ViewModels
+﻿using ChequeWriter.Modules.CommonModule.Events;
+
+namespace ChequeWriter.Modules.ReportModule.ViewModels
 {
     public class ReportViewModel: BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
+        private readonly IEventAggregator _eventAggregator;
 
         public DelegateCommand NavigateBack { get; set; }
 
-        public ReportViewModel(IRegionManager regionManager)
+        public ReportViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
 
             NavigateBack = new DelegateCommand(OnReturn);
         }
@@ -21,7 +25,7 @@
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            // Entry Point when navigate to ReportView
+            _eventAggregator.GetEvent<UIControlEvent>().Publish("Report");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

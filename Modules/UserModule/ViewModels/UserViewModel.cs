@@ -4,19 +4,9 @@
     {
         private readonly IRegionManager _regionManager;
 
-        public DelegateCommand NavigateBack { get; set; }
-
         public UserViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-
-            NavigateBack = new DelegateCommand(OnReturn);
-        }
-
-        private void OnReturn()
-        {
-            IRegion region = _regionManager.Regions["UserContentRegion"];
-            region.RequestNavigate("MainView");
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)

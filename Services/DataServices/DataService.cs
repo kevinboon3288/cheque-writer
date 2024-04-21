@@ -53,10 +53,22 @@ public class DataService : IDataService
 
         var queryResult =
             from u in db.User.ToList()
-            join ul in db.UserLevel on u.Id equals userLevel
+            join ul in db.UserLevel on u.UserLevelId equals ul.Id
             where u.Name == name && u.Password == password && u.UserLevelId == userLevel
             select u;
 
         return queryResult.Any();
+    }
+
+    public List<User> GetAllUsers() 
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        var queryResult =
+            from u in db.User
+            join ul in db.UserLevel on u.UserLevelId equals ul.Id
+            select u;
+
+        return queryResult.ToList();
     }
 }

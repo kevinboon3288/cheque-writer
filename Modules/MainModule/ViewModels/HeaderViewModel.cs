@@ -1,23 +1,30 @@
-﻿namespace ChequeWriter.Modules.MainModule.ViewModels;
+﻿
 
-public class MainViewModel: BindableBase, INavigationAware
+namespace ChequeWriter.Modules.MainModule.ViewModels;
+
+public class HeaderViewModel: BindableBase, INavigationAware
 {
     private readonly IRegionManager _regionManager;
     private readonly IEventAggregator _eventAggregator;
 
-    public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
+
+
+    public HeaderViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
     {
         _regionManager = regionManager;
         _eventAggregator = eventAggregator;
+
+        _eventAggregator.GetEvent<UIControlEvent>().Subscribe(OnTitleChanged);
     }
 
     public void OnNavigatedTo(NavigationContext navigationContext)
     {
-        IRegion headerRegion = _regionManager.Regions["HeaderContentRegion"];
-        IRegion moduleRegion = _regionManager.Regions["ModuleContentRegion"];
+        // Entry Point when navigate to HeaderView
+    }
 
-        headerRegion.RequestNavigate("HeaderView");
-        moduleRegion.RequestNavigate("ModuleView");
+    private void OnTitleChanged(string title) 
+    {
+        
     }
 
     public bool IsNavigationTarget(NavigationContext navigationContext)

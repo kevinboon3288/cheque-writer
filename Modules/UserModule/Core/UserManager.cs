@@ -29,4 +29,24 @@ public class UserManager : IUserManager
     {
         return _dataService.IsValidUser(name, password, userLevel);
     }
+
+    public List<User> GetAllUsers() 
+    {
+        List<User> users = new();
+
+        foreach (var user in _dataService.GetAllUsers()) 
+        {
+            string? userLevelName = user.UserLevel!.Name;
+
+            users.Add(new User() 
+            {
+                Id = user.Id,
+                Name = user.Name,
+                JobTitle = user.JobTitle,
+                UserLevel = userLevelName
+            });
+        }
+
+        return users;
+    }
 }
