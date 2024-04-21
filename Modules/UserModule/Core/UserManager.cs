@@ -36,14 +36,12 @@ public class UserManager : IUserManager
 
         foreach (var user in _dataService.GetAllUsers()) 
         {
-            string? userLevelName = user.UserLevel!.Name;
-
             users.Add(new User() 
             {
                 Id = user.Id,
                 Name = user.Name,
                 JobTitle = user.JobTitle,
-                UserLevel = userLevelName
+                UserLevel = _dataService.GetUserLevelNameById(user.UserLevelId)
             });
         }
 

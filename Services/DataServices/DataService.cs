@@ -22,6 +22,25 @@ public class DataService : IDataService
         return queryResult.FirstOrDefault();
     }
 
+    public string? GetUserLevelNameById(int id) 
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        var queryResult =
+            from ul in db.UserLevel
+            where ul.Id == id
+            select ul;
+
+        UserLevel? userLevel = queryResult.FirstOrDefault();
+
+        if (userLevel != null) 
+        {
+            return userLevel.Name;
+        }
+
+        return null;
+    }
+
     public List<UserLevel>? GetUserLevels()
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);

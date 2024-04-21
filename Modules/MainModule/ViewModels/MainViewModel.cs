@@ -18,6 +18,8 @@ public class MainViewModel: BindableBase, INavigationAware
 
         headerRegion.RequestNavigate("HeaderView");
         moduleRegion.RequestNavigate("ModuleView");
+
+        _eventAggregator.GetEvent<UIControlEvent>().Publish("Main");
     }
 
     public bool IsNavigationTarget(NavigationContext navigationContext)

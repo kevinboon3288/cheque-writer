@@ -24,7 +24,8 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Style="{StaticResource ImageRoundBtnStyle}" Visibility="Hidden"/>
-        <TextBlock Grid.Column="1" Text="Header" Style="{StaticResource ModuleTitleTextStyle}"/>
-        <Button Grid.Column="2" Style="{StaticResource ImageRoundBtnStyle}"/>
+        <TextBlock Grid.Column="1" Text="{Binding Title}" Style="{StaticResource ModuleTitleTextStyle}"/>
+        <Button Grid.Column="2" Style="{StaticResource ImageRoundBtnStyle}"
+                Command="{Binding NavigateCommand}"/>
     </Grid>
 </UserControl>
