@@ -1,48 +1,33 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
+﻿namespace ChequeWriter.Modules.MainModule.ViewModels;
 
-namespace ChequeWriter.Modules.MainModule.ViewModels
+public class MainViewModel: BindableBase, INavigationAware
 {
-    public class MainViewModel: BindableBase, INavigationAware
+    private readonly IRegionManager _regionManager;
+    private readonly IEventAggregator _eventAggregator;
+
+    public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
     {
-        private readonly IRegionManager _regionManager;
+        _regionManager = regionManager;
+        _eventAggregator = eventAggregator;
+    }
 
-        public DelegateCommand NavigateToCheque { get; set; }
-        public DelegateCommand NavigateToReport { get; set; }
+    public void OnNavigatedTo(NavigationContext navigationContext)
+    {
+        IRegion headerRegion = _regionManager.Regions["HeaderContentRegion"];
+        IRegion moduleRegion = _regionManager.Regions["ModuleContentRegion"];
 
-        public MainViewModel(IRegionManager regionManager)
-        {
-            _regionManager = regionManager;
+        headerRegion.RequestNavigate("HeaderView");
+        moduleRegion.RequestNavigate("ModuleView");
 
-            NavigateToCheque = new DelegateCommand(OnNavigateToCheque);
-            NavigateToReport = new DelegateCommand(OnNavigateToReport);
-        }
+        _eventAggregator.GetEvent<UIControlEvent>().Publish("Main");
+    }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            // Entry Point when navigate to MainView
-        }
+    public bool IsNavigationTarget(NavigationContext navigationContext)
+    {
+        return true;
+    }
 
-        private void OnNavigateToCheque()
-        {
-            IRegion region = _regionManager.Regions["UserContentRegion"];
-            region.RequestNavigate("ChequeView");
-        }
-
-        private void OnNavigateToReport()
-        {
-            IRegion region = _regionManager.Regions["UserContentRegion"];
-            region.RequestNavigate("ReportView");
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
+    public void OnNavigatedFrom(NavigationContext navigationContext)
+    {
     }
 }

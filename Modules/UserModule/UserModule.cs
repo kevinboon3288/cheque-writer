@@ -19,10 +19,11 @@
         {
             containerRegistry.RegisterForNavigation<UserView>();
             containerRegistry.RegisterForNavigation<UserLoginView>();
+            containerRegistry.RegisterForNavigation<UserManagementView>();
 
             ViewModelLocationProvider.Register<UserView, UserViewModel>();
             ViewModelLocationProvider.Register<UserLoginView, UserLoginViewModel>();
-
+            ViewModelLocationProvider.Register<UserManagementView, UserManagementViewModel>();
         }
     }
 }

@@ -19,18 +19,12 @@
         </ResourceDictionary>
     </UserControl.Resources>
     
-    <Grid Background="LightYellow">
+    <Grid Background="{StaticResource Secondary}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Main" Style="{StaticResource ModuleTitleTextStyle}"/>
-        <StackPanel
-            Grid.Row="1"
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <Button Content="Go to Cheque" Command="{Binding NavigateToCheque}" Style="{StaticResource RoundBtnStyle}" />
-            <Button Content="Go to Report" Command="{Binding NavigateToReport}" Style="{StaticResource RoundBtnStyle}" />
-        </StackPanel>
+        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="HeaderContentRegion"/>
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ModuleContentRegion"/>
     </Grid>
 </UserControl>

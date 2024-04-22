@@ -4,7 +4,7 @@
     <SolidColorBrush
         x:Key="GreenColor"
         Opacity="1"
-        Color="LightGreen" />
+        Color="DarkGreen" />
     <SolidColorBrush
         x:Key="Primary"
         Color="#546d89" />
@@ -28,9 +28,19 @@
         Color="White" />
 
     <!--  UI Components Styling  -->
+    <Style x:Key="MainHeaderTitleTextStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Sora" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    
     <Style x:Key="ModuleTitleTextStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="Sora" />
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Margin" Value="5" />
@@ -58,6 +68,26 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <Style x:Key="UserInfoHeaderTextStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Sora" />
+        <Setter Property="Foreground" Value="{StaticResource Text-Dark}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    
+    <Style x:Key="UserInfoTextStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Sora" />
+        <Setter Property="Foreground" Value="{StaticResource Text-Light}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <Style x:Key="RoundBtnStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="50" />
@@ -66,8 +96,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
-                        Background="SeaGreen"
-                        BorderBrush="DarkOliveGreen"
+                        Background="{StaticResource Tertiary}"
+                        BorderBrush="{StaticResource Primary}"
                         BorderThickness="2"
                         CornerRadius="5">
                         <ContentPresenter
@@ -83,6 +113,82 @@
         </Setter>
     </Style>
 
+    <Style x:Key="LoginButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Background="{StaticResource GreenColor}"
+                        BorderBrush="{StaticResource Text-Dark}"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                        <ContentPresenter
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            TextElement.FontFamily="Sora"
+                            TextElement.FontSize="12"
+                            TextElement.FontWeight="SemiBold"
+                            TextElement.Foreground="Black" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LogoImageButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        Background="Transparent"
+                        CornerRadius="5"
+                        Margin="5,0">
+                        <Image Source="pack://application:,,,/Resources;component/Icons/ChequeWriterLogo16x16.png"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ProfileImageButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        Background="Transparent"
+                        CornerRadius="5"
+                        Margin="10">
+                        <Image Source="pack://application:,,,/Resources;component/Icons/Profile16x16.png"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BackImageButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        Background="Transparent"
+                        CornerRadius="5"
+                        Margin="12">
+                        <Image Source="pack://application:,,,/Resources;component/Icons/Back16x16.png"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="CommonTextBoxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="AcceptsReturn" Value="false"/>
@@ -92,6 +198,7 @@
     </Style>
 
     <Style x:Key="UserNameTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextBoxStyle}">
+        <Setter Property="MaxHeight" Value="60"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -132,6 +239,7 @@
     </Style>
 
     <Style x:Key="PasswordTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextBoxStyle}">
+        <Setter Property="MaxHeight" Value="60"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -171,6 +279,7 @@
     </Style>
 
     <Style x:Key="UserLoginComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="MaxHeight" Value="60"/>
         <Setter Property="Margin" Value="10"/>
         <Setter Property="Foreground" Value="{StaticResource Text-Dark}"/>
         <Setter Property="FontFamily" Value="Sora"/>

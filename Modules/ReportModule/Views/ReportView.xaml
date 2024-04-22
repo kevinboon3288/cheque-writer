@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Background="{StaticResource Secondary}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -25,17 +25,11 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="0"
                 Command="{Binding NavigateBack}"
-                Content="Back"
-                Style="{StaticResource RoundBtnStyle}" />
-            <TextBlock
-                Grid.Column="1"
-                Style="{StaticResource ModuleTitleTextStyle}"
-                Text="Report" />
+                Style="{StaticResource BackImageButtonStyle}" />
         </Grid>
     </Grid>
 </UserControl>

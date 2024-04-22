@@ -22,6 +22,25 @@ public class DataService : IDataService
         return queryResult.FirstOrDefault();
     }
 
+    public string? GetUserLevelNameById(int id) 
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        var queryResult =
+            from ul in db.UserLevel
+            where ul.Id == id
+            select ul;
+
+        UserLevel? userLevel = queryResult.FirstOrDefault();
+
+        if (userLevel != null) 
+        {
+            return userLevel.Name;
+        }
+
+        return null;
+    }
+
     public List<UserLevel>? GetUserLevels()
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
@@ -53,10 +72,22 @@ public class DataService : IDataService
 
         var queryResult =
             from u in db.User.ToList()
-            join ul in db.UserLevel on u.Id equals userLevel
+            join ul in db.UserLevel on u.UserLevelId equals ul.Id
             where u.Name == name && u.Password == password && u.UserLevelId == userLevel
             select u;
 
         return queryResult.Any();
+    }
+
+    public List<User> GetAllUsers() 
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        var queryResult =
+            from u in db.User
+            join ul in db.UserLevel on u.UserLevelId equals ul.Id
+            select u;
+
+        return queryResult.ToList();
     }
 }

@@ -6,4 +6,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Icons\Back16x16.png" />
+    <None Remove="Icons\ChequeWriterLogo16x16.png" />
+    <None Remove="Icons\Profile16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Back16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\ChequeWriterLogo16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Profile16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 </Project>

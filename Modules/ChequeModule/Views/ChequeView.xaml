@@ -17,23 +17,17 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Background="{StaticResource Secondary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Button
             Grid.Column="0"
             Command="{Binding NavigateBack}"
-            Content="Back"
-            Style="{StaticResource RoundBtnStyle}" />
-        <TextBlock
-            Grid.Column="1"
-            Style="{StaticResource ModuleTitleTextStyle}"
-            Text="Cheque" />
+            Style="{StaticResource BackImageButtonStyle}" />
     </Grid>
 </UserControl>
