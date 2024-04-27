@@ -11,40 +11,61 @@ public class UserManager : IUserManager
 
     public List<UserLevel> GetUserLevels()
     {
-        List<UserLevel> userLevels = new();
-
-        foreach (var userLevel in _dataService.GetUserLevels()!)
+        try
         {
-            userLevels.Add(new UserLevel()
-            {
-                Id = userLevel.Id,
-                Name = userLevel.Name,
-            });
-        }
+            List<UserLevel> userLevels = new();
 
-        return userLevels;
+            foreach (var userLevel in _dataService.GetUserLevels()!)
+            {
+                userLevels.Add(new UserLevel()
+                {
+                    Id = userLevel.Id,
+                    Name = userLevel.Name,
+                });
+            }
+
+            return userLevels;
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
     }
 
     public bool IsValidUser(string name, string password, int userLevel) 
     {
-        return _dataService.IsValidUser(name, password, userLevel);
+        try
+        {
+            return _dataService.IsValidUser(name, password, userLevel);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
     }
 
     public List<User> GetAllUsers() 
     {
-        List<User> users = new();
-
-        foreach (var user in _dataService.GetAllUsers()) 
+        try
         {
-            users.Add(new User() 
-            {
-                Id = user.Id,
-                Name = user.Name,
-                JobTitle = user.JobTitle,
-                UserLevel = _dataService.GetUserLevelNameById(user.UserLevelId)
-            });
-        }
+            List<User> users = new();
 
-        return users;
+            foreach (var user in _dataService.GetAllUsers()) 
+            {
+                users.Add(new User() 
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    JobTitle = user.JobTitle,
+                    UserLevel = _dataService.GetUserLevelNameById(user.UserLevelId)
+                });
+            }
+
+            return users;
+        }
+        catch(Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
     }
 }
