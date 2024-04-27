@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChequeWriter.Modules.UserModule.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -41,19 +43,21 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Id" Style="{StaticResource UserInfoHeaderTextStyle}"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Name" Style="{StaticResource UserInfoHeaderTextStyle}"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Job TItle" Style="{StaticResource UserInfoHeaderTextStyle}"/>
-                <TextBlock Grid.Row="0" Grid.Column="3" Text="Authority" Style="{StaticResource UserInfoHeaderTextStyle}"/>
-                <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center" Background="{StaticResource Tertiary}"/>
+                <CheckBox Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="Hidden"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Id" Style="{StaticResource UserInfoHeaderTextStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Name" Style="{StaticResource UserInfoHeaderTextStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Job TItle" Style="{StaticResource UserInfoHeaderTextStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Authority" Style="{StaticResource UserInfoHeaderTextStyle}"/>
+                <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Background="{StaticResource Tertiary}"/>
                 <ItemsControl Grid.Row="2" Grid.Column="0" 
-              Grid.ColumnSpan="4" 
-              ItemsSource="{Binding Users}">
+                              Grid.ColumnSpan="5" 
+                              ItemsSource="{Binding Users}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel CanVerticallyScroll="True" CanHorizontallyScroll="False"/>
@@ -63,15 +67,18 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Id}" Style="{StaticResource UserInfoTextStyle}"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource UserInfoTextStyle}"/>
-                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding JobTitle}" Style="{StaticResource UserInfoTextStyle}"/>
-                                <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding UserLevel}" Style="{StaticResource UserInfoTextStyle}"/>
+                                <CheckBox Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                          IsChecked="{Binding IsChecked}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Id}" Style="{StaticResource UserInfoTextStyle}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Name}" Style="{StaticResource UserInfoTextStyle}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding JobTitle}" Style="{StaticResource UserInfoTextStyle}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding UserLevel}" Style="{StaticResource UserInfoTextStyle}"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

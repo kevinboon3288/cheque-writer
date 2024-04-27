@@ -138,6 +138,56 @@
         </Setter>
     </Style>
 
+    <Style x:Key="UserCreateButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                    Background="{StaticResource GreenColor}"
+                    BorderBrush="{StaticResource Text-Dark}"
+                    BorderThickness="2"
+                    CornerRadius="5">
+                        <ContentPresenter
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextElement.FontFamily="Sora"
+                        TextElement.FontSize="12"
+                        TextElement.FontWeight="SemiBold"
+                        TextElement.Foreground="Black" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UserCancelButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Background="IndianRed"
+                        BorderBrush="{StaticResource Text-Dark}"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                        <ContentPresenter
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            TextElement.FontFamily="Sora"
+                            TextElement.FontSize="12"
+                            TextElement.FontWeight="SemiBold"
+                            TextElement.Foreground="Black" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="LogoImageButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="50" />
         <Setter Property="Height" Value="50" />
@@ -268,6 +318,47 @@
                         <Trigger Property="IsKeyboardFocused" Value="False">
                             <Setter Property="Foreground" Value="Gray"/>
                             <Setter TargetName="UserNameText" Property="Text" Value="Enter a username"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UserJobTitleTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextBoxStyle}">
+        <Setter Property="MaxHeight" Value="60"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="UserJobTitleTextBoxBorder"
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        CornerRadius="3"
+                        Background="White"
+                        Padding="5">
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <TextBlock x:Name="UserJobTitleText" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Visibility="Collapsed"
+                                   Style="{StaticResource UserLoginInputTextStyle}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="UserJobTitleText" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter TargetName="UserJobTitleText" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter TargetName="UserJobTitleText" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="False">
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter TargetName="UserJobTitleText" Property="Text" Value="Enter a job title"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

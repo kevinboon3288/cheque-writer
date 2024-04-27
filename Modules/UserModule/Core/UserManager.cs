@@ -57,13 +57,38 @@ public class UserManager : IUserManager
                     Id = user.Id,
                     Name = user.Name,
                     JobTitle = user.JobTitle,
-                    UserLevel = _dataService.GetUserLevelNameById(user.UserLevelId)
+                    UserLevel = _dataService.GetUserLevelNameById(user.UserLevelId),
+                    IsChecked = false
                 });
             }
 
             return users;
         }
         catch(Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
+    }
+
+    public int AddUser(string userName, string password, string? jobTitle, int userLevel)
+    {
+        try
+        {
+            return _dataService.AddUser(userName, password, jobTitle, userLevel);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
+    }
+
+    public int DeletUser(User user) 
+    { 
+        try
+        { 
+            return _dataService.DeleteUser(user.Id);
+        }
+        catch (Exception ex)
         {
             throw new InvalidOperationException(ex.Message);
         }

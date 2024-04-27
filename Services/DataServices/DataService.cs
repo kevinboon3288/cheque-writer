@@ -1,5 +1,17 @@
 ﻿namespace DataServices;
 
+public class DataServiceException : Exception
+{
+    public DataServiceException(string message)
+        : base(message)
+    {
+    }
+    public DataServiceException(string message, Exception inner)
+        : base(message, inner)
+    {
+    }
+}
+
 public class DataService : IDataService
 {
     private const string _connectionString = "Host=localhost;Database=cheque-writer-ui;Username=postgres;Password=postgres";
@@ -9,6 +21,8 @@ public class DataService : IDataService
     {
         _dbContextFactory = dbContextFactory;
     }
+
+    #region ChequeModule
 
     public Cheque? GetCheques(int id)
     {
@@ -21,6 +35,10 @@ public class DataService : IDataService
 
         return queryResult.FirstOrDefault();
     }
+
+    #endregion
+
+    #region UserModule
 
     public string? GetUserLevelNameById(int id) 
     {
@@ -63,13 +81,6 @@ public class DataService : IDataService
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
-        User user = new() 
-        { 
-            Name = name, 
-            Password = password, 
-            UserLevelId = userLevel 
-        };
-
         var queryResult =
             from u in db.User.ToList()
             join ul in db.UserLevel on u.UserLevelId equals ul.Id
@@ -90,4 +101,43 @@ public class DataService : IDataService
 
         return queryResult.ToList();
     }
+
+    public int AddUser(string userName, string password, string? jobTitle, int userLevel) 
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+        
+        User user = new User() 
+        {
+            Name = userName,
+            Password = password,
+            JobTitle = jobTitle,
+            UserLevelId = userLevel
+        };
+
+        db.User.Add(user);
+        int result = db.SaveChanges();
+        if (result == 0) 
+        {
+            throw new DataServiceException("Couldn't add a new user to User table");
+        }
+
+        return user.Id;
+    }
+
+    public int DeleteUser(int userId)
+    {
+        int result = 0;
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        User? selectedUser = db.User.SingleOrDefault(u => u.Id == userId);
+        if (selectedUser != null) 
+        {
+            db.Remove(selectedUser);
+            result = db.SaveChanges();
+        }
+
+        return result;
+    }
+
+    #endregion
 }

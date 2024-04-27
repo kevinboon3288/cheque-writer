@@ -6,6 +6,7 @@
         private readonly IUserManager _userManager;
         private readonly IEventAggregator _eventAggregator;
         private List<User> _users = new();
+        private User _selectedUser = new();
 
         public List<User> Users 
         {
@@ -13,7 +14,13 @@
             set {  SetProperty(ref _users, value); }
         }
 
-        public DelegateCommand<User> DeleteUserCommand { get; private set; }
+        public User SelectedUser
+        {
+            get { return _selectedUser; }
+            set { SetProperty(ref _selectedUser, value); }
+        }
+
+        public DelegateCommand DeleteUserCommand { get; private set; }
         public DelegateCommand NavigateToUserAdderCommand { get; private set; }
         public DelegateCommand NavigateBack { get; private set; }
 
@@ -25,7 +32,7 @@
 
             NavigateBack = new DelegateCommand(OnReturn);
             NavigateToUserAdderCommand = new DelegateCommand(OnNavigateToUserAdder);
-            DeleteUserCommand = new DelegateCommand<User>(OnDeleteUser);
+            DeleteUserCommand = new DelegateCommand(OnDeleteUser);
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -49,15 +56,18 @@
         private void OnNavigateToUserAdder()
         {
             //TODO: Navigate to UserAdderView
-            //IRegion region = _regionManager.Regions["UserContentRegion"];
-            //region.RequestNavigate("MainView");
+            IRegion region = _regionManager.Regions["ModuleContentRegion"];
+            region.RequestNavigate("UserAdderView");
         }
 
-        private void OnDeleteUser(User selectedUser) 
+        private void OnDeleteUser() 
         {
-            if (selectedUser != null) 
+            foreach (User user in Users) 
             {
-                //TODO: Call Delete API
+                if (user.IsChecked) 
+                {
+                    _userManager.DeletUser(user);
+                }
             }
 
             OnRefresh();
