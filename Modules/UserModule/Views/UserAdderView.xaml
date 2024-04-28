@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="ChequeWriter.Modules.UserModule.Views.UserAdderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChequeWriter.Modules.UserModule.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources;component/Styles/ControlStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Margin="50, 10" Padding="20" BorderThickness="5" BorderBrush="Black" CornerRadius="5" Background="{StaticResource Tertiary}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" 
+                           Text="UserName :" 
+                           Style="{StaticResource UserLoginTitleTextStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" 
+                            Text="{Binding UserName}" 
+                            Style="{StaticResource UserNameTextBoxStyle}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" 
+                            Text="Password :" 
+                            Style="{StaticResource UserLoginTitleTextStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" 
+                        Text="{Binding Password}" 
+                        Style="{StaticResource PasswordTextBoxStyle}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" 
+                            Text="Job Title :" 
+                            Style="{StaticResource UserLoginTitleTextStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" 
+                        Text="{Binding JobTitle}" 
+                        Style="{StaticResource UserJobTitleTextBoxStyle}"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" 
+                            Text="Authority :" 
+                            Style="{StaticResource UserLoginTitleTextStyle}"/>
+                <ComboBox Grid.Row="3" Grid.Column="1"
+                          ItemsSource="{Binding UserLevels}" 
+                          SelectedItem="{Binding SelectedUserLevel}" 
+                          DisplayMemberPath="Name" 
+                          Style="{StaticResource UserLoginComboBoxStyle}"/>
+            </Grid>
+        </Border>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Create"
+                    Command="{Binding AddUserCommand}"
+                    Style="{StaticResource UserCreateButtonStyle}"/>
+            <Button Content="Cancel"
+                    Command="{Binding CancelCommand}"
+                    Style="{StaticResource UserCancelButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
