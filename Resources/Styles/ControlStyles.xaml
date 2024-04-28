@@ -366,6 +366,47 @@
         </Setter>
     </Style>
 
+    <Style x:Key="PasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="CaretBrush" Value="{StaticResource Text-Dark}"/>
+        <Setter Property="FontFamily" Value="Sora"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="MaxHeight" Value="60"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border x:Name="PasswordBoxBorder"
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        CornerRadius="3"
+                        Background="White"
+                        Padding="5">
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <TextBlock x:Name="PasswordText" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Visibility="Collapsed"
+                                   Style="{StaticResource UserLoginInputTextStyle}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="PasswordChar" Value="">
+                            <Setter TargetName="PasswordText" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter TargetName="PasswordText" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="False">
+                            <Setter TargetName="PasswordText" Property="Text" Value="Enter a password"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="PasswordTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextBoxStyle}">
         <Setter Property="MaxHeight" Value="60"/>
         <Setter Property="Template">

@@ -45,10 +45,10 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" 
                                Text="Password :" 
                                Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <!--TODO: Will Implement PasswordBox control instead of Textbox in future-->
-                    <TextBox Grid.Row="1" Grid.Column="1" 
-                             Text="{Binding Password}" 
-                             Style="{StaticResource PasswordTextBoxStyle}"/>
+                    <PasswordBox Grid.Row="1" Grid.Column="1"
+                                 PasswordChanged="PasswordBox_PasswordChanged"
+                                 PasswordChar="*" 
+                                 Style="{StaticResource PasswordBoxStyle}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" 
                                Text="Authority :" 
                                Style="{StaticResource UserLoginTitleTextStyle}"/>
