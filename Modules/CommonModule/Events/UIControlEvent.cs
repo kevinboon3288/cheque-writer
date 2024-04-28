@@ -3,3 +3,7 @@
 public class UIControlEvent: PubSubEvent<string>
 {
 }
+
+public class CurrentUserEvent : PubSubEvent<int>
+{
+}

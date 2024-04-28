@@ -5,6 +5,7 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
     public class UserLoginViewModel: BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
+        private readonly IEventAggregator _eventAggregator;
         private readonly IUserManager _userManager;
         private List<UserLevel> _userLevels = new();
         private UserLevel? _selectedUserLevel = new();
@@ -37,9 +38,10 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
 
         public DelegateCommand LoginCommand { get; set; }
 
-        public UserLoginViewModel(IRegionManager regionManager, IUserManager userManager)
+        public UserLoginViewModel(IRegionManager regionManager,IEventAggregator eventAggregator, IUserManager userManager)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
             _userManager = userManager;
 
             LoginCommand = new DelegateCommand(OnLogin);
@@ -71,6 +73,8 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
             {
                 IRegion region = _regionManager.Regions["UserContentRegion"];
                 region.RequestNavigate("MainView");               
+
+                _eventAggregator.GetEvent<CurrentUserEvent>().Publish(_selectedUserLevel.Id);
             }
         }
 

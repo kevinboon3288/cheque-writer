@@ -27,6 +27,7 @@
         <TextBlock Grid.Column="1" Text="Cheque Writer" Style="{StaticResource MainHeaderTitleTextStyle}"/>
         <TextBlock Grid.Column="1" Text="{Binding Title}" Style="{StaticResource ModuleTitleTextStyle}"/>
         <Button Grid.Column="2" Style="{StaticResource ProfileImageButtonStyle}"
-                Command="{Binding NavigateCommand}"/>
+                Command="{Binding NavigateCommand}"
+                IsEnabled="{Binding IsAccessible}"/>
     </Grid>
 </UserControl>
