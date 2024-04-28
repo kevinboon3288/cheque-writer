@@ -7,11 +7,18 @@ public class HeaderViewModel: BindableBase, INavigationAware
     private readonly IRegionManager _regionManager;
     private readonly IEventAggregator _eventAggregator;
     private string? _title;
+    private bool _isAccessible;
 
     public string? Title 
     {
         get { return _title; }
         set { SetProperty(ref _title, value); }
+    }
+
+    public bool IsAccessible
+    {
+        get { return _isAccessible; }
+        set { SetProperty(ref _isAccessible, value); }
     }
 
     public DelegateCommand NavigateCommand { get; private set; }
@@ -24,6 +31,7 @@ public class HeaderViewModel: BindableBase, INavigationAware
         NavigateCommand = new DelegateCommand(OnNavigateToUserManagement);
 
         _eventAggregator.GetEvent<UIControlEvent>().Subscribe(OnTitleChanged);
+        _eventAggregator.GetEvent<CurrentUserEvent>().Subscribe(OnCurrentUserLevel);
     }
 
     private void OnNavigateToUserManagement() 
@@ -43,6 +51,11 @@ public class HeaderViewModel: BindableBase, INavigationAware
         {
             Title = title;
         }
+    }
+
+    private void OnCurrentUserLevel(int currentUserLevel)
+    {
+        IsAccessible = (currentUserLevel == 1) ? true : false;
     }
 
     public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -11,7 +11,7 @@
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            // Entry Point when navigate to ReportView
+            // Entry Point when navigate to UserView
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

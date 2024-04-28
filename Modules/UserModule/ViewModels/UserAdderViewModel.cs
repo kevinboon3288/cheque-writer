@@ -1,8 +1,6 @@
-﻿using ChequeWriter.Modules.UserModule.Core;
-
-namespace ChequeWriter.Modules.UserModule.ViewModels
+﻿namespace ChequeWriter.Modules.UserModule.ViewModels
 {
-    public class UserLoginViewModel: BindableBase, INavigationAware
+    public class UserAdderViewModel: BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
@@ -10,18 +8,25 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
         private List<UserLevel> _userLevels = new();
         private UserLevel? _selectedUserLevel = new();
         private string? _userName;
+        private string? _jobTitle;
         private string? _password;
 
-        public string? UserName 
+        public string? UserName
         {
             get { return _userName; }
-            set { SetProperty(ref _userName, value); } 
+            set { SetProperty(ref _userName, value); }
         }
 
         public string? Password
         {
             get { return _password; }
             set { SetProperty(ref _password, value); }
+        }
+
+        public string? JobTitle
+        {
+            get { return _jobTitle; }
+            set { SetProperty(ref _jobTitle, value); }
         }
 
         public UserLevel? SelectedUserLevel
@@ -35,46 +40,50 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
             get { return _userLevels; }
             set { SetProperty(ref _userLevels, value); }
         }
+        public DelegateCommand CancelCommand {  get; private set; }
+        public DelegateCommand AddUserCommand { get; private set; }
 
-        public DelegateCommand LoginCommand { get; set; }
 
-        public UserLoginViewModel(IRegionManager regionManager,IEventAggregator eventAggregator, IUserManager userManager)
+        public UserAdderViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IUserManager userManager)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _userManager = userManager;
 
-            LoginCommand = new DelegateCommand(OnLogin);
-
-            OnRefresh();
+            CancelCommand = new DelegateCommand(OnReturn);
+            AddUserCommand = new DelegateCommand(OnAddUser);
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             OnRefresh();
+
+            _eventAggregator.GetEvent<UIControlEvent>().Publish("Add User");
         }
 
-        private void OnRefresh() 
+        private void OnRefresh()
         {
             UserName = String.Empty;
             Password = String.Empty;
+            JobTitle = String.Empty;
             SelectedUserLevel = new();
             UserLevels = _userManager.GetUserLevels();
         }
 
-        private void OnLogin()
+        private void OnReturn() 
         {
-            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password) || _selectedUserLevel is null) 
-            {
-                throw new ArgumentNullException("Empty username or password.");
-            }
+            IRegion region = _regionManager.Regions["ModuleContentRegion"];
+            region.RequestNavigate("UserManagementView");
+        }
 
-            if (_userManager.IsValidUser(UserName, Password, SelectedUserLevel!.Id)) 
+        private void OnAddUser()
+        {
+            if (SelectedUserLevel != null && !string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password)) 
             {
-                IRegion region = _regionManager.Regions["UserContentRegion"];
-                region.RequestNavigate("MainView");               
+                _userManager.AddUser(UserName, Password, JobTitle, SelectedUserLevel.Id);
 
-                _eventAggregator.GetEvent<CurrentUserEvent>().Publish(_selectedUserLevel.Id);
+                IRegion region = _regionManager.Regions["ModuleContentRegion"];
+                region.RequestNavigate("UserManagementView");            
             }
         }
 
