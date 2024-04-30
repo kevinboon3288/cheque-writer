@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChequeWriter.Modules.UserModule.Views"
+             xmlns:converter="clr-namespace:ChequeWriter.Modules.CommonModule.Converters;assembly=CommonModule"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -14,6 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources;component/Styles/ControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converter:UIControlVisibilityConveter x:Key="visibilityConverter"></converter:UIControlVisibilityConveter>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -43,9 +45,16 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" 
                             Text="Password :" 
                             Style="{StaticResource UserLoginTitleTextStyle}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" 
-                        Text="{Binding Password}" 
-                        Style="{StaticResource PasswordTextBoxStyle}"/>
+                <PasswordBox Grid.Row="1" Grid.Column="1"
+                                 PasswordChanged="PasswordBox_PasswordChanged"
+                                 PasswordChar="*" Background="Yellow"
+                                 Style="{StaticResource PasswordBoxStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Password}" 
+                             Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource PasswordTextBoxStyle}"/>
+                <Button Grid.Row="1" Grid.Column="1"
+                            Command="{Binding PasswordDisplayCommand}"
+                            Style="{StaticResource PasswordVisibleImageButtonStyle}"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" 
                             Text="Job Title :" 
                             Style="{StaticResource UserLoginTitleTextStyle}"/>

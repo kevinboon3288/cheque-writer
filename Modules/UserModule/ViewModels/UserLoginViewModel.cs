@@ -1,6 +1,4 @@
-﻿using ChequeWriter.Modules.UserModule.Core;
-
-namespace ChequeWriter.Modules.UserModule.ViewModels
+﻿namespace ChequeWriter.Modules.UserModule.ViewModels
 {
     public class UserLoginViewModel: BindableBase, INavigationAware
     {
@@ -11,6 +9,7 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
         private UserLevel? _selectedUserLevel = new();
         private string? _userName;
         private string? _password;
+        private bool _isVisible;
 
         public string? UserName 
         {
@@ -22,6 +21,12 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
         {
             get { return _password; }
             set { SetProperty(ref _password, value); }
+        }
+
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set { SetProperty(ref _isVisible, value); }
         }
 
         public UserLevel? SelectedUserLevel
@@ -36,7 +41,8 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
             set { SetProperty(ref _userLevels, value); }
         }
 
-        public DelegateCommand LoginCommand { get; set; }
+        public DelegateCommand PasswordDisplayCommand { get; private set; }
+        public DelegateCommand LoginCommand { get; private set; }
 
         public UserLoginViewModel(IRegionManager regionManager,IEventAggregator eventAggregator, IUserManager userManager)
         {
@@ -45,6 +51,7 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
             _userManager = userManager;
 
             LoginCommand = new DelegateCommand(OnLogin);
+            PasswordDisplayCommand = new DelegateCommand(OnPasswordDisplay);
 
             OnRefresh();
         }
@@ -58,6 +65,7 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
         {
             UserName = String.Empty;
             Password = String.Empty;
+            IsVisible = false;
             SelectedUserLevel = new();
             UserLevels = _userManager.GetUserLevels();
         }
@@ -76,6 +84,11 @@ namespace ChequeWriter.Modules.UserModule.ViewModels
 
                 _eventAggregator.GetEvent<CurrentUserEvent>().Publish(_selectedUserLevel.Id);
             }
+        }
+
+        private void OnPasswordDisplay() 
+        {
+            IsVisible = !_isVisible;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
