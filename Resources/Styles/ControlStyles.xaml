@@ -276,6 +276,34 @@
         </Setter>
     </Style>
 
+    <Style x:Key="PasswordVisibleImageButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        Background="Transparent"
+                        CornerRadius="5"
+                        Margin="12">
+                        <Image x:Name="PasswordVisibleImage" Source="pack://application:,,,/Resources;component/Icons/Visible16x16.png"/>
+                    </Border>
+                    <!--TODO: IsVisible is a pubic property instance setup for the visibility of UI control at the related view model.-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsVisible" Value="True">
+                            <Setter TargetName="PasswordVisibleImage" Property="Source" Value="pack://application:,,,/Resources;component/Icons/Visible16x16.png"/>
+                        </Trigger>
+                        <Trigger Property="IsVisible" Value="False">
+                            <Setter TargetName="PasswordVisibleImage" Property="Source" Value="pack://application:,,,/Resources;component/Icons/NotVisible16x16.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="CommonTextBoxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="AcceptsReturn" Value="false"/>
@@ -383,7 +411,7 @@
                         Padding="5">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
-                            <TextBlock x:Name="PasswordText" 
+                            <TextBlock x:Name="PasswordBoxText" 
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Visibility="Collapsed"
@@ -392,14 +420,14 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="PasswordChar" Value="">
-                            <Setter TargetName="PasswordText" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PasswordBoxText" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter Property="Foreground" Value="Black"/>
-                            <Setter TargetName="PasswordText" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PasswordBoxText" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
-                            <Setter TargetName="PasswordText" Property="Text" Value="Enter a password"/>
+                            <Setter Property="Foreground" Value="Gray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -409,6 +437,7 @@
 
     <Style x:Key="PasswordTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextBoxStyle}">
         <Setter Property="MaxHeight" Value="60"/>
+        <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -420,7 +449,7 @@
                             Padding="5">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
-                            <TextBlock x:Name="PasswordText" 
+                            <TextBlock x:Name="PasswordTextBoxContent" 
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Visibility="Collapsed"
@@ -428,18 +457,12 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Text" Value="">
-                            <Setter TargetName="PasswordText" Property="Visibility" Value="Visible"/>
-                        </Trigger>
-                        <Trigger Property="Text" Value="{x:Null}">
-                            <Setter TargetName="PasswordText" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter Property="Foreground" Value="Black"/>
-                            <Setter TargetName="PasswordText" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PasswordTextBoxContent" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
-                            <Setter TargetName="PasswordText" Property="Text" Value="Enter a password"/>
+                            <Setter Property="Foreground" Value="Gray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

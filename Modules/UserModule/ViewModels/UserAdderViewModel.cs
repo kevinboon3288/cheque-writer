@@ -10,6 +10,7 @@
         private string? _userName;
         private string? _jobTitle;
         private string? _password;
+        private bool _isVisible;
 
         public string? UserName
         {
@@ -21,6 +22,12 @@
         {
             get { return _password; }
             set { SetProperty(ref _password, value); }
+        }
+
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set { SetProperty(ref _isVisible, value); }
         }
 
         public string? JobTitle
@@ -40,6 +47,8 @@
             get { return _userLevels; }
             set { SetProperty(ref _userLevels, value); }
         }
+
+        public DelegateCommand PasswordDisplayCommand { get; private set; }
         public DelegateCommand CancelCommand {  get; private set; }
         public DelegateCommand AddUserCommand { get; private set; }
 
@@ -50,6 +59,7 @@
             _eventAggregator = eventAggregator;
             _userManager = userManager;
 
+            PasswordDisplayCommand = new DelegateCommand(OnPasswordDisplay);
             CancelCommand = new DelegateCommand(OnReturn);
             AddUserCommand = new DelegateCommand(OnAddUser);
         }
@@ -66,6 +76,7 @@
             UserName = String.Empty;
             Password = String.Empty;
             JobTitle = String.Empty;
+            IsVisible = false;
             SelectedUserLevel = new();
             UserLevels = _userManager.GetUserLevels();
         }
@@ -85,6 +96,11 @@
                 IRegion region = _regionManager.Regions["ModuleContentRegion"];
                 region.RequestNavigate("UserManagementView");            
             }
+        }
+
+        private void OnPasswordDisplay() 
+        {
+            IsVisible = !_isVisible;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
