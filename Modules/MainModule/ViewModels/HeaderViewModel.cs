@@ -8,6 +8,7 @@ public class HeaderViewModel: BindableBase, INavigationAware
     private readonly IEventAggregator _eventAggregator;
     private string? _title;
     private bool _isAccessible;
+    private bool _isRadioChecked;
 
     public string? Title 
     {
@@ -21,7 +22,16 @@ public class HeaderViewModel: BindableBase, INavigationAware
         set { SetProperty(ref _isAccessible, value); }
     }
 
+    public bool IsRadioChecked
+    {
+        get { return _isRadioChecked; }
+        set 
+        { SetProperty(ref _isRadioChecked, value); }
+    }
+
     public DelegateCommand NavigateCommand { get; private set; }
+
+    public DelegateCommand LogOutCommand { get; private set; }
 
     public HeaderViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
     {
@@ -29,6 +39,7 @@ public class HeaderViewModel: BindableBase, INavigationAware
         _eventAggregator = eventAggregator;
 
         NavigateCommand = new DelegateCommand(OnNavigateToUserManagement);
+        LogOutCommand = new DelegateCommand(OnLogOut);
 
         _eventAggregator.GetEvent<UIControlEvent>().Subscribe(OnTitleChanged);
         _eventAggregator.GetEvent<CurrentUserEvent>().Subscribe(OnCurrentUserLevel);
@@ -36,8 +47,20 @@ public class HeaderViewModel: BindableBase, INavigationAware
 
     private void OnNavigateToUserManagement() 
     {
+        IsRadioChecked = false;
+
         IRegion region = _regionManager.Regions["ModuleContentRegion"];
         region.RequestNavigate("UserManagementView");
+    }
+
+    private void OnLogOut()
+    {
+        IsAccessible = false;
+        IsRadioChecked = false;
+        Title = String.Empty;
+
+        IRegion region = _regionManager.Regions["UserContentRegion"];
+        region.RequestNavigate("UserLoginView");
     }
 
     public void OnNavigatedTo(NavigationContext navigationContext)

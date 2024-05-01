@@ -26,6 +26,9 @@
     <SolidColorBrush
         x:Key="Text-Light"
         Color="White" />
+    <SolidColorBrush
+        x:Key="LightGray"
+        Color="Gray" />
 
     <!--  UI Components Styling  -->
     <Style x:Key="MainHeaderTitleTextStyle" TargetType="{x:Type TextBlock}">
@@ -199,23 +202,6 @@
                         CornerRadius="5"
                         Margin="5,0">
                         <Image Source="pack://application:,,,/Resources;component/Icons/ChequeWriterLogo16x16.png"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-    <Style x:Key="ProfileImageButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="50" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border 
-                        Background="Transparent"
-                        CornerRadius="5"
-                        Margin="10">
-                        <Image Source="pack://application:,,,/Resources;component/Icons/Profile16x16.png"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -443,7 +429,7 @@
                 <ControlTemplate TargetType="TextBox">
                     <Border x:Name="PasswordTextBoxBorder"
                             BorderThickness="1"
-                            BorderBrush="Black"
+                            BorderBrush="{StaticResource Text-Dark}"
                             CornerRadius="3"
                             Background="White"
                             Padding="5">
@@ -458,11 +444,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Foreground" Value="{StaticResource Text-Dark}"/>
                             <Setter TargetName="PasswordTextBoxContent" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
-                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter Property="Foreground" Value="{StaticResource LightGray}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -485,4 +471,60 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
     </Style>
 
+    <Style x:Key="UserProfileMenuItemRadioButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Image Width="40"
+                           Height="40"
+                           VerticalAlignment="Center"
+                           Source="pack://application:,,,/Resources;component/Icons/Profile16x16.png"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UserProfileMenuItem" TargetType="{x:Type MenuItem}">
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontFamily" Value="Sora"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Foreground" Value="{StaticResource Text-Dark}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter ContentSource="Header"
+                                              Margin="10"
+                                              RecognizesAccessKey="True"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Background" Value="{StaticResource LightGray}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{StaticResource Primary}" />
+                <Setter Property="Foreground" Value="{StaticResource Text-Light}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="UserProfilePopUpStyle" TargetType="{x:Type Popup}">
+        <Setter Property="VerticalOffset" Value="10"/>
+        <Setter Property="HorizontalOffset" Value="-105"/>
+        <Setter Property="StaysOpen" Value="False"/>
+        <Setter Property="Placement" Value="Bottom"/>
+    </Style>
 </ResourceDictionary>
