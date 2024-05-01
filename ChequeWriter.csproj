@@ -19,21 +19,25 @@
     <Compile Remove="Modules\**" />
     <Compile Remove="Resources\**" />
     <Compile Remove="Services\**" />
+    <Compile Remove="UnitTest\**" />
     <EmbeddedResource Remove="ChequeWriter.DbInitializer.Console\**" />
     <EmbeddedResource Remove="ChequeWriter.DbInitializer\**" />
     <EmbeddedResource Remove="Modules\**" />
     <EmbeddedResource Remove="Resources\**" />
     <EmbeddedResource Remove="Services\**" />
+    <EmbeddedResource Remove="UnitTest\**" />
     <None Remove="ChequeWriter.DbInitializer.Console\**" />
     <None Remove="ChequeWriter.DbInitializer\**" />
     <None Remove="Modules\**" />
 	<None Remove="Resources\**" />
 	<None Remove="Services\**" />
+	<None Remove="UnitTest\**" />
 	<Page Remove="ChequeWriter.DbInitializer.Console\**" />
     <Page Remove="ChequeWriter.DbInitializer\**" />
     <Page Remove="Modules\**" />
     <Page Remove="Resources\**" />
     <Page Remove="Services\**" />
+    <Page Remove="UnitTest\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
