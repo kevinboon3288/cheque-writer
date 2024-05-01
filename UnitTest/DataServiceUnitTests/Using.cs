@@ -1,0 +1,11 @@
+﻿global using DataServices;
+global using DataServices.Models;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Design;
+global using Microsoft.Extensions.Options;
+global using Microsoft.Data.SqlClient;
+global using NSubstitute;
+global using NUnit.Framework;
+global using System;
+global using System.Data.Common;
+global using Microsoft.Data.Sqlite;
