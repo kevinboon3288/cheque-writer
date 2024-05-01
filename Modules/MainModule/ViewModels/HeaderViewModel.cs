@@ -1,6 +1,4 @@
-﻿
-
-namespace ChequeWriter.Modules.MainModule.ViewModels;
+﻿namespace ChequeWriter.Modules.MainModule.ViewModels;
 
 public class HeaderViewModel: BindableBase, INavigationAware
 {

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 
-namespace ChequeWriter.DbInitializer.Console
+namespace ChequeWriter.DbInitializer.Console;
+
+public class Program
 {
-    public class Program
+    private const string ConnectionStringName = "cheque-writer-ui";
+
+    public static void Main(string[] args)
     {
-        private const string ConnectionStringName = "cheque-writer-ui";
+        string? connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
 
-        public static void Main(string[] args)
-        {
-            string? connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
-
-            DbInitializer.Seed(connectionString);
-        }
+        DbInitializer.Seed(connectionString);
     }
 }

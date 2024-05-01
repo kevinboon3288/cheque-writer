@@ -308,7 +308,7 @@
                             BorderBrush="Black"
                             CornerRadius="3"
                             Background="White"
-                            Padding="5">
+                            Padding="10">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
                             <TextBlock x:Name="UserNameText" 
@@ -349,7 +349,7 @@
                         BorderBrush="Black"
                         CornerRadius="3"
                         Background="White"
-                        Padding="5">
+                        Padding="10">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
                             <TextBlock x:Name="UserJobTitleText" 
@@ -394,7 +394,7 @@
                         BorderBrush="Black"
                         CornerRadius="3"
                         Background="White"
-                        Padding="5">
+                        Padding="10">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
                             <TextBlock x:Name="PasswordBoxText" 
@@ -432,7 +432,7 @@
                             BorderBrush="{StaticResource Text-Dark}"
                             CornerRadius="3"
                             Background="White"
-                            Padding="5">
+                            Padding="10">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
                             <TextBlock x:Name="PasswordTextBoxContent" 
@@ -560,7 +560,7 @@
     <Style x:Key="UserProfileMenuItem" TargetType="{x:Type MenuItem}">
         <Setter Property="Width" Value="150"/>
         <Setter Property="Height" Value="50"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontFamily" Value="Sora"/>
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="Foreground" Value="{StaticResource Text-Dark}"/>
