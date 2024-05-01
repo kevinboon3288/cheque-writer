@@ -21,6 +21,7 @@ A WPF application using C# and Prism Library under MVVM design to automate the i
 - MVVM Architectural Design
 - Entity Framework
 - PostgreSql
+- NUnit Test Framework with NSubtitude mocking library
 
 ## Installation
 
