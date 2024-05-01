@@ -1,25 +1,24 @@
-﻿namespace ChequeWriter.Modules.ChequeModule
+﻿namespace ChequeWriter.Modules.ChequeModule;
+
+public class ChequeModule : IModule
 {
-    public class ChequeModule : IModule
+    private readonly IRegionManager _regionManager;
+
+    public ChequeModule(IRegionManager regionManager)
     {
-        private readonly IRegionManager _regionManager;
+        _regionManager = regionManager;
+    }
 
-        public ChequeModule(IRegionManager regionManager)
-        {
-            _regionManager = regionManager;
-        }
+    public void OnInitialized(IContainerProvider containerProvider)
+    {
+        _regionManager.RegisterViewWithRegion("ChequeContentRegion", typeof(ChequeView));
+    }
 
-        public void OnInitialized(IContainerProvider containerProvider)
-        {
-            _regionManager.RegisterViewWithRegion("ChequeContentRegion", typeof(ChequeView));
-        }
+    public void RegisterTypes(IContainerRegistry containerRegistry)
+    {
+        containerRegistry.RegisterScoped<IDataService, DataService>();
+        containerRegistry.RegisterForNavigation<ChequeView>();
 
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            containerRegistry.RegisterScoped<IDataService, DataService>();
-            containerRegistry.RegisterForNavigation<ChequeView>();
-
-            ViewModelLocationProvider.Register<ChequeView, ChequeViewModel>();
-        }
+        ViewModelLocationProvider.Register<ChequeView, ChequeViewModel>();
     }
 }

@@ -101,9 +101,7 @@ public class UserDataServiceUnitTest
         using (ChequeWriterDbContext dbContext = new(_dbContextOptions))
         {
             dbContext.Database.EnsureCreated();
-
             dbContext.UserLevel.RemoveRange(dbContext.UserLevel);
-
             dbContext.SaveChanges();
         }
 
@@ -169,9 +167,7 @@ public class UserDataServiceUnitTest
         using (ChequeWriterDbContext dbContext = new(_dbContextOptions))
         {
             dbContext.Database.EnsureCreated();
-
             dbContext.User.RemoveRange(dbContext.User);
-
             dbContext.SaveChanges();
         }
 
@@ -209,9 +205,9 @@ public class UserDataServiceUnitTest
         // Act
         _dataService.DeleteUser(3);
 
-        // Assert
         bool isDeletedUserFound = _dataService.GetAllUsers().Any(x => x.Id == 3);
 
+        // Assert
         Assert.That(isDeletedUserFound, Is.False);
     }
 }
