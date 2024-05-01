@@ -13,6 +13,15 @@ A WPF application using C# and Prism Library under MVVM design to automate the i
 - Report generation service utilizing cheque data
 - Developed using .NET 8 technologies.
 
+## 🛠 Languages and Technologies
+
+- NET 8.0
+- C#
+- WPF Framework
+- MVVM Architectural Design
+- Entity Framework
+- PostgreSql
+
 ## Installation
 
 Clone the repository and open the solution file in Visual Studio:
