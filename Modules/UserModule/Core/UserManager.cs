@@ -44,6 +44,18 @@ public class UserManager : IUserManager
         }
     }
 
+    public bool IsExistUser(string name, int userLevel)
+    {
+        try
+        {
+            return _dataService.IsExistUser(name, userLevel);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
+    }
+
     public List<User> GetAllUsers() 
     {
         try

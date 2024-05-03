@@ -91,10 +91,13 @@ public class UserAdderViewModel: BindableBase, INavigationAware
     {
         if (SelectedUserLevel != null && !string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password)) 
         {
-            _userManager.AddUser(UserName, Password, JobTitle, SelectedUserLevel.Id);
+            if (!_userManager.IsExistUser(UserName, SelectedUserLevel.Id))
+            {
+                _userManager.AddUser(UserName, Password, JobTitle, SelectedUserLevel.Id);
 
-            IRegion region = _regionManager.Regions["ModuleContentRegion"];
-            region.RequestNavigate("UserManagementView");            
+                IRegion region = _regionManager.Regions["ModuleContentRegion"];
+                region.RequestNavigate("UserManagementView");            
+            }
         }
     }
 

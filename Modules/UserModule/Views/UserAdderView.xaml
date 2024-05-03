@@ -46,9 +46,9 @@
                             Text="Password :" 
                             Style="{StaticResource UserLoginTitleTextStyle}"/>
                 <PasswordBox Grid.Row="1" Grid.Column="1"
-                                 PasswordChanged="PasswordBox_PasswordChanged"
-                                 PasswordChar="*" Background="Yellow"
-                                 Style="{StaticResource PasswordBoxStyle}"/>
+                             PasswordChanged="PasswordBox_PasswordChanged"
+                             PasswordChar="*" Background="Yellow"
+                             Style="{StaticResource PasswordBoxStyle}"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Password}" 
                              Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource PasswordTextBoxStyle}"/>
