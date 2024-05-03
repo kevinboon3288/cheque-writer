@@ -2,23 +2,34 @@
 
 public class DataServiceException : Exception
 {
-    public DataServiceException(string message)
-        : base(message)
+    public DataServiceException(string errorMessage): base(errorMessage)
     {
     }
-    public DataServiceException(string message, Exception inner)
-        : base(message, inner)
+    public DataServiceException(string errorMessage, Exception inner): base(errorMessage, inner)
     {
     }
 }
 
 public class DataService : IDataService
 {
-    private const string _connectionString = "Host=localhost;Database=cheque-writer-ui;Username=postgres;Password=postgres";
+    private const string DbName = "cheque-writer-ui";
+    private string _connectionString = "Host=localhost;Database=cheque-writer-ui;Username=postgres;Password=postgres";
     private readonly IDesignTimeDbContextFactory<ChequeWriterDbContext> _dbContextFactory;
 
     public DataService(IDesignTimeDbContextFactory<ChequeWriterDbContext> dbContextFactory)
     {
+        _dbContextFactory = dbContextFactory;
+    }
+
+    //TODO: This constructor is used for unit test configuration with SQL Lite database purpose
+    public DataService(IDesignTimeDbContextFactory<ChequeWriterDbContext> dbContextFactory,IOptions<ChequeWriterOption> options)
+    {
+        if (options.Value.ConnectionString == null || !options.Value.ConnectionString.TryGetValue(DbName, out string? connectionString)) 
+        {
+            throw new DataServiceException($"Unable to retrieve the connection string under {DbName} from configuration");
+        }
+
+        _connectionString = connectionString;
         _dbContextFactory = dbContextFactory;
     }
 
@@ -64,15 +75,10 @@ public class DataService : IDataService
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
         var queryResult =
-            from ul in db.UserLevel.ToList()
+            from ul in db.UserLevel
             select ul;
 
-        List<UserLevel>? userLevels = new();
-
-        foreach (UserLevel? userLevel in queryResult)
-        {
-            userLevels.Add(userLevel);
-        }
+        List<UserLevel>? userLevels = queryResult.ToList();
 
         return userLevels;
     }

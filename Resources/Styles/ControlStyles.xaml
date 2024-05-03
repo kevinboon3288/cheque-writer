@@ -26,6 +26,9 @@
     <SolidColorBrush
         x:Key="Text-Light"
         Color="White" />
+    <SolidColorBrush
+        x:Key="LightGray"
+        Color="Gray" />
 
     <!--  UI Components Styling  -->
     <Style x:Key="MainHeaderTitleTextStyle" TargetType="{x:Type TextBlock}">
@@ -204,23 +207,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <Style x:Key="ProfileImageButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="50" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border 
-                        Background="Transparent"
-                        CornerRadius="5"
-                        Margin="10">
-                        <Image Source="pack://application:,,,/Resources;component/Icons/Profile16x16.png"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style x:Key="BackImageButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="50" />
@@ -276,6 +262,34 @@
         </Setter>
     </Style>
 
+    <Style x:Key="PasswordVisibleImageButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="55" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Margin" Value="10,10,13,10" />
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        Background="Transparent"
+                        CornerRadius="5"
+                        Margin="15">
+                        <Image x:Name="PasswordVisibleImage" Source="pack://application:,,,/Resources;component/Icons/Visible16x16.png"/>
+                    </Border>
+                    <!--TODO: IsVisible is a pubic property instance setup for the visibility of UI control at the related view model.-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsVisible" Value="True">
+                            <Setter TargetName="PasswordVisibleImage" Property="Source" Value="pack://application:,,,/Resources;component/Icons/Visible16x16.png"/>
+                        </Trigger>
+                        <Trigger Property="IsVisible" Value="False">
+                            <Setter TargetName="PasswordVisibleImage" Property="Source" Value="pack://application:,,,/Resources;component/Icons/NotVisible16x16.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="CommonTextBoxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="AcceptsReturn" Value="false"/>
@@ -294,7 +308,7 @@
                             BorderBrush="Black"
                             CornerRadius="3"
                             Background="White"
-                            Padding="5">
+                            Padding="10">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
                             <TextBlock x:Name="UserNameText" 
@@ -335,7 +349,7 @@
                         BorderBrush="Black"
                         CornerRadius="3"
                         Background="White"
-                        Padding="5">
+                        Padding="10">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
                             <TextBlock x:Name="UserJobTitleText" 
@@ -366,39 +380,40 @@
         </Setter>
     </Style>
 
-    <Style x:Key="PasswordTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextBoxStyle}">
+    <Style x:Key="PasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="CaretBrush" Value="{StaticResource Text-Dark}"/>
+        <Setter Property="FontFamily" Value="Sora"/>
+        <Setter Property="Margin" Value="10"/>
         <Setter Property="MaxHeight" Value="60"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Border x:Name="PasswordTextBoxBorder"
-                            BorderThickness="1"
-                            BorderBrush="Black"
-                            CornerRadius="3"
-                            Background="White"
-                            Padding="5">
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border x:Name="PasswordBoxBorder"
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        CornerRadius="3"
+                        Background="White"
+                        Padding="10">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"/>
-                            <TextBlock x:Name="PasswordText" 
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Visibility="Collapsed"
-                                       Style="{StaticResource UserLoginInputTextStyle}"/>
+                            <TextBlock x:Name="PasswordBoxText" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Visibility="Collapsed"
+                                   Style="{StaticResource UserLoginInputTextStyle}"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Text" Value="">
-                            <Setter TargetName="PasswordText" Property="Visibility" Value="Visible"/>
-                        </Trigger>
-                        <Trigger Property="Text" Value="{x:Null}">
-                            <Setter TargetName="PasswordText" Property="Visibility" Value="Collapsed"/>
+                        <Trigger Property="PasswordChar" Value="">
+                            <Setter TargetName="PasswordBoxText" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter Property="Foreground" Value="Black"/>
-                            <Setter TargetName="PasswordText" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PasswordBoxText" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
-                            <Setter TargetName="PasswordText" Property="Text" Value="Enter a password"/>
+                            <Setter Property="Foreground" Value="Gray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -406,9 +421,113 @@
         </Setter>
     </Style>
 
+    <Style x:Key="PasswordTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextBoxStyle}">
+        <Setter Property="MaxHeight" Value="60"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="PasswordTextBoxBorder"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource Text-Dark}"
+                            CornerRadius="3"
+                            Background="White"
+                            Padding="10">
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <TextBlock x:Name="PasswordTextBoxContent" 
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Visibility="Collapsed"
+                                       Style="{StaticResource UserLoginInputTextStyle}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource Text-Dark}"/>
+                            <Setter TargetName="PasswordTextBoxContent" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource LightGray}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="ComboBoxToggleButtonTemplate" TargetType="ToggleButton">
+        <Border x:Name="templateRoot" Background="{StaticResource Text-Light}" BorderBrush="{StaticResource Text-Dark}" BorderThickness="1" CornerRadius="3">
+            <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Right">
+                <Image Source="pack://application:,,,/Resources;component/Icons/DropDown16x16.png" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"
+                       Margin="16"/>
+            </Border>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ToggleButton Name="ToggleButton" 
+                          Template="{StaticResource ComboBoxToggleButtonTemplate}" 
+                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+            </ToggleButton>
+            <TextBox x:Name="PART_EditableTextBox" 
+                     Style="{x:Null}" 
+                     BorderThickness="0"
+                     Margin="6,10,60,3" 
+                     FontFamily="Sora" 
+                     FontWeight="Regular" 
+                     FontSize="18" 
+                     Focusable="True" 
+                     Background="{StaticResource Text-Light}" 
+                     Foreground="{ StaticResource Text-Dark }"
+                     Visibility="Hidden"/>
+            <Popup x:Name="PART_Popup" 
+                   AllowsTransparency="true" 
+                   Grid.ColumnSpan="2" 
+                   IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                   Margin="1" 
+                   PopupAnimation="Slide"
+                   Placement="Bottom">
+                <Border x:Name="dropDownBorder" 
+                        HorizontalAlignment="Stretch"
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="1" 
+                        MinWidth="{Binding ActualWidth, ElementName=templateRoot}" 
+                        MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <ScrollViewer x:Name="DropDownScrollViewer">
+                        <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                            <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top">
+                                <Rectangle x:Name="opaqueRect" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                            </Canvas>
+                            <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                        </Grid>
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+            <ContentPresenter 
+                x:Name="contentPresenter" 
+                Margin="16,0,32,0"
+                Content="{TemplateBinding SelectionBoxItem}" 
+                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" 
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                IsHitTestVisible="false"/>
+        </Grid>
+    </ControlTemplate>
+
     <Style x:Key="UserLoginComboBoxStyle" TargetType="{x:Type ComboBox}">
         <Setter Property="MaxHeight" Value="60"/>
         <Setter Property="Margin" Value="10"/>
+        <Setter Property="Background" Value="GhostWhite"/>
         <Setter Property="Foreground" Value="{StaticResource Text-Dark}"/>
         <Setter Property="FontFamily" Value="Sora"/>
         <Setter Property="FontWeight" Value="Regular"/>
@@ -419,6 +538,64 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
+    </Style>
+
+    <Style x:Key="UserProfileMenuItemRadioButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Image Width="40"
+                           Height="40"
+                           VerticalAlignment="Center"
+                           Source="pack://application:,,,/Resources;component/Icons/Profile16x16.png"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UserProfileMenuItem" TargetType="{x:Type MenuItem}">
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="Sora"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Foreground" Value="{StaticResource Text-Dark}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter ContentSource="Header"
+                                              Margin="10"
+                                              RecognizesAccessKey="True"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Background" Value="{StaticResource LightGray}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{StaticResource Primary}" />
+                <Setter Property="Foreground" Value="{StaticResource Text-Light}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="UserProfilePopUpStyle" TargetType="{x:Type Popup}">
+        <Setter Property="VerticalOffset" Value="10"/>
+        <Setter Property="HorizontalOffset" Value="-105"/>
+        <Setter Property="StaysOpen" Value="False"/>
+        <Setter Property="Placement" Value="Bottom"/>
     </Style>
 
 </ResourceDictionary>

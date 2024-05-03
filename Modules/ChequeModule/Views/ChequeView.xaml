@@ -8,6 +8,10 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <Window
+        WindowStyle="None"
+        WindowState="Maximized"/>
+
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -18,20 +22,19 @@
     </UserControl.Resources>
 
     <Grid Background="{StaticResource Secondary}">
-        
-        <Button
-            Grid.Column="0"
-            Command="{Binding NavigateBack}"
-            Style="{StaticResource BackImageButtonStyle}" />
 
-        <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left">
-            <Button Width="101" Height="39" >Save</Button>
+        <Button
+            Command="{Binding NavigateBack}"
+            Style="{StaticResource BackImageButtonStyle}" HorizontalAlignment="Center" Width="50" />
+
+        <StackPanel Grid.Column="2" Grid.Row="4">
+            <Button Width="101" Height="39" HorizontalAlignment="Left" >Save</Button>
         </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right">
-            <Button Width="101" Height="39" >Cancel</Button>
+        <StackPanel Grid.Column="2" Grid.Row="4">
+            <Button Width="101" Height="39" HorizontalAlignment="Right" >Cancel</Button>
         </StackPanel>
-        
-        <StackPanel Grid.Column="2" Grid.Row="2">
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,15,0,0" Grid.RowSpan="2">
             <StackPanel>
                 <Label
                     Content="Payee's name:" 
@@ -39,7 +42,7 @@
                 <TextBox/>
             </StackPanel>
             <Border Height="15"/>
-            
+
             <StackPanel>
                 <Label
                     Content="Amount (numbers):"
@@ -47,7 +50,7 @@
                 <TextBox/>
             </StackPanel>
             <Border Height="15"/>
-            
+
             <StackPanel>
                 <Label
                     Content="Date:" 
@@ -55,7 +58,7 @@
                 <TextBox/>
             </StackPanel>
             <Border Height="15"/>
-            
+
             <StackPanel>
                 <Label
                     Content="Drawer:" 
@@ -63,7 +66,11 @@
                 <TextBox/>
             </StackPanel>
         </StackPanel>
-        
+
+        <StackPanel Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Height="185">
+            <StackPanel Height="185"/>
+        </StackPanel>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="17*" />
@@ -74,11 +81,10 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="177*"/>
-            <ColumnDefinition Width="12*"/>
-            <ColumnDefinition Width="199*"/>
         </Grid.ColumnDefinitions>
-        
+        <Button
+            Grid.Column="0"
+            Command="{Binding NavigateBack}"
+            Style="{StaticResource BackImageButtonStyle}" />
     </Grid>
 </UserControl>

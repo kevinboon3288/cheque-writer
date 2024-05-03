@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChequeWriter.Modules.MainModule.Views"
+             xmlns:converter="clr-namespace:ChequeWriter.Modules.CommonModule.Converters;assembly=CommonModule"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -14,6 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources;component/Styles/ControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converter:UIControlVisibilityConveter x:Key="visibilityConverter"></converter:UIControlVisibilityConveter>
         </ResourceDictionary>
     </UserControl.Resources>
     
@@ -23,11 +25,34 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Style="{StaticResource LogoImageButtonStyle}" Visibility="Visible"/>
+        <Button Grid.Column="0" Style="{StaticResource LogoImageButtonStyle}"/>
         <TextBlock Grid.Column="1" Text="Cheque Writer" Style="{StaticResource MainHeaderTitleTextStyle}"/>
         <TextBlock Grid.Column="1" Text="{Binding Title}" Style="{StaticResource ModuleTitleTextStyle}"/>
-        <Button Grid.Column="2" Style="{StaticResource ProfileImageButtonStyle}"
-                Command="{Binding NavigateCommand}"
-                IsEnabled="{Binding IsAccessible}"/>
+        <RadioButton Grid.Column="2" 
+                     x:Name="ProfilePopUpMenuButton"
+                     IsChecked="{Binding IsRadioChecked}"
+                     Style="{StaticResource UserProfileMenuItemRadioButton}">
+            <Popup IsOpen="{Binding Path=IsChecked, ElementName=ProfilePopUpMenuButton}" 
+                   PlacementTarget="{Binding ElementName=ProfilePopUpMenuButton}"
+                   Style="{StaticResource UserProfilePopUpStyle}">
+                <Border BorderBrush="{StaticResource Text-Dark}" BorderThickness="3" CornerRadius="1">
+                    <Menu
+                        Visibility="{Binding IsRadioChecked, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
+                        <Menu.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </Menu.ItemsPanel>
+                        <MenuItem Header="User Management" 
+                                    Command="{Binding NavigateCommand}" 
+                                    Visibility="{Binding IsAccessible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource UserProfileMenuItem}"/>
+                        <MenuItem Header="Log Out" 
+                                    Command="{Binding LogOutCommand}"
+                                    Style="{StaticResource UserProfileMenuItem}"/>
+                    </Menu>
+                </Border>
+            </Popup>
+        </RadioButton>
     </Grid>
 </UserControl>
