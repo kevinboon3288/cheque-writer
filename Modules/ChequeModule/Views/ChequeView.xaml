@@ -8,9 +8,6 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Window
-        WindowStyle="None"
-        WindowState="Maximized"/>
 
 
     <UserControl.Resources>
@@ -21,55 +18,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{StaticResource Secondary}">
-
-        <Button
-            Command="{Binding NavigateBack}"
-            Style="{StaticResource BackImageButtonStyle}" HorizontalAlignment="Center" Width="50" />
-
-        <StackPanel Grid.Column="2" Grid.Row="4">
-            <Button Width="101" Height="39" HorizontalAlignment="Left" >Save</Button>
-        </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="4">
-            <Button Width="101" Height="39" HorizontalAlignment="Right" >Cancel</Button>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,15,0,0" Grid.RowSpan="2">
-            <StackPanel>
-                <Label
-                    Content="Payee's name:" 
-                    HorizontalAlignment="Left" />
-                <TextBox/>
-            </StackPanel>
-            <Border Height="15"/>
-
-            <StackPanel>
-                <Label
-                    Content="Amount (numbers):"
-                    HorizontalAlignment="Left" />
-                <TextBox/>
-            </StackPanel>
-            <Border Height="15"/>
-
-            <StackPanel>
-                <Label
-                    Content="Date:" 
-                    HorizontalAlignment="Left" />
-                <TextBox/>
-            </StackPanel>
-            <Border Height="15"/>
-
-            <StackPanel>
-                <Label
-                    Content="Drawer:" 
-                    HorizontalAlignment="Left" />
-                <TextBox/>
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Height="185">
-            <StackPanel Height="185"/>
-        </StackPanel>
+    <Grid Background="{StaticResource Secondary}" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -81,10 +30,148 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="84*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Button
-            Grid.Column="0"
             Command="{Binding NavigateBack}"
-            Style="{StaticResource BackImageButtonStyle}" />
+            Style="{StaticResource BackImageButtonStyle}" HorizontalAlignment="Center" Width="50" />
+
+        <StackPanel Grid.Row="4" Grid.Column="2">
+            <Button 
+                Width="101" 
+                Height="39" 
+                HorizontalAlignment="Left" >Save</Button>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="2">
+            <Button 
+                Width="101" 
+                Height="39" 
+                HorizontalAlignment="Right" >Cancel</Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,15,0,0" Grid.RowSpan="2" >
+            <StackPanel>
+                <TextBlock
+                    Text="Payee's name:" 
+                    HorizontalAlignment="Left" 
+                    Style="{StaticResource UserLoginTitleTextStyle}"/>
+                <TextBox
+                    Style="{StaticResource CommonTextBoxStyle}"/>
+            </StackPanel>
+            <Border Height="8"/>
+
+            <StackPanel>
+                <TextBlock
+                    Text="Amount (numbers):"
+                    HorizontalAlignment="Left" 
+                    Style="{StaticResource UserLoginTitleTextStyle}"/>
+                <TextBox
+                    Style="{StaticResource CommonTextBoxStyle}"/>
+            </StackPanel>
+            <Border Height="8"/>
+
+            <StackPanel>
+                <TextBlock
+                    Text="Date (DDMMYY):" 
+                    HorizontalAlignment="Left" 
+                    Style="{StaticResource UserLoginTitleTextStyle}"/>
+                <TextBox
+                    Style="{StaticResource CommonTextBoxStyle}"/>
+            </StackPanel>
+            <Border Height="8"/>
+
+            <StackPanel>
+                <TextBlock
+                    Text="Drawer:" 
+                    HorizontalAlignment="Left" 
+                    Style="{StaticResource UserLoginTitleTextStyle}"/>
+                <TextBox
+                    Style="{StaticResource CommonTextBoxStyle}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="4" Margin="0,15,0,0" Grid.RowSpan="2" >
+            <TextBlock
+                Text="Preview:" 
+                HorizontalAlignment="Center"
+                Style="{StaticResource UserLoginTitleTextStyle}"/>
+        </StackPanel>
+
+        <StackPanel 
+                Grid.Row="2" Grid.Column="4" 
+                VerticalAlignment="Center" 
+                Height="210" 
+                Width="420"
+                Background="White" >
+            <StackPanel>
+                <Canvas>
+                    <Line
+                        X1="20" Y1="70"
+                        X2="250" Y2="70"
+                        Stroke="Black"
+                        StrokeThickness="0.5" />
+                    <Line
+                        X1="20" Y1="95"
+                        X2="250" Y2="95"
+                        Stroke="Black"
+                        StrokeThickness="0.5" />
+                    <Line
+                        X1="20" Y1="120"
+                        X2="250" Y2="120"
+                        Stroke="Black"
+                        StrokeThickness="0.5" />
+                    <Line
+                        X1="200" Y1="170"
+                        X2="400" Y2="170"
+                        Stroke="Black"
+                        StrokeThickness="0.5" />
+                    <Rectangle
+                        Width="140"
+                        Height="35"
+                        Fill="White"
+                        Stroke="Black"
+                        StrokeThickness="2"
+                        Canvas.Left="260"
+                        Canvas.Top="76" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </Canvas>
+            </StackPanel>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="17*"/>
+                    <ColumnDefinition Width="11*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="1" Grid.Column="0" 
+                    Text="PAYEE" 
+                    Margin="22,10,173,1" FontSize="9" IsEnabled="False" Grid.ColumnSpan="1" FontStyle="Italic"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" 
+                    Text="RINGGIT MALAYSIA" 
+                    TextWrapping="Wrap" 
+                    Margin="22,0,173,6" FontSize="9" FontStyle="Italic" IsEnabled="False" Grid.ColumnSpan="1" Width="45"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" 
+                    Text="DATE" Grid.ColumnSpan="1" Margin="20,29,0,0" IsEnabled="False" FontWeight="Normal" FontSize="9" Width="20" HorizontalAlignment="Left" Height="15" />
+                
+                <TextBlock Grid.Row="2" Grid.Column="1" 
+                    Text="RM" Grid.ColumnSpan="1" Margin="30,14,0,0" IsEnabled="False" FontWeight="Bold" Width="20" HorizontalAlignment="Left" />
+
+                <TextBlock Grid.Row="3" Grid.Column="1" 
+                    Text="NO SIGNATURE BELOW THIS LINE" Grid.ColumnSpan="2" Margin="23,70,0,0" IsEnabled="False" FontWeight="Normal" FontSize="6" />
+            </Grid>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>
