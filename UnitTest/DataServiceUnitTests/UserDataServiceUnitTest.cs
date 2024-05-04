@@ -135,6 +135,26 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
+    public void IsExistUser_ReturnTrue_Success()
+    {
+        // Act
+        bool result = _dataService.IsExistUser("Bob", 1);
+
+        // Assert
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void IsExistUser_ReturnFalse_Success()
+    {
+        // Act
+        bool result = _dataService.IsExistUser("Kevin", 1);
+
+        // Assert
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
     public void GetAllUsers_ReturnAllUsers_Success()
     {
         // Act
@@ -209,5 +229,12 @@ public class UserDataServiceUnitTest
 
         // Assert
         Assert.That(isDeletedUserFound, Is.False);
+    }
+
+    [Test]
+    public void DeleteUser_UnknownId_ThrowDataServiceException()
+    {
+        // Assert
+        Assert.Throws<DataServiceException>(() => _dataService.DeleteUser(4));
     }
 }

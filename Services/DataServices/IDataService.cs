@@ -6,6 +6,7 @@ public interface IDataService
     string? GetUserLevelNameById(int id);
     List<UserLevel>? GetUserLevels();
     bool IsValidUser(string? name, string? password, int userLevel);
+    bool IsExistUser(string? name, int userLevel);
     List<User> GetAllUsers();
     int AddUser(string userName, string password, string? jobTitle, int userLevel);
     int DeleteUser(int userId);
