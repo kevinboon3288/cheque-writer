@@ -11,6 +11,7 @@ public class UserAdderViewModel: BindableBase, INavigationAware
     private string? _jobTitle;
     private string? _password;
     private bool _isVisible;
+    private int? _currentUserId;
 
     public string? UserName
     {
@@ -66,9 +67,14 @@ public class UserAdderViewModel: BindableBase, INavigationAware
 
     public void OnNavigatedTo(NavigationContext navigationContext)
     {
-        OnRefresh();
-
         _eventAggregator.GetEvent<UIControlEvent>().Publish("Add User");
+
+        if (navigationContext.Parameters.ContainsKey("currentUserId"))
+        {
+            _currentUserId = navigationContext.Parameters.GetValue<int>("currentUserId");
+        }
+
+        OnRefresh();
     }
 
     private void OnRefresh()
@@ -91,10 +97,18 @@ public class UserAdderViewModel: BindableBase, INavigationAware
     {
         if (SelectedUserLevel != null && !string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password)) 
         {
-            _userManager.AddUser(UserName, Password, JobTitle, SelectedUserLevel.Id);
+            if (_currentUserId == null) 
+            {
+                throw new ArgumentNullException($"Empty current user is defined in {nameof(OnAddUser)}");
+            }
 
-            IRegion region = _regionManager.Regions["ModuleContentRegion"];
-            region.RequestNavigate("UserManagementView");            
+            if (!_userManager.IsExistUser(UserName, SelectedUserLevel.Id))
+            {
+                _userManager.AddUser(UserName, Password, JobTitle, SelectedUserLevel.Id, _currentUserId.Value);
+
+                IRegion region = _regionManager.Regions["ModuleContentRegion"];
+                region.RequestNavigate("UserManagementView");            
+            }
         }
     }
 

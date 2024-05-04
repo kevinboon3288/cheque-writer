@@ -41,9 +41,9 @@ public class UserDataServiceUnitTest
 
             dbContext.UserLevel.Add(adminLevel);
             dbContext.UserLevel.Add(userLevel);
-            dbContext.User.Add(new User() { Name = "Bob", JobTitle = "Administrator", Password = "bob123", UserLevelId = 1, UserLevel = adminLevel });
-            dbContext.User.Add(new User() { Name = "Anthony", JobTitle = "Engineer", Password = "ant234", UserLevelId = 2, UserLevel = userLevel });
-            dbContext.User.Add(new User() { Name = "Jessie Tan", JobTitle = "Developer", Password = "j@dev555", UserLevelId = 2, UserLevel = userLevel });
+            dbContext.User.Add(new User() { UserId = new Guid("1785E29D-8B5E-49C3-AAC0-E4D2B0E434CC"), Name = "Bob", JobTitle = "Administrator", Password = "bob123", UserLevelId = 1, CreatedBy = 0, UserLevel = adminLevel });
+            dbContext.User.Add(new User() { UserId = new Guid("9BCEAB40-7F2B-459B-A99A-9F93F92EBAED"), Name = "Anthony", JobTitle = "Engineer", Password = "ant234", UserLevelId = 2, CreatedBy = 1, UserLevel = userLevel });
+            dbContext.User.Add(new User() { UserId = new Guid("8C186670-673C-4417-8926-F1C160DBC46A"), Name = "Jessie Tan", JobTitle = "Developer", Password = "j@dev555", UserLevelId = 2, CreatedBy = 1, UserLevel = userLevel });
 
             dbContext.SaveChanges();
         }
@@ -115,6 +115,23 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
+    public void GetCurrentUserId_ReturnIdNumber_Success()
+    {
+        // Act
+        int userNoId = _dataService.GetCurrentUserId("Bob", "bob123", 1);
+
+        // Assert
+        Assert.That(userNoId, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void GetCurrentUserId_InvalidUserInfo_ThrowDataServiceException()
+    {
+        // Assert
+        Assert.Throws<DataServiceException>(() => _dataService.GetCurrentUserId("Kevin", "kevin123", 1));
+    }
+
+    [Test]
     public void IsValidUser_ReturnTrue_Success()
     {
         // Act
@@ -135,25 +152,52 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
+    public void IsExistUser_ReturnTrue_Success()
+    {
+        // Act
+        bool result = _dataService.IsExistUser("Bob", 1);
+
+        // Assert
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void IsExistUser_ReturnFalse_Success()
+    {
+        // Act
+        bool result = _dataService.IsExistUser("Kevin", 1);
+
+        // Assert
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
     public void GetAllUsers_ReturnAllUsers_Success()
     {
         // Act
+        Guid guidUser1 = new Guid("1785E29D-8B5E-49C3-AAC0-E4D2B0E434CC");
+        Guid guidUser2 = new Guid("9BCEAB40-7F2B-459B-A99A-9F93F92EBAED");
+        Guid guidUser3 = new Guid("8C186670-673C-4417-8926-F1C160DBC46A");
+
         List<User> users = _dataService.GetAllUsers();
 
         // Assert
         Assert.That(users, Is.Not.Null);
         Assert.That(users.Count(), Is.EqualTo(3));
         Assert.That(users[0].Id, Is.EqualTo(1));
+        Assert.That(users[0].UserId, Is.EqualTo(guidUser1));
         Assert.That(users[0].Name, Is.EqualTo("Bob"));
         Assert.That(users[0].JobTitle, Is.EqualTo("Administrator"));
         Assert.That(users[0].Password, Is.EqualTo("bob123"));
         Assert.That(users[0].UserLevelId, Is.EqualTo(1));
         Assert.That(users[1].Id, Is.EqualTo(2));
+        Assert.That(users[1].UserId, Is.EqualTo(guidUser2));
         Assert.That(users[1].Name, Is.EqualTo("Anthony"));
         Assert.That(users[1].JobTitle, Is.EqualTo("Engineer"));
         Assert.That(users[1].Password, Is.EqualTo("ant234"));
         Assert.That(users[1].UserLevelId, Is.EqualTo(2));
         Assert.That(users[2].Id, Is.EqualTo(3));
+        Assert.That(users[2].UserId, Is.EqualTo(guidUser3));
         Assert.That(users[2].Name, Is.EqualTo("Jessie Tan"));
         Assert.That(users[2].JobTitle, Is.EqualTo("Developer"));
         Assert.That(users[2].Password, Is.EqualTo("j@dev555"));
@@ -188,7 +232,7 @@ public class UserDataServiceUnitTest
         string newUserPassword = "nancy@112";
         string newUserJobTitle = "Tester";
 
-        int newUserId = _dataService.AddUser(newUserName, newUserPassword, newUserJobTitle, 2);
+        int newUserId = _dataService.AddUser(newUserName, newUserPassword, newUserJobTitle, 2, 1);
 
         bool isNewUserAdded = _dataService.GetAllUsers().Any(x => x.Name == newUserName 
                                 && x.Password == newUserPassword
@@ -209,5 +253,12 @@ public class UserDataServiceUnitTest
 
         // Assert
         Assert.That(isDeletedUserFound, Is.False);
+    }
+
+    [Test]
+    public void DeleteUser_UnknownId_ThrowDataServiceException()
+    {
+        // Assert
+        Assert.Throws<DataServiceException>(() => _dataService.DeleteUser(4));
     }
 }

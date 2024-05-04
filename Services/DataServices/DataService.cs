@@ -40,11 +40,11 @@ public class DataService : IDataService
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
         var queryResult =
-            from c in db.Cheque.ToList()
+            from c in db.Cheque
             where c.Id == id
             select c;
 
-        return queryResult.FirstOrDefault();
+        return queryResult.ToList().FirstOrDefault();
     }
 
     #endregion
@@ -83,17 +83,50 @@ public class DataService : IDataService
         return userLevels;
     }
 
+    public int GetCurrentUserId(string? name, string? password, int userLevel)
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        var queryResult =
+            from u in db.User
+            join ul in db.UserLevel on u.UserLevelId equals ul.Id
+            where u.Name == name && u.Password == password && u.UserLevelId == userLevel
+            select u;
+
+        User? currentUser = queryResult.ToList().FirstOrDefault();
+
+        if (currentUser == null) 
+        {
+            throw new DataServiceException($"Couldn't find the user with {name}");
+        }
+
+        return currentUser.Id;
+    }
+
     public bool IsValidUser(string? name, string? password, int userLevel) 
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
         var queryResult =
-            from u in db.User.ToList()
+            from u in db.User
             join ul in db.UserLevel on u.UserLevelId equals ul.Id
             where u.Name == name && u.Password == password && u.UserLevelId == userLevel
             select u;
 
-        return queryResult.Any();
+        return queryResult.ToList().Count != 0;
+    }
+
+    public bool IsExistUser(string? name, int userLevel)
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        var queryResult =
+            from u in db.User
+            join ul in db.UserLevel on u.UserLevelId equals ul.Id
+            where u.Name == name && u.UserLevelId == userLevel
+            select u;
+
+        return queryResult.ToList().Count != 0;
     }
 
     public List<User> GetAllUsers() 
@@ -103,21 +136,24 @@ public class DataService : IDataService
         var queryResult =
             from u in db.User
             join ul in db.UserLevel on u.UserLevelId equals ul.Id
+            orderby u.UserLevelId
             select u;
 
         return queryResult.ToList();
     }
 
-    public int AddUser(string userName, string password, string? jobTitle, int userLevel) 
+    public int AddUser(string userName, string password, string? jobTitle, int userLevel, int currentUserId) 
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
-        
-        User user = new User() 
+
+        User user = new User()
         {
+            UserId = Guid.NewGuid(),
             Name = userName,
             Password = password,
             JobTitle = jobTitle,
-            UserLevelId = userLevel
+            CreatedBy = currentUserId,
+            UserLevelId = userLevel,
         };
 
         db.User.Add(user);
@@ -136,11 +172,13 @@ public class DataService : IDataService
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
         User? selectedUser = db.User.SingleOrDefault(u => u.Id == userId);
-        if (selectedUser != null) 
+        if (selectedUser == null) 
         {
-            db.Remove(selectedUser);
-            result = db.SaveChanges();
+            throw new DataServiceException($"Couldn't delete the user: {userId}");
         }
+
+        db.Remove(selectedUser);
+        result = db.SaveChanges();
 
         return result;
     }

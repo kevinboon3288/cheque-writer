@@ -32,11 +32,35 @@ public class UserManager : IUserManager
         }
     }
 
+    public int GetCurrentUserId(string name, string password, int userLevel)
+    {
+        try
+        {
+            return _dataService.GetCurrentUserId(name, password, userLevel);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
+    }
+
     public bool IsValidUser(string name, string password, int userLevel) 
     {
         try
         {
             return _dataService.IsValidUser(name, password, userLevel);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
+    }
+
+    public bool IsExistUser(string name, int userLevel)
+    {
+        try
+        {
+            return _dataService.IsExistUser(name, userLevel);
         }
         catch (Exception ex)
         {
@@ -55,10 +79,12 @@ public class UserManager : IUserManager
                 users.Add(new User() 
                 {
                     Id = user.Id,
+                    UserId = user.UserId.ToString(),
                     Name = user.Name,
                     JobTitle = user.JobTitle,
+                    CreatedBy = user.CreatedBy,
                     UserLevel = _dataService.GetUserLevelNameById(user.UserLevelId),
-                    IsChecked = false
+                    IsEnabled = (user.Id == 1) ? false : true
                 });
             }
 
@@ -70,11 +96,11 @@ public class UserManager : IUserManager
         }
     }
 
-    public int AddUser(string userName, string password, string? jobTitle, int userLevel)
+    public int AddUser(string userName, string password, string? jobTitle, int userLevel, int currentUserId)
     {
         try
         {
-            return _dataService.AddUser(userName, password, jobTitle, userLevel);
+            return _dataService.AddUser(userName, password, jobTitle, userLevel, currentUserId);
         }
         catch (Exception ex)
         {
