@@ -7,6 +7,7 @@ public class HeaderViewModel: BindableBase, INavigationAware
     private string? _title;
     private bool _isAccessible;
     private bool _isRadioChecked;
+    private int? _currentUserId;
 
     public string? Title 
     {
@@ -47,8 +48,13 @@ public class HeaderViewModel: BindableBase, INavigationAware
     {
         IsRadioChecked = false;
 
+        if (_currentUserId == null) 
+        {
+            throw new ArgumentNullException($"Empty current user info.");
+        }
+
         IRegion region = _regionManager.Regions["ModuleContentRegion"];
-        region.RequestNavigate("UserManagementView");
+        region.RequestNavigate($"UserManagementView?currentUserId={_currentUserId}");
     }
 
     private void OnLogOut()
@@ -74,9 +80,19 @@ public class HeaderViewModel: BindableBase, INavigationAware
         }
     }
 
-    private void OnCurrentUserLevel(int currentUserLevel)
+    private void OnCurrentUserLevel(Dictionary<string, dynamic> currentUserEventArgs)
     {
-        IsAccessible = (currentUserLevel == 1) ? true : false;
+        ArgumentNullException.ThrowIfNull(currentUserEventArgs);
+
+        if (currentUserEventArgs.TryGetValue("SelectedUserLevelId", out dynamic? selectedUserLevelId)) 
+        {
+            IsAccessible = (selectedUserLevelId == 1) ? true : false;          
+        }
+
+        if (currentUserEventArgs.TryGetValue("UserNoId", out dynamic? userNoId))
+        {
+            _currentUserId = userNoId;
+        }
     }
 
     public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -82,7 +82,11 @@ public class UserLoginViewModel: BindableBase, INavigationAware
             IRegion region = _regionManager.Regions["UserContentRegion"];
             region.RequestNavigate("MainView");               
 
-            _eventAggregator.GetEvent<CurrentUserEvent>().Publish(_selectedUserLevel.Id);
+            _eventAggregator.GetEvent<CurrentUserEvent>().Publish(new Dictionary<string, dynamic>() 
+            {
+                { "UserNoId", _userManager.GetCurrentUserId(UserName, Password, _selectedUserLevel.Id) },
+                { "SelectedUserLevelId", _selectedUserLevel.Id  }
+            });
         }
     }
 
