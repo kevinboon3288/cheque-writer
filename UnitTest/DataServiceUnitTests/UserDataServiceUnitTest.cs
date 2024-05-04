@@ -115,6 +115,23 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
+    public void GetCurrentUserId_ReturnIdNumber_Success()
+    {
+        // Act
+        int userNoId = _dataService.GetCurrentUserId("Bob", "bob123", 1);
+
+        // Assert
+        Assert.That(userNoId, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void GetCurrentUserId_InvalidUserInfo_ThrowDataServiceException()
+    {
+        // Assert
+        Assert.Throws<DataServiceException>(() => _dataService.GetCurrentUserId("Kevin", "kevin123", 1));
+    }
+
+    [Test]
     public void IsValidUser_ReturnTrue_Success()
     {
         // Act
