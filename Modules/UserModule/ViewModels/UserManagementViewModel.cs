@@ -7,6 +7,7 @@ public class UserManagementViewModel: BindableBase, INavigationAware
     private readonly IEventAggregator _eventAggregator;
     private List<User> _users = new();
     private User _selectedUser = new();
+    private int? _currentUserId;
 
     public List<User> Users 
     {
@@ -39,12 +40,26 @@ public class UserManagementViewModel: BindableBase, INavigationAware
     {
         _eventAggregator.GetEvent<UIControlEvent>().Publish("User Management");
 
+        if (navigationContext.Parameters.ContainsKey("currentUserId")) 
+        {
+            _currentUserId = navigationContext.Parameters.GetValue<int>("currentUserId");
+        }
+
         OnRefresh();
     }
 
     private void OnRefresh() 
     {
         Users = _userManager.GetAllUsers();
+
+        if (_currentUserId != null) 
+        {
+            User? currentUser = Users.FirstOrDefault(x => x.Id == _currentUserId);
+            if (currentUser != null)
+            { 
+                currentUser.IsEnabled = false; 
+            }
+        }
     }
 
     private void OnReturn()
@@ -55,9 +70,13 @@ public class UserManagementViewModel: BindableBase, INavigationAware
 
     private void OnNavigateToUserAdder()
     {
-        //TODO: Navigate to UserAdderView
+        if (_currentUserId == null)
+        {
+            throw new ArgumentNullException($"Empty or null current user.");
+        }
+
         IRegion region = _regionManager.Regions["ModuleContentRegion"];
-        region.RequestNavigate("UserAdderView");
+        region.RequestNavigate($"UserAdderView?currentUserId={_currentUserId}");
     }
 
     private void OnDeleteUser() 

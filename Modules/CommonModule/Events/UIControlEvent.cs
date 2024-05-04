@@ -4,6 +4,6 @@ public class UIControlEvent: PubSubEvent<string>
 {
 }
 
-public class CurrentUserEvent : PubSubEvent<int>
+public class CurrentUserEvent : PubSubEvent<Dictionary<string, dynamic>>
 {
 }

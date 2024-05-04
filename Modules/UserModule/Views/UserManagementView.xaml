@@ -53,7 +53,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="Id" Style="{StaticResource UserInfoHeaderTextStyle}"/>
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Name" Style="{StaticResource UserInfoHeaderTextStyle}"/>
                 <TextBlock Grid.Row="0" Grid.Column="3" Text="Job TItle" Style="{StaticResource UserInfoHeaderTextStyle}"/>
-                <TextBlock Grid.Row="0" Grid.Column="4" Text="Authority" Style="{StaticResource UserInfoHeaderTextStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="5" Text="Authority" Style="{StaticResource UserInfoHeaderTextStyle}"/>
                 <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Background="{StaticResource Tertiary}"/>
                 <ItemsControl Grid.Row="2" Grid.Column="0" 
                               Grid.ColumnSpan="5" 
@@ -74,8 +74,10 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <CheckBox Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"
-                                          IsChecked="{Binding IsChecked}"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Id}" Style="{StaticResource UserInfoTextStyle}"/>
+                                          IsChecked="{Binding IsChecked}"
+                                          IsEnabled="{Binding IsEnabled}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding UserId}" ToolTip="{Binding UserId}" 
+                                           Style="{StaticResource UserInfoTextStyle}"/>
                                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Name}" Style="{StaticResource UserInfoTextStyle}"/>
                                 <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding JobTitle}" Style="{StaticResource UserInfoTextStyle}"/>
                                 <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding UserLevel}" Style="{StaticResource UserInfoTextStyle}"/>
