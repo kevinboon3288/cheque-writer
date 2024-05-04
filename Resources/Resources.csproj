@@ -9,15 +9,27 @@
   <ItemGroup>
     <None Remove="Icons\Add16x16.png" />
     <None Remove="Icons\Back16x16.png" />
+    <None Remove="Icons\Checked16x16.png" />
     <None Remove="Icons\ChequeWriterLogo16x16.png" />
     <None Remove="Icons\Delete16x16.png" />
     <None Remove="Icons\DropDown16x16.png" />
+    <None Remove="Icons\NotSelected16x16.png" />
     <None Remove="Icons\NotVisible16x16.png" />
     <None Remove="Icons\Profile16x16.png" />
+    <None Remove="Icons\Unchecked16x16.png" />
     <None Remove="Icons\Visible16x16.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\Checked16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Icons\DropDown16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\NotSelected16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Unchecked16x16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Visible16x16.png">

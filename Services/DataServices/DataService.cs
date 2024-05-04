@@ -136,6 +136,7 @@ public class DataService : IDataService
         var queryResult =
             from u in db.User
             join ul in db.UserLevel on u.UserLevelId equals ul.Id
+            orderby u.UserLevelId
             select u;
 
         return queryResult.ToList();
