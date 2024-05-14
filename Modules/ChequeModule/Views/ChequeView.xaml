@@ -22,84 +22,80 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="17*" />
-            <RowDefinition Height="331*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="23*"/>
-            <RowDefinition Height="17*" />
-            <RowDefinition Height="331*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="23*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="55*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="84*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button
             Command="{Binding NavigateBack}"
             Style="{StaticResource BackImageButtonStyle}" HorizontalAlignment="Center" Width="50" />
 
-        <StackPanel Grid.Row="4" Grid.Column="2">
+        <StackPanel Grid.Row="4" Grid.Column="1" VerticalAlignment="Bottom">
             <Button 
                 Width="101" 
                 Height="39" 
-                HorizontalAlignment="Left" >Save</Button>
+                HorizontalAlignment="Center" 
+                >Save</Button>
         </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="2">
+        <StackPanel Grid.Row="4" Grid.Column="2" VerticalAlignment="Bottom">
             <Button 
                 Width="101" 
                 Height="39" 
-                HorizontalAlignment="Right" >Cancel</Button>
+                HorizontalAlignment="Center" >Cancel</Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,15,0,0" Grid.RowSpan="2" >
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" Grid.RowSpan="4" Grid.ColumnSpan="2">
             <StackPanel>
                 <TextBlock
                     Text="Payee's name:" 
                     HorizontalAlignment="Left" 
-                    Style="{StaticResource UserLoginTitleTextStyle}"/>
+                    Style="{StaticResource ChequeViewFillInFormStyle}"/>
                 <TextBox
                     Style="{StaticResource CommonTextBoxStyle}"/>
             </StackPanel>
-            <Border Height="8"/>
+            <Border Height="3"/>
 
             <StackPanel>
                 <TextBlock
                     Text="Amount (numbers):"
                     HorizontalAlignment="Left" 
-                    Style="{StaticResource UserLoginTitleTextStyle}"/>
+                    Style="{StaticResource ChequeViewFillInFormStyle}"/>
                 <TextBox
                     Style="{StaticResource CommonTextBoxStyle}"/>
             </StackPanel>
-            <Border Height="8"/>
+            <Border Height="3"/>
 
             <StackPanel>
                 <TextBlock
                     Text="Date (DDMMYY):" 
                     HorizontalAlignment="Left" 
-                    Style="{StaticResource UserLoginTitleTextStyle}"/>
+                    Style="{StaticResource ChequeViewFillInFormStyle}"/>
                 <TextBox
                     Style="{StaticResource CommonTextBoxStyle}"/>
             </StackPanel>
-            <Border Height="8"/>
+            <Border Height="3"/>
 
             <StackPanel>
                 <TextBlock
                     Text="Drawer:" 
                     HorizontalAlignment="Left" 
-                    Style="{StaticResource UserLoginTitleTextStyle}"/>
+                    Style="{StaticResource ChequeViewFillInFormStyle}"/>
                 <TextBox
                     Style="{StaticResource CommonTextBoxStyle}"/>
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="4" Margin="0,15,0,0" Grid.RowSpan="2" >
+        <StackPanel Grid.Row="1" Grid.Column="3" Margin="0,15,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" >
             <TextBlock
                 Text="Preview:" 
                 HorizontalAlignment="Center"
@@ -107,11 +103,15 @@
         </StackPanel>
 
         <StackPanel 
-                Grid.Row="2" Grid.Column="4" 
+                Grid.Row="1" Grid.Column="3" 
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center" 
                 Height="210" 
                 Width="420"
-                Background="White" >
+                Background="White" 
+                Margin="0,20,5,0" 
+                Grid.RowSpan="4"
+                Grid.ColumnSpan="3">
             <StackPanel>
                 <Canvas>
                     <Line
