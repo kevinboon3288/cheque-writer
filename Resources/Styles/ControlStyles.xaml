@@ -629,4 +629,14 @@
         <Setter Property="Margin" Value="10"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
+
+    <Style x:Key="ChequeViewFillInFormStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextBlock.FontFamily" Value="Sora" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="TextBlock.FontSize" Value="16" />
+        <Setter Property="TextBlock.FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
 </ResourceDictionary>
