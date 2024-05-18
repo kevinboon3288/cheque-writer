@@ -26,7 +26,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="User Login" Style="{StaticResource ModuleTitleTextStyle}"/>
+            <TextBlock Grid.Row="0" Text="User Login" Style="{StaticResource ModuleTitleTextStyle}" Foreground="{StaticResource Text-Dark}"/>
             <Border Grid.Row="1" Style="{StaticResource UserLoginLayoutBorderStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
