@@ -46,4 +46,9 @@ public class ChequeManager : IChequeManager
             _cheques.Remove(selectedCheque);
         }
     }
+
+    public static string TranslateToWord(double amount)
+    {
+        return AmountUtils.ConvertToWords(amount);
+    }
 }
