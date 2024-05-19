@@ -18,7 +18,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{StaticResource Secondary}" >
+    <Grid Background="{StaticResource Secondary}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -40,61 +40,83 @@
             Command="{Binding NavigateBack}"
             Style="{StaticResource BackImageButtonStyle}" HorizontalAlignment="Center" Width="50" />
 
-        <StackPanel Grid.Row="4" Grid.Column="1" VerticalAlignment="Bottom">
-            <Button 
-                Width="101" 
-                Height="39" 
-                HorizontalAlignment="Center" 
-                >Save</Button>
-        </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="2" VerticalAlignment="Bottom">
-            <Button 
-                Width="101" 
-                Height="39" 
-                HorizontalAlignment="Center" >Cancel</Button>
-        </StackPanel>
+        
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="4"
+              MinWidth="250" MinHeight="270">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" Grid.RowSpan="4" Grid.ColumnSpan="2">
-            <StackPanel>
-                <TextBlock
-                    Text="Payee's name:" 
-                    HorizontalAlignment="Left" 
-                    Style="{StaticResource ChequeViewFillInFormStyle}"/>
-                <TextBox
-                    Style="{StaticResource CommonTextBoxStyle}"/>
-            </StackPanel>
-            <Border Height="3"/>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2" 
+                  MaxWidth="500" MaxHeight="540" >
+                <StackPanel  Margin="0,0,0,0" >
+                    <StackPanel>
+                        <TextBlock
+                            Text="Payee's name:" 
+                            HorizontalAlignment="Left" 
+                            Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                        <TextBox
+                            Style="{StaticResource CommonTextBoxStyle}"/>
+                    </StackPanel>
+                    <Border Height="3"/>
 
-            <StackPanel>
-                <TextBlock
-                    Text="Amount (numbers):"
-                    HorizontalAlignment="Left" 
-                    Style="{StaticResource ChequeViewFillInFormStyle}"/>
-                <TextBox
-                    Style="{StaticResource CommonTextBoxStyle}"/>
-            </StackPanel>
-            <Border Height="3"/>
+                    <StackPanel>
+                        <TextBlock
+                            Text="Amount (numbers):"
+                            HorizontalAlignment="Left" 
+                            Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                        <TextBox
+                            Style="{StaticResource CommonTextBoxStyle}"/>
+                    </StackPanel>
+                    <Border Height="3"/>
 
-            <StackPanel>
-                <TextBlock
-                    Text="Date (DDMMYY):" 
-                    HorizontalAlignment="Left" 
-                    Style="{StaticResource ChequeViewFillInFormStyle}"/>
-                <TextBox
-                    Style="{StaticResource CommonTextBoxStyle}"/>
-            </StackPanel>
-            <Border Height="3"/>
+                    <StackPanel>
+                        <TextBlock
+                            Text="Date (DDMMYY):" 
+                            HorizontalAlignment="Left" 
+                            Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                        <TextBox
+                            Style="{StaticResource CommonTextBoxStyle}"/>
+                    </StackPanel>
+                    <Border Height="3"/>
 
-            <StackPanel>
-                <TextBlock
-                    Text="Drawer:" 
-                    HorizontalAlignment="Left" 
-                    Style="{StaticResource ChequeViewFillInFormStyle}"/>
-                <TextBox
-                    Style="{StaticResource CommonTextBoxStyle}"/>
-            </StackPanel>
-        </StackPanel>
+                    <StackPanel>
+                        <TextBlock
+                            Text="Drawer:" 
+                            HorizontalAlignment="Left" 
+                            Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                        <TextBox
+                            Style="{StaticResource CommonTextBoxStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
 
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <Button 
+                        Width="101" 
+                        Height="39" 
+                        HorizontalAlignment="Center" >Save</Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Button 
+                        Width="101" 
+                        Height="39" 
+                        HorizontalAlignment="Center" >Cancel</Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
         <StackPanel Grid.Row="1" Grid.Column="3" Margin="0,15,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" >
             <TextBlock
                 Text="Preview:" 
@@ -135,6 +157,7 @@
                         Stroke="Black"
                         StrokeThickness="0.5" />
                     <Rectangle
+                        x:Name="chequeBorderRect"
                         Width="140"
                         Height="35"
                         Fill="White"
