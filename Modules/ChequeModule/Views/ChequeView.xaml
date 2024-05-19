@@ -116,90 +116,98 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        
-        <StackPanel Grid.Row="1" Grid.Column="3" Margin="0,15,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" >
-            <TextBlock
-                Text="Preview:" 
-                HorizontalAlignment="Center"
-                Style="{StaticResource UserLoginTitleTextStyle}"/>
-        </StackPanel>
 
-        <StackPanel 
-                Grid.Row="1" Grid.Column="3" 
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" 
-                Height="210" 
-                Width="420"
-                Background="White" 
-                Margin="0,20,5,0" 
-                Grid.RowSpan="4"
-                Grid.ColumnSpan="3">
-            <StackPanel>
-                <Canvas>
-                    <Line
-                        X1="20" Y1="70"
-                        X2="250" Y2="70"
-                        Stroke="Black"
-                        StrokeThickness="0.5" />
-                    <Line
-                        X1="20" Y1="95"
-                        X2="250" Y2="95"
-                        Stroke="Black"
-                        StrokeThickness="0.5" />
-                    <Line
-                        X1="20" Y1="120"
-                        X2="250" Y2="120"
-                        Stroke="Black"
-                        StrokeThickness="0.5" />
-                    <Line
-                        X1="200" Y1="170"
-                        X2="400" Y2="170"
-                        Stroke="Black"
-                        StrokeThickness="0.5" />
-                    <Rectangle
-                        x:Name="chequeBorderRect"
-                        Width="140"
-                        Height="35"
-                        Fill="White"
-                        Stroke="Black"
-                        StrokeThickness="2"
-                        Canvas.Left="260"
-                        Canvas.Top="76" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                </Canvas>
+        <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="4" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,15,0,0" >
+                <TextBlock
+                    Text="Preview:" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource UserLoginTitleTextStyle}"/>
             </StackPanel>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="17*"/>
-                    <ColumnDefinition Width="11*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="48"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1" Grid.Column="0" 
-                    Text="PAYEE" 
-                    Margin="22,10,173,1" FontSize="9" IsEnabled="False" Grid.ColumnSpan="1" FontStyle="Italic"/>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <StackPanel 
+                        MinHeight="210" 
+                        MinWidth="420"
+                        MaxHeight="400"
+                        MaxWidth="800"
+                        Margin="5,5,5,5"
+                        Background="White" >
 
-                <TextBlock Grid.Row="2" Grid.Column="0" 
-                    Text="RINGGIT MALAYSIA" 
-                    TextWrapping="Wrap" 
-                    Margin="22,0,173,6" FontSize="9" FontStyle="Italic" IsEnabled="False" Grid.ColumnSpan="1" Width="45"/>
+                    <Canvas>
+                        <Line
+                            X1="20" Y1="70"
+                            X2="250" Y2="70"
+                            Stroke="Black"
+                            StrokeThickness="0.5" />
+                        <Line
+                            X1="20" Y1="95"
+                            X2="250" Y2="95"
+                            Stroke="Black"
+                            StrokeThickness="0.5" />
+                        <Line
+                            X1="20" Y1="120"
+                            X2="250" Y2="120"
+                            Stroke="Black"
+                            StrokeThickness="0.5" />
+                        <Line
+                            X1="200" Y1="170"
+                            X2="400" Y2="170"
+                            Stroke="Black"
+                            StrokeThickness="0.5" />
+                        <Rectangle
+                            x:Name="chequeBorderRect"
+                            Width="140"
+                            Height="35"
+                            Fill="White"
+                            Stroke="Black"
+                            StrokeThickness="2"
+                            Canvas.Left="260"
+                            Canvas.Top="76" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Canvas>
 
-                <TextBlock Grid.Row="0" Grid.Column="1" 
-                    Text="DATE" Grid.ColumnSpan="1" Margin="20,29,0,0" IsEnabled="False" FontWeight="Normal" FontSize="9" Width="20" HorizontalAlignment="Left" Height="15" />
-                
-                <TextBlock Grid.Row="2" Grid.Column="1" 
-                    Text="RM" Grid.ColumnSpan="1" Margin="30,14,0,0" IsEnabled="False" FontWeight="Bold" Width="20" HorizontalAlignment="Left" />
 
-                <TextBlock Grid.Row="3" Grid.Column="1" 
-                    Text="NO SIGNATURE BELOW THIS LINE" Grid.ColumnSpan="2" Margin="23,70,0,0" IsEnabled="False" FontWeight="Normal" FontSize="6" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="1" Grid.Column="0" 
+                            Text="PAYEE" 
+                            Margin="22,10,173,1" FontSize="9" IsEnabled="False" Grid.ColumnSpan="1" FontStyle="Italic"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" 
+                            Text="RINGGIT MALAYSIA" 
+                            TextWrapping="Wrap" 
+                            Margin="22,0,173,6" FontSize="9" FontStyle="Italic" IsEnabled="False" Grid.ColumnSpan="1" Width="45"/>
+
+                        <TextBlock Grid.Row="0" Grid.Column="1" 
+                            Text="DATE" Grid.ColumnSpan="1" Margin="20,29,0,0" IsEnabled="False" FontWeight="Normal" FontSize="9" Width="20" HorizontalAlignment="Left" Height="15" />
+
+                        <TextBlock Grid.Row="2" Grid.Column="1" 
+                            Text="RM" Grid.ColumnSpan="1" Margin="30,14,0,0" IsEnabled="False" FontWeight="Bold" Width="20" HorizontalAlignment="Left" />
+
+                        <TextBlock Grid.Row="3" Grid.Column="1" 
+                            Text="NO SIGNATURE BELOW THIS LINE" Grid.ColumnSpan="2" Margin="23,70,0,0" IsEnabled="False" FontWeight="Normal" FontSize="6" />
+                    </Grid>
+
+                </StackPanel>
             </Grid>
-
-        </StackPanel>
-
+            
+        </Grid>
+    
     </Grid>
 </UserControl>
