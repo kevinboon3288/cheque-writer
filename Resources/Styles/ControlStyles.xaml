@@ -636,7 +636,126 @@
         <Setter Property="TextBlock.FontSize" Value="16" />
         <Setter Property="TextBlock.FontWeight" Value="Bold" />
         <Setter Property="Margin" Value="5" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+
+    <Style x:Key="ChequeViewButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="110" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                Background="{StaticResource Tertiary}"
+                BorderBrush="{StaticResource Primary}"
+                BorderThickness="2"
+                CornerRadius="5">
+                        <ContentPresenter
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    TextElement.FontFamily="Sora"
+                    TextElement.FontSize="15"
+                    TextElement.FontWeight="SemiBold"
+                    TextElement.Foreground="GhostWhite" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewTitleStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Sora" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewContentStyle" TargetType="{x:Type StackPanel}">
+        <Setter Property="MinHeight" Value="210" />
+        <Setter Property="MinWidth" Value="420" />
+        <Setter Property="MaxHeight" Value="400" />
+        <Setter Property="MaxWidth" Value="800" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Background" Value="White" />
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewCanvasLineStyle" TargetType="{x:Type Line}">
+        <Setter Property="Stroke" Value="Black" />
+        <Setter Property="StrokeThickness" Value="0.6" />
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewCanvasRectangleStyle" TargetType="{x:Type Rectangle}">
+        <Setter Property="Width" Value="140" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Fill" Value="White" />
+        <Setter Property="Stroke" Value="Black" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Canvas.Left" Value="260" />
+        <Setter Property="Canvas.Top" Value="76" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewPayeeStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Grid.Row" Value="1" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="1" />
+        <Setter Property="FontStyle" Value="Italic" />
+        <Setter Property="FontSize" Value="9" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="Margin" Value="22,10,173,1" />
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewWordCurrencyStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Grid.Row" Value="2" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="1" />
+        <Setter Property="FontStyle" Value="Italic" />
+        <Setter Property="FontSize" Value="9" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="Margin" Value="22,0,173,6" />
+        <Setter Property="Width" Value="45" />
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewDateStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="Grid.ColumnSpan" Value="1" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="9" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="Margin" Value="20,29,0,0" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewNumericCurrencyStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Grid.Row" Value="2" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="Grid.ColumnSpan" Value="1" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="Margin" Value="30,14,0,0" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style x:Key="ChequeViewPreviewWordBelowSignLineStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Grid.Row" Value="3" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="Grid.ColumnSpan" Value="2" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="6" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="Margin" Value="23,70,0,0" />
+    </Style>
+
 </ResourceDictionary>
