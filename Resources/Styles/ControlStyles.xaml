@@ -646,10 +646,10 @@
     </Style>
 
     <Style x:Key="ChequeViewFillInFormStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="TextBlock.FontFamily" Value="Sora" />
+        <Setter Property="FontFamily" Value="Sora" />
         <Setter Property="Foreground" Value="Black" />
-        <Setter Property="TextBlock.FontSize" Value="16" />
-        <Setter Property="TextBlock.FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Margin" Value="5" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -718,9 +718,6 @@
     </Style>
 
     <Style x:Key="ChequeViewPreviewPayeeStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Grid.Row" Value="1" />
-        <Setter Property="Grid.Column" Value="0" />
-        <Setter Property="Grid.ColumnSpan" Value="1" />
         <Setter Property="FontStyle" Value="Italic" />
         <Setter Property="FontSize" Value="9" />
         <Setter Property="IsEnabled" Value="False" />
@@ -728,9 +725,6 @@
     </Style>
 
     <Style x:Key="ChequeViewPreviewWordCurrencyStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Grid.Row" Value="2" />
-        <Setter Property="Grid.Column" Value="0" />
-        <Setter Property="Grid.ColumnSpan" Value="1" />
         <Setter Property="FontStyle" Value="Italic" />
         <Setter Property="FontSize" Value="9" />
         <Setter Property="TextWrapping" Value="Wrap" />
@@ -740,9 +734,6 @@
     </Style>
 
     <Style x:Key="ChequeViewPreviewDateStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Grid.Row" Value="0" />
-        <Setter Property="Grid.Column" Value="1" />
-        <Setter Property="Grid.ColumnSpan" Value="1" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="FontSize" Value="9" />
         <Setter Property="IsEnabled" Value="False" />
@@ -753,9 +744,6 @@
     </Style>
 
     <Style x:Key="ChequeViewPreviewNumericCurrencyStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Grid.Row" Value="2" />
-        <Setter Property="Grid.Column" Value="1" />
-        <Setter Property="Grid.ColumnSpan" Value="1" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="IsEnabled" Value="False" />
         <Setter Property="Margin" Value="30,14,0,0" />
@@ -764,9 +752,6 @@
     </Style>
 
     <Style x:Key="ChequeViewPreviewWordBelowSignLineStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Grid.Row" Value="3" />
-        <Setter Property="Grid.Column" Value="1" />
-        <Setter Property="Grid.ColumnSpan" Value="2" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="FontSize" Value="6" />
         <Setter Property="IsEnabled" Value="False" />
