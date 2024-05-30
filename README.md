@@ -18,9 +18,10 @@ A WPF application using C# and Prism Library under MVVM design to automate the i
 - NET 8.0
 - C#
 - WPF Framework
+- Prism Library
 - MVVM Architectural Design
 - Entity Framework
-- PostgreSql
+- PostgreSQL
 - NUnit Test Framework with NSubtitude mocking library
 
 ## Installation
@@ -35,7 +36,7 @@ git clone https://github.com/kevinboon3288/cheque-writer.git
 1. Open the solution file `ChequeWriter.sln` in Visual Studio.
 2. Build the solution.
 3. Run the application.
-For more detailed usage instructions, please refer to the documentation.
+For more detailed usage instructions, please refers to the documentation.
 
 ## Contributing
 Contributions are not currently open to the public. This project is maintained by:

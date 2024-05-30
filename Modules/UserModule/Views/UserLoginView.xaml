@@ -20,14 +20,14 @@
     </UserControl.Resources>
 
     <Border Padding="40" Background="{StaticResource Secondary}" BorderBrush="{StaticResource Text-Dark}" BorderThickness="5">
-        <Grid>
+        <Grid Style="{StaticResource MiddleGridLayoutStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="User Login" Style="{StaticResource ModuleTitleTextStyle}"/>
-            <Border Grid.Row="1" Margin="50, 10" Padding="20" BorderThickness="5" BorderBrush="Black" CornerRadius="5" Background="{StaticResource Tertiary}">
+            <TextBlock Grid.Row="0" Text="User Login" Style="{StaticResource ModuleTitleTextStyle}" Foreground="{StaticResource Text-Dark}"/>
+            <Border Grid.Row="1" Style="{StaticResource UserLoginLayoutBorderStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
