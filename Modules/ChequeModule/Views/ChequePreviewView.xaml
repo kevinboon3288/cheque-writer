@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="ChequeWriter.Modules.ChequeModule.Views.ChequePreviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChequeWriter.Modules.ChequeModule.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources;component/Styles/ControlStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Style="{StaticResource MiddleGridLayoutStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Preview" Style="{StaticResource ChequeViewPreviewTitleStyle}"/>
+        <StackPanel Grid.Row="1" Style="{StaticResource ChequeViewPreviewContentStyle}"  HorizontalAlignment="Center">
+            <Canvas>
+                <Line X1="20" Y1="70"
+                        X2="250" Y2="70"
+                        Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
+                <Line X1="20" Y1="95"
+                        X2="250" Y2="95"
+                        Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
+                <Line X1="20" Y1="120"
+                        X2="250" Y2="120"
+                        Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
+                <Line X1="200" Y1="170"
+                        X2="400" Y2="170"
+                        Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
+                <Rectangle x:Name="chequeBorderRect" Style="{StaticResource ChequeViewPreviewCanvasRectangleStyle}" />
+            </Canvas>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="1"
+                            Text="PAYEE" 
+                            Style="{StaticResource ChequeViewPreviewPayeeStyle}" />
+                <TextBlock Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="1"
+                            Text="RINGGIT MALAYSIA" 
+                            Style="{StaticResource ChequeViewPreviewWordCurrencyStyle}" />
+                <TextBlock Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="1"
+                            Text="DATE" 
+                            Style="{StaticResource ChequeViewPreviewDateStyle}" />
+                <TextBlock Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="1"
+                            Text="RM" 
+                            Style="{StaticResource ChequeViewPreviewNumericCurrencyStyle}" />
+                <TextBlock Grid.Row="3"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Text="NO SIGNATURE BELOW THIS LINE"
+                            Style="{StaticResource ChequeViewPreviewWordBelowSignLineStyle}" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

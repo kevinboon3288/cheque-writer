@@ -1,6 +1,4 @@
-﻿
-
-namespace ChequeWriter.Modules.ChequeModule.Core;
+﻿namespace ChequeWriter.Modules.ChequeModule.Core;
 
 public class ChequeManager : IChequeManager
 {

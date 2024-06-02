@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="ChequeWriter.Modules.ChequeModule.Views.ChequeFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChequeWriter.Modules.ChequeModule.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources;component/Styles/ControlStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Style="{StaticResource MiddleGridLayoutStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Padding="20" BorderThickness="5" BorderBrush="Black" CornerRadius="5" Background="{StaticResource Tertiary}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Payee's name:" Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ChequeFormTextBoxStyle}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount (numbers):" Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource ChequeFormTextBoxStyle}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Date (DDMMYY):" Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource ChequeFormTextBoxStyle}"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Drawer:" Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource ChequeFormTextBoxStyle}"/>
+            </Grid>
+        </Border>
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Save" Style="{StaticResource ChequeViewSaveButtonStyle}" />
+            <Button Content="Cancel" Style="{StaticResource ChequeViewCancelButtonStyle}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

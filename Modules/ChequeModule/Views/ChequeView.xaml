@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ChequeWriter.Modules.ChequeModule.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -17,189 +19,19 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{StaticResource Secondary}">
-
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <Button
-            Command="{Binding NavigateBack}"
-            Style="{StaticResource BackImageButtonStyle}" HorizontalAlignment="Center" Width="50" />
-
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="4"
-              MinWidth="250" MinHeight="270">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2" 
-                  MaxWidth="500" MaxHeight="540" >
-                <StackPanel  Margin="0,0,0,0" >
-                    <StackPanel>
-                        <TextBlock
-                            Text="Payee's name:" 
-                            
-                            Style="{StaticResource ChequeViewFillInFormStyle}"/>
-                        <TextBox
-                            Style="{StaticResource CommonTextBoxStyle}"/>
-                    </StackPanel>
-                    <Border Height="3"/>
-
-                    <StackPanel>
-                        <TextBlock
-                            Text="Amount (numbers):"
-                            Style="{StaticResource ChequeViewFillInFormStyle}"/>
-                        <TextBox
-                            Style="{StaticResource CommonTextBoxStyle}"/>
-                    </StackPanel>
-                    <Border Height="3"/>
-
-                    <StackPanel>
-                        <TextBlock
-                            Text="Date (DDMMYY):" 
-                            Style="{StaticResource ChequeViewFillInFormStyle}"/>
-                        <TextBox
-                            Style="{StaticResource CommonTextBoxStyle}"/>
-                    </StackPanel>
-                    <Border Height="3"/>
-
-                    <StackPanel>
-                        <TextBlock
-                            Text="Drawer:" 
-                            Style="{StaticResource ChequeViewFillInFormStyle}"/>
-                        <TextBox
-                            Style="{StaticResource CommonTextBoxStyle}"/>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-
-            <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <Button 
-                        Content="Save"
-                        Style="{StaticResource ChequeViewButtonStyle}" />
-                </StackPanel>
-                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <Button 
-                        Content="Cancel"
-                        Style="{StaticResource ChequeViewButtonStyle}" />
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="4" Grid.ColumnSpan="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <StackPanel Grid.Row="0" Margin="0,15,0,0" >
-                <TextBlock
-                    Text="Preview:" 
-                    Style="{StaticResource ChequeViewPreviewTitleStyle}"/>
-            </StackPanel>
-
-            <Grid Grid.Row="1" Grid.Column="0">
-                <StackPanel 
-                        Style="{StaticResource ChequeViewPreviewContentStyle}" >
-
-                    <Canvas>
-                        <Line
-                            X1="20" Y1="70"
-                            X2="250" Y2="70"
-                            Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
-                        <Line
-                            X1="20" Y1="95"
-                            X2="250" Y2="95"
-                            Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
-                        <Line
-                            X1="20" Y1="120"
-                            X2="250" Y2="120"
-                            Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
-                        <Line
-                            X1="200" Y1="170"
-                            X2="400" Y2="170"
-                            Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
-                        <Rectangle
-                            x:Name="chequeBorderRect"
-                            Style="{StaticResource ChequeViewPreviewCanvasRectangleStyle}" />
-                    </Canvas>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="48"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock  
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="1"
-                            Text="PAYEE" 
-                            Style="{StaticResource ChequeViewPreviewPayeeStyle}" />
-
-                        <TextBlock 
-                            Grid.Row="2"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="1"
-                            Text="RINGGIT MALAYSIA" 
-                            Style="{StaticResource ChequeViewPreviewWordCurrencyStyle}" />
-
-                        <TextBlock  
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="1"
-                            Text="DATE" 
-                            Style="{StaticResource ChequeViewPreviewDateStyle}" />
-
-                        <TextBlock 
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="1"
-                            Text="RM" 
-                            Style="{StaticResource ChequeViewPreviewNumericCurrencyStyle}" />
-
-                        <TextBlock 
-                            Grid.Row="3"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="2"
-                            Text="NO SIGNATURE BELOW THIS LINE"
-                            Style="{StaticResource ChequeViewPreviewWordBelowSignLineStyle}" />
-                    </Grid>
-
-                </StackPanel>
-            </Grid>
-
-        </Grid>
+        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"
+                Command="{Binding NavigateBack}" Style="{StaticResource BackImageButtonStyle}"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <ContentControl prism:RegionManager.RegionName="ChequeFormContentRegion" Margin="10"/>
+            <ContentControl prism:RegionManager.RegionName="ChequePreviewContentRegion" Margin="10"/>
+        </StackPanel>
     </Grid>
 </UserControl>
