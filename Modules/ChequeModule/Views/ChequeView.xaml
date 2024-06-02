@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ChequeWriter.Modules.ChequeModule.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -17,7 +19,17 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{StaticResource Secondary}">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ContentControl Grid.Column="0" prism:RegionManager.RegionName="ChequeFormContentRegion"/>
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="ChequePreviewContentRegion"/>
+    </Grid>
+    
+    <!--TODO: Have to move the related code design to respective region view-->
+    <!--<Grid Background="{StaticResource Secondary}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -201,5 +213,5 @@
             </Grid>
 
         </Grid>
-    </Grid>
+    </Grid>-->
 </UserControl>
