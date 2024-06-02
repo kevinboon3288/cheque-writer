@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\GenericModels\Common\Common.csproj" />
     <ProjectReference Include="..\..\Resources\Resources.csproj" />
     <ProjectReference Include="..\..\Services\DataServices\DataServices.csproj" />
     <ProjectReference Include="..\CommonModule\CommonModule.csproj" />
