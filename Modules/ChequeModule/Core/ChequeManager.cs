@@ -1,4 +1,6 @@
-﻿namespace ChequeWriter.Modules.ChequeModule.Core;
+﻿
+
+namespace ChequeWriter.Modules.ChequeModule.Core;
 
 public class ChequeManager : IChequeManager
 {
@@ -49,6 +51,6 @@ public class ChequeManager : IChequeManager
 
     public static string TranslateToWord(double amount)
     {
-        return AmountUtils.ConvertToWords(amount);
+        return AmountUtils.Convert(amount);
     }
 }
