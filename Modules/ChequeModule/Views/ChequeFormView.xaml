@@ -16,8 +16,37 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    <Grid Background="Green">
-            
+
+    <Grid Style="{StaticResource MiddleGridLayoutStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Padding="20" BorderThickness="5" BorderBrush="Black" CornerRadius="5" Background="{StaticResource Tertiary}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Payee's name:" Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ChequeFormTextBoxStyle}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount (numbers):" Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource ChequeFormTextBoxStyle}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Date (DDMMYY):" Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource ChequeFormTextBoxStyle}"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Drawer:" Style="{StaticResource ChequeViewFillInFormStyle}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource ChequeFormTextBoxStyle}"/>
+            </Grid>
+        </Border>
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Save" Style="{StaticResource ChequeViewSaveButtonStyle}" />
+            <Button Content="Cancel" Style="{StaticResource ChequeViewCancelButtonStyle}" />
+        </StackPanel>
     </Grid>
 </UserControl>
