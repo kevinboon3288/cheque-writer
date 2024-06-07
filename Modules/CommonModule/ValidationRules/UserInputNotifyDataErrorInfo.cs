@@ -7,7 +7,7 @@ namespace CommonModule.ValidationRules;
 
 public class UserInputNotifyDataErrorInfo : BindableBase, INotifyDataErrorInfo
 {
-    private readonly Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
+    private readonly Dictionary<string, List<string>> Errors = new();
 
     public bool HasErrors => Errors.Count != 0;
 
@@ -15,9 +15,9 @@ public class UserInputNotifyDataErrorInfo : BindableBase, INotifyDataErrorInfo
 
     public IEnumerable GetErrors(string propertyName)
     {
-        if (!string.IsNullOrEmpty(propertyName) && Errors.TryGetValue(propertyName, out List<string> value))
+        if (!string.IsNullOrEmpty(propertyName) && Errors.TryGetValue(propertyName, out List<string> errors))
         { 
-            return value;
+            return errors;
         }
 
         return null;
@@ -28,7 +28,7 @@ public class UserInputNotifyDataErrorInfo : BindableBase, INotifyDataErrorInfo
         ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
     }
 
-    protected void ResetError(string propertyName)
+    protected void RemoveError(string propertyName)
     {
         Errors.Remove(propertyName);
         OnErrorsChanged(propertyName);
@@ -38,7 +38,7 @@ public class UserInputNotifyDataErrorInfo : BindableBase, INotifyDataErrorInfo
     {
         Errors.TryAdd(propertyName, new List<string>());
 
-        if (!Errors[propertyName].Contains(error))
+        if (!Errors[propertyName].Any(existError => existError == error))
         {
             Errors[propertyName].Add(error);
             OnErrorsChanged(propertyName);
@@ -47,32 +47,32 @@ public class UserInputNotifyDataErrorInfo : BindableBase, INotifyDataErrorInfo
 
     protected void Validate(string propertyName, string stringValue)
     {
-        ResetError(propertyName);
+        RemoveError(propertyName);
 
-        if (stringValue.Length == 0)
+        if (string.IsNullOrEmpty(stringValue))
         {
-            AddError(propertyName, "Input cannot be empty");
+            AddError(propertyName, "Input cannot be empty or null");
+            return;
         }
     }
 
     protected void ValidateEmailFormat(string propertyName, string stringValue)
     {
-        ResetError(propertyName);
+        RemoveError(propertyName);
 
-        if (stringValue.Length == 0)
+        if (string.IsNullOrEmpty(stringValue))
         {
-            AddError(propertyName, "Input cannot be empty");
+            AddError(propertyName, "Input cannot be empty or null");
+            return;
         }
-        else 
+
+        if (!string.IsNullOrEmpty(stringValue)) 
         {
-            if (!string.IsNullOrEmpty(stringValue)) 
+            string pattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
+            Match match = Regex.Match(stringValue, pattern);
+            if (!match.Success)
             {
-                string pattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
-                Match match = Regex.Match(stringValue, pattern);
-                if (!match.Success)
-                {
-                    AddError(propertyName, "Invalid email format. Please enter the correct format: [test@gmail.com]");
-                }
+                AddError(propertyName, "Invalid email format. Please enter the correct format: [test@gmail.com]");
             }
         }
     }
