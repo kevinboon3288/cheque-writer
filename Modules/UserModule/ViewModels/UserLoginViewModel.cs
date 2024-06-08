@@ -1,4 +1,6 @@
-﻿namespace ChequeWriter.Modules.UserModule.ViewModels;
+﻿using CommonModule.ValidationRules;
+
+namespace ChequeWriter.Modules.UserModule.ViewModels;
 
 public class UserLoginViewModel: BindableBase, INavigationAware
 {
@@ -7,11 +9,11 @@ public class UserLoginViewModel: BindableBase, INavigationAware
     private readonly IUserManager _userManager;
     private List<UserLevel> _userLevels = new();
     private UserLevel? _selectedUserLevel = new();
-    private string? _userName;
+    private UserInputParameter? _userName;
     private string? _password;
     private bool _isVisible;
 
-    public string? UserName 
+    public UserInputParameter? UserName 
     {
         get { return _userName; }
         set { SetProperty(ref _userName, value); } 
@@ -63,7 +65,7 @@ public class UserLoginViewModel: BindableBase, INavigationAware
 
     private void OnRefresh() 
     {
-        UserName = String.Empty;
+        UserName = new UserInputParameter();
         Password = String.Empty;
         IsVisible = false;
         SelectedUserLevel = new();
@@ -72,19 +74,19 @@ public class UserLoginViewModel: BindableBase, INavigationAware
 
     private void OnLogin()
     {
-        if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password) || _selectedUserLevel is null) 
+        if (UserName == null || string.IsNullOrEmpty(Password) || _selectedUserLevel is null) 
         {
             throw new ArgumentNullException("Empty username or password.");
         }
 
-        if (_userManager.IsValidUser(UserName, Password, SelectedUserLevel!.Id)) 
+        if (UserName.InputValue != null && _userManager.IsValidUser(UserName.InputValue, Password, SelectedUserLevel!.Id)) 
         {
             IRegion region = _regionManager.Regions["UserContentRegion"];
             region.RequestNavigate("MainView");               
 
             _eventAggregator.GetEvent<CurrentUserEvent>().Publish(new Dictionary<string, dynamic>() 
             {
-                { "UserNoId", _userManager.GetCurrentUserId(UserName, Password, _selectedUserLevel.Id) },
+                { "UserNoId", _userManager.GetCurrentUserId(UserName.InputValue, Password, _selectedUserLevel.Id) },
                 { "SelectedUserLevelId", _selectedUserLevel.Id  }
             });
         }
@@ -103,4 +105,24 @@ public class UserLoginViewModel: BindableBase, INavigationAware
     public void OnNavigatedFrom(NavigationContext navigationContext)
     {
     }
+
+    public class UserInputParameter: UserInputNotifyDataErrorInfo
+    {
+        private string? _inputValue;
+
+        public string? InputValue 
+        {
+            get { return _inputValue; }
+            set 
+            { 
+                SetProperty(ref _inputValue, value);
+                if (value != null) 
+                {
+                    Validate(nameof(InputValue), value);
+                }
+            }
+        }
+    }
 }
+
+

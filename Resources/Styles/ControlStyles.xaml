@@ -291,7 +291,7 @@
                         Margin="15">
                         <Image x:Name="PasswordVisibleImage" Source="pack://application:,,,/Resources;component/Icons/Visible16x16.png"/>
                     </Border>
-                    <!--TODO: IsVisible is a pubic property instance setup for the visibility of UI control at the related view model.-->
+                    <!--TODO: IsVisible is a public property instance setup for the visibility of UI control at the related view model.-->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsVisible" Value="True">
                             <Setter TargetName="PasswordVisibleImage" Property="Source" Value="pack://application:,,,/Resources;component/Icons/Visible16x16.png"/>
@@ -322,7 +322,7 @@
         <Setter Property="MaxHeight" Value="60"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
+                <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border x:Name="UserNameTextBoxBorder"
                             BorderThickness="1"
                             BorderBrush="Black"
@@ -352,6 +352,16 @@
                         <Trigger Property="IsKeyboardFocused" Value="False">
                             <Setter Property="Foreground" Value="Gray"/>
                             <Setter TargetName="UserNameText" Property="Text" Value="Enter a username"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)/ErrorContent}"/>
+                            <Setter TargetName="UserNameTextBoxBorder" Property="Background" Value="White" />
+                            <Setter TargetName="UserNameTextBoxBorder" Property="BorderBrush" Value="Red"/>
+                            <Setter TargetName="UserNameTextBoxBorder" Property="BorderThickness" Value="2"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="False">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
