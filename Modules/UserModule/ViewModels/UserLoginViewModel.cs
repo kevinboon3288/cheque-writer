@@ -46,6 +46,8 @@ public class UserLoginViewModel: BindableBase, INavigationAware
     public DelegateCommand PasswordDisplayCommand { get; private set; }
     public DelegateCommand LoginCommand { get; private set; }
 
+    public event EventHandler? ClearLoginPasswordReceived;
+
     public UserLoginViewModel(IRegionManager regionManager,IEventAggregator eventAggregator, IUserManager userManager)
     {
         _regionManager = regionManager;
@@ -56,6 +58,11 @@ public class UserLoginViewModel: BindableBase, INavigationAware
         PasswordDisplayCommand = new DelegateCommand(OnPasswordDisplay);
 
         OnRefresh();
+    }
+
+    private void OnClearPasswordReceived()
+    {
+        ClearLoginPasswordReceived?.Invoke(this, new EventArgs());
     }
 
     public void OnNavigatedTo(NavigationContext navigationContext)
@@ -70,6 +77,8 @@ public class UserLoginViewModel: BindableBase, INavigationAware
         IsVisible = false;
         SelectedUserLevel = new();
         UserLevels = _userManager.GetUserLevels();
+
+        OnClearPasswordReceived();
     }
 
     private void OnLogin()
