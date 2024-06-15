@@ -23,12 +23,22 @@ namespace ChequeWriter.Modules.UserModule.Views
         public UserAdderView()
         {
             InitializeComponent();
+
+            UserAdderViewModel vm = (UserAdderViewModel)this.DataContext;
+            vm.ClearAdderPasswordReceived += ClearPassword;
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)
-            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
+            { 
+                ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; 
+            }
+        }
+
+        private void ClearPassword(object? sender, EventArgs e) 
+        {
+            UserAdderPasswordBox.Password = null;
         }
     }
 }

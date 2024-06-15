@@ -53,6 +53,7 @@ public class UserAdderViewModel: BindableBase, INavigationAware
     public DelegateCommand CancelCommand {  get; private set; }
     public DelegateCommand AddUserCommand { get; private set; }
 
+    public event EventHandler? ClearAdderPasswordReceived;
 
     public UserAdderViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IUserManager userManager)
     {
@@ -63,6 +64,11 @@ public class UserAdderViewModel: BindableBase, INavigationAware
         PasswordDisplayCommand = new DelegateCommand(OnPasswordDisplay);
         CancelCommand = new DelegateCommand(OnReturn);
         AddUserCommand = new DelegateCommand(OnAddUser);
+    }
+
+    private void OnClearPasswordReceived()
+    {
+        ClearAdderPasswordReceived?.Invoke(this, new EventArgs());
     }
 
     public void OnNavigatedTo(NavigationContext navigationContext)
@@ -85,6 +91,8 @@ public class UserAdderViewModel: BindableBase, INavigationAware
         IsVisible = false;
         SelectedUserLevel = new();
         UserLevels = _userManager.GetUserLevels();
+
+        OnClearPasswordReceived();
     }
 
     private void OnReturn() 

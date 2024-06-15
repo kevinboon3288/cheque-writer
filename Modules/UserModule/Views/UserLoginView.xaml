@@ -48,6 +48,7 @@
                                Text="Password :" 
                                Style="{StaticResource UserLoginTitleTextStyle}"/>
                     <PasswordBox Grid.Row="1" Grid.Column="1"
+                                 x:Name="UserLoginPasswordBox"
                                  PasswordChanged="PasswordBox_PasswordChanged"
                                  PasswordChar="*" Background="Yellow"
                                  Style="{StaticResource PasswordBoxStyle}"/>
