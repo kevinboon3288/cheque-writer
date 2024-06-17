@@ -18,9 +18,11 @@ public class ChequeModule : IModule
     public void RegisterTypes(IContainerRegistry containerRegistry)
     {
         containerRegistry.RegisterForNavigation<ChequeView>();
+        containerRegistry.RegisterForNavigation<ChequeManagementView>();
         containerRegistry.RegisterForNavigation<ChequeFormView>();
         containerRegistry.RegisterForNavigation<ChequePreviewView>();
 
         ViewModelLocationProvider.Register<ChequeView, ChequeViewModel>();
+        ViewModelLocationProvider.Register<ChequeManagementView, ChequeManagementViewModel>();
     }
 }

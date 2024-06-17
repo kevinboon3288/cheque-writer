@@ -40,7 +40,7 @@ public class HeaderViewModel: BindableBase, INavigationAware
         NavigateCommand = new DelegateCommand(OnNavigateToUserManagement);
         LogOutCommand = new DelegateCommand(OnLogOut);
 
-        _eventAggregator.GetEvent<UIControlEvent>().Subscribe(OnTitleChanged);
+        _eventAggregator.GetEvent<HeaderTitleUIControlEvent>().Subscribe(OnTitleChanged);
         _eventAggregator.GetEvent<CurrentUserEvent>().Subscribe(OnCurrentUserLevel);
     }
 

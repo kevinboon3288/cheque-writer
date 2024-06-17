@@ -241,6 +241,24 @@
         </Setter>
     </Style>
 
+    <Style x:Key="OverviewImageButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border 
+                        Background="Transparent"
+                        CornerRadius="5"
+                        Margin="12">
+                        <Image Source="pack://application:,,,/Resources;component/Icons/Overview16x16.png"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="AddImageButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="50" />
         <Setter Property="Height" Value="50" />

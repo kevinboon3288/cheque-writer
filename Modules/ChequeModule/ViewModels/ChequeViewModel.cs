@@ -1,21 +1,20 @@
-﻿
-namespace ChequeWriter.Modules.ChequeModule.ViewModels;
+﻿namespace ChequeWriter.Modules.ChequeModule.ViewModels;
 
 public class ChequeViewModel : BindableBase, INavigationAware
 {
     private readonly IRegionManager _regionManager;
-    private readonly IChequeManager _chequeManager;
     private readonly IEventAggregator _eventAggregator;
 
-    public DelegateCommand NavigateBack { get; set; }
+    public DelegateCommand NavigateBack { get; private set; }
+    public DelegateCommand NavigateToOverview { get; private set; }
 
-    public ChequeViewModel(IRegionManager regionManager, IChequeManager chequeManager, IEventAggregator eventAggregator)
+    public ChequeViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
     {
         _regionManager = regionManager;
-        _chequeManager = chequeManager;
         _eventAggregator = eventAggregator;
 
         NavigateBack = new DelegateCommand(OnReturn);
+        NavigateToOverview = new DelegateCommand(OnNavigateToOverview);
     }
 
     private void OnReturn()
@@ -24,9 +23,15 @@ public class ChequeViewModel : BindableBase, INavigationAware
         region.RequestNavigate("MainView");
     }
 
+    private void OnNavigateToOverview() 
+    {
+        IRegion region = _regionManager.Regions["ModuleContentRegion"];
+        region.RequestNavigate("ChequeManagementView");
+    }
+
     public void OnNavigatedTo(NavigationContext navigationContext)
     {
-        _eventAggregator.GetEvent<UIControlEvent>().Publish("Cheque");
+        _eventAggregator.GetEvent<HeaderTitleUIControlEvent>().Publish("Cheque");
     }
 
     public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -1,6 +1,6 @@
 ﻿namespace ChequeWriter.Modules.CommonModule.Events;
 
-public class UIControlEvent: PubSubEvent<string>
+public class HeaderTitleUIControlEvent: PubSubEvent<string>
 {
 }
 

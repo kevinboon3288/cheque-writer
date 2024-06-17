@@ -73,7 +73,7 @@ public class UserAdderViewModel: BindableBase, INavigationAware
 
     public void OnNavigatedTo(NavigationContext navigationContext)
     {
-        _eventAggregator.GetEvent<UIControlEvent>().Publish("Add User");
+        _eventAggregator.GetEvent<HeaderTitleUIControlEvent>().Publish("Add User");
 
         if (navigationContext.Parameters.ContainsKey("currentUserId"))
         {
