@@ -11,3 +11,4 @@ global using ChequeWriter.Modules.ChequeModule.Models;
 global using ChequeWriter.Modules.ChequeModule.Views;
 global using ChequeWriter.Modules.ChequeModule.ViewModels;
 global using ChequeWriter.GenericModels.Common.Utils;
+global using System.Collections.ObjectModel;

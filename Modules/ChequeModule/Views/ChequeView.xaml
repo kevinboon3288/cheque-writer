@@ -27,8 +27,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"
-                Command="{Binding NavigateBack}" Style="{StaticResource BackImageButtonStyle}"/>
+        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding NavigateBack}" Style="{StaticResource BackImageButtonStyle}"/>
+        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding NavigateToOverview}" Style="{StaticResource OverviewImageButtonStyle}"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <ContentControl prism:RegionManager.RegionName="ChequeFormContentRegion" Margin="10"/>
             <ContentControl prism:RegionManager.RegionName="ChequePreviewContentRegion" Margin="10"/>

@@ -7,7 +7,7 @@ namespace ChequeWriter.Modules.ReportModule.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
-        public DelegateCommand NavigateBack { get; set; }
+        public DelegateCommand NavigateBack { get; private set; }
 
         public ReportViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
@@ -25,7 +25,7 @@ namespace ChequeWriter.Modules.ReportModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            _eventAggregator.GetEvent<UIControlEvent>().Publish("Report");
+            _eventAggregator.GetEvent<HeaderTitleUIControlEvent>().Publish("Report");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

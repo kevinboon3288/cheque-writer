@@ -5,8 +5,8 @@ public class ModuleViewModel: BindableBase, INavigationAware
     private readonly IRegionManager _regionManager;
     private readonly IEventAggregator _eventAggregator;
 
-    public DelegateCommand NavigateToCheque { get; set; }
-    public DelegateCommand NavigateToReport { get; set; }
+    public DelegateCommand NavigateToCheque { get; private set; }
+    public DelegateCommand NavigateToReport { get; private set; }
 
     public ModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
     {

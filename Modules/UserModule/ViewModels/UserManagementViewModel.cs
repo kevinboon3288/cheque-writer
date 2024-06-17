@@ -38,7 +38,7 @@ public class UserManagementViewModel: BindableBase, INavigationAware
 
     public void OnNavigatedTo(NavigationContext navigationContext)
     {
-        _eventAggregator.GetEvent<UIControlEvent>().Publish("User Management");
+        _eventAggregator.GetEvent<HeaderTitleUIControlEvent>().Publish("User Management");
 
         if (navigationContext.Parameters.ContainsKey("currentUserId")) 
         {
