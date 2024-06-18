@@ -5,7 +5,7 @@ namespace CommonUtilsUnitTests;
 public class AmountUtilsUnitTest
 {
     [Test]
-    public void ConvertPriceToWords_NegativeValue_ThrowCommonUtilsException()
+    public void ConvertPriceToWords_ThrowCommonUtilsException_WithNegativeValue()
     {
         //Act
         double price = -6;
@@ -15,7 +15,7 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturnZero_Success()
+    public void ConvertPriceToWords_ReturnZeroString_WithZeroPrice()
     {
         //Act
         double price = 0;
@@ -28,7 +28,7 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturnUnits_Success()
+    public void ConvertPriceToWords_ReturnUnitsString_WithUnitsValue()
     {
         //Act
         double price = 6.8;
@@ -41,7 +41,7 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturnTens_Success()
+    public void ConvertPriceToWords_ReturnTensString_WithTensValue()
     {
         //Act
         double price = 15.6;
@@ -54,8 +54,8 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturnHundereds_Success()
-    {
+    public void ConvertPriceToWords_ReturnHunderedsString_WithHundredsValue()
+    { 
         //Act
         double price = 750.3;
 
@@ -67,7 +67,7 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturnThousands_Success()
+    public void ConvertPriceToWords_ReturnThousandsString_WithThousandsValue()
     {
         //Act
         double price = 6670.54;
@@ -80,7 +80,7 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturnTenThousands_Success()
+    public void ConvertPriceToWords_ReturnTenThousandsString_WithTenThousandsValue()
     {
         //Act
         double price = 17980.54;
@@ -93,7 +93,7 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturnHunderdThousands_Success()
+    public void ConvertPriceToWords_ReturnHunderdThousandsString_WithHundredsThousandsValue()
     {
         double price = 541290.79;
 
@@ -105,7 +105,7 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturnMillions_Success()
+    public void ConvertPriceToWords_ReturnMillionsString_WithMillionsValue()
     {
         double price = 5356334.88;
 
@@ -117,7 +117,7 @@ public class AmountUtilsUnitTest
     }
 
     [Test]
-    public void ConvertPriceToWords_ReturBillions_Success()
+    public void ConvertPriceToWords_ReturBillionsString_WithBillionsValue()
     {
         double price = 6578966523.25;
 
