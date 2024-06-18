@@ -56,7 +56,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetUserLevelNameById_ReturnString_Success()
+    public void GetUserLevelNameById_ReturnString_WithNotNullId()
     {
         // Act
         string? userLevel1Name = _dataService.GetUserLevelNameById(1);
@@ -70,7 +70,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetUserLevelNameById_ReturnNull_Success()
+    public void GetUserLevelNameById_ReturnNull_WithInvalidInput()
     {
         // Act
         string? userLevelName = _dataService.GetUserLevelNameById(3);
@@ -80,7 +80,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetUserLevels_ReturnAllUserLevel_Success()
+    public void GetUserLevels_ReturnAllUserLevel_HasUserLevels()
     {
         // Act
         List<UserLevel>? userLevels = _dataService.GetUserLevels();
@@ -95,7 +95,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetUserLevels_ReturnNull_Success()
+    public void GetUserLevels_ReturnNull_HasEmptyUserLevels()
     {
         // Arrange
         using (ChequeWriterDbContext dbContext = new(_dbContextOptions))
@@ -115,7 +115,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetCurrentUserId_ReturnIdNumber_Success()
+    public void GetCurrentUserId_ReturnId_WithUserInfo()
     {
         // Act
         int userNoId = _dataService.GetCurrentUserId("Bob", "bob123", 1);
@@ -125,14 +125,14 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetCurrentUserId_InvalidUserInfo_ThrowDataServiceException()
+    public void GetCurrentUserId_ThrowDataServiceException_InvalidUserInfo()
     {
         // Assert
         Assert.Throws<DataServiceException>(() => _dataService.GetCurrentUserId("Kevin", "kevin123", 1));
     }
 
     [Test]
-    public void IsValidUser_ReturnTrue_Success()
+    public void IsValidUser_ReturnTrue_WithExistUserInfo()
     {
         // Act
         bool result = _dataService.IsValidUser("Bob", "bob123", 1);
@@ -142,7 +142,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void IsValidUser_ReturnFalse_Success()
+    public void IsValidUser_ReturnFalse_WithInvalidUserInfo()
     {
         // Act
         bool result = _dataService.IsValidUser("Kevin", "admin123", 1);
@@ -152,7 +152,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void IsExistUser_ReturnTrue_Success()
+    public void IsExistUser_ReturnTrue_WithExistUserInfo()
     {
         // Act
         bool result = _dataService.IsExistUser("Bob", 1);
@@ -162,7 +162,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void IsExistUser_ReturnFalse_Success()
+    public void IsExistUser_ReturnFalse_WithInvalidUserInfo()
     {
         // Act
         bool result = _dataService.IsExistUser("Kevin", 1);
@@ -172,7 +172,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetAllUsers_ReturnAllUsers_Success()
+    public void GetAllUsers_ReturnAllUsers_HasUsers()
     {
         // Act
         Guid guidUser1 = new Guid("1785E29D-8B5E-49C3-AAC0-E4D2B0E434CC");
@@ -205,7 +205,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetAllUsers_ReturnAllUsers_Null()
+    public void GetAllUsers_ReturnEmptyUsers_HasEmptyUsers()
     {
         // Arrange
         using (ChequeWriterDbContext dbContext = new(_dbContextOptions))
@@ -225,7 +225,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void AddUser_ReturnUserId_Success()
+    public void AddUser_ReturnNewUserId_WithNewUserInfo()
     {
         // Act
         string newUserName = "Nancy";
@@ -244,7 +244,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void DeleteUser_ReturnResultValue_Success()
+    public void DeleteUser_ReturnTrue_WithExistUserInfo()
     {
         // Act
         _dataService.DeleteUser(3);
@@ -256,7 +256,7 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void DeleteUser_UnknownId_ThrowDataServiceException()
+    public void DeleteUser_ThrowDataServiceException_WithInvalidUserId()
     {
         // Assert
         Assert.Throws<DataServiceException>(() => _dataService.DeleteUser(4));
