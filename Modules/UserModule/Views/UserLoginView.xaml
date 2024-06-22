@@ -20,56 +20,63 @@
     </UserControl.Resources>
 
     <Border Padding="40" Background="{StaticResource Secondary}" BorderBrush="{StaticResource Text-Dark}" BorderThickness="5">
-        <Grid Style="{StaticResource MiddleGridLayoutStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="User Login" Style="{StaticResource ModuleTitleTextStyle}" Foreground="{StaticResource Text-Dark}"/>
-            <Border Grid.Row="1" Style="{StaticResource UserLoginLayoutBorderStyle}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" 
-                               Text="UserName :" 
-                               Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" 
-                             Text="{Binding UserName.InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
-                             Style="{StaticResource UserNameTextBoxStyle}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" 
-                               Text="Password :" 
-                               Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <PasswordBox Grid.Row="1" Grid.Column="1"
-                                 x:Name="UserLoginPasswordBox"
-                                 PasswordChanged="PasswordBox_PasswordChanged"
-                                 PasswordChar="*" Background="Yellow"
-                                 Style="{StaticResource PasswordBoxStyle}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Password}" 
-                             Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
-                             Style="{StaticResource PasswordTextBoxStyle}"/>
-                    <Button Grid.Row="1" Grid.Column="1"
-                            Command="{Binding PasswordDisplayCommand}"
-                            Style="{StaticResource PasswordVisibleImageButtonStyle}"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" 
-                               Text="Authority :" 
-                               Style="{StaticResource UserLoginTitleTextStyle}"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1"
-                              ItemsSource="{Binding UserLevels}" 
-                              SelectedItem="{Binding SelectedUserLevel}" 
-                              DisplayMemberPath="Name" 
-                              Style="{StaticResource UserLoginComboBoxStyle}"/>
-                </Grid>
-            </Border>
-            <Button Grid.Row="2" Content="Login" Margin="50, 10" Width="200" Height="30" HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}"
-                    Command="{Binding LoginCommand}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Style="{StaticResource ChequeWriterImageLogoStyle}"/>
+            <Grid Grid.Column="1" Style="{StaticResource MiddleGridLayoutStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="User Login" Style="{StaticResource ModuleTitleTextStyle}" Foreground="{StaticResource Text-Dark}"/>
+                <Border Grid.Row="1" Style="{StaticResource UserLoginLayoutBorderStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" 
+                                   Text="UserName :" 
+                                   Style="{StaticResource UserLoginTitleTextStyle}"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" 
+                                 Text="{Binding UserName.InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
+                                 Style="{StaticResource UserNameTextBoxStyle}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" 
+                                   Text="Password :" 
+                                   Style="{StaticResource UserLoginTitleTextStyle}"/>
+                        <PasswordBox Grid.Row="1" Grid.Column="1"
+                                     x:Name="UserLoginPasswordBox"
+                                     PasswordChanged="PasswordBox_PasswordChanged"
+                                     PasswordChar="*" Background="Yellow"
+                                     Style="{StaticResource PasswordBoxStyle}"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Password}" 
+                                 Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource PasswordTextBoxStyle}"/>
+                        <Button Grid.Row="1" Grid.Column="1"
+                                Command="{Binding PasswordDisplayCommand}"
+                                Style="{StaticResource PasswordVisibleImageButtonStyle}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" 
+                                   Text="Authority :" 
+                                   Style="{StaticResource UserLoginTitleTextStyle}"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1"
+                                  ItemsSource="{Binding UserLevels}" 
+                                  SelectedItem="{Binding SelectedUserLevel}" 
+                                  DisplayMemberPath="Name" 
+                                  Style="{StaticResource UserLoginComboBoxStyle}"/>
+                    </Grid>
+                </Border>
+                <Button Grid.Row="2" Content="Login" Margin="50, 10" Width="200" Height="30" HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}"
+                        Command="{Binding LoginCommand}"/>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
