@@ -37,6 +37,12 @@
         <Setter Property="MaxHeight" Value="500" />
     </Style>
 
+    <Style x:Key="ChequeWriterImageLogoStyle" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="pack://application:,,,/Resources;component/Icons/ChequeWriterLogo16x16.png"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
     <Style x:Key="UserLoginLayoutBorderStyle" TargetType="{x:Type Border}">
         <Setter Property="Margin" Value="50, 10" />
         <Setter Property="Padding" Value="20" />
