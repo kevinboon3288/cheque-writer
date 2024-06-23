@@ -1,0 +1,10 @@
+﻿global using ChequeWriter.Modules.CommonModule.Events;
+global using ChequeWriter.Modules.NotificationModule.Models;
+global using ChequeWriter.Modules.NotificationModule.ViewModels;
+global using ChequeWriter.Modules.NotificationModule.Views;
+global using Prism.Events;
+global using Prism.Ioc;
+global using Prism.Modularity;
+global using Prism.Mvvm;
+global using Prism.Regions;
+global using System.Collections.ObjectModel;

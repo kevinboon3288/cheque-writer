@@ -49,6 +49,7 @@
   <ItemGroup>
     <ProjectReference Include="Modules\ChequeModule\ChequeModule.csproj" />
     <ProjectReference Include="Modules\MainModule\MainModule.csproj" />
+    <ProjectReference Include="Modules\NotificationModule\NotificationModule.csproj" />
     <ProjectReference Include="Modules\ReportModule\ReportModule.csproj" />
     <ProjectReference Include="Modules\UserModule\UserModule.csproj" />
     <ProjectReference Include="Resources\Resources.csproj" />

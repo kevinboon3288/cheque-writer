@@ -15,5 +15,9 @@
 
     <Grid>
         <ContentControl prism:RegionManager.RegionName="UserContentRegion"/>
+        <ContentControl prism:RegionManager.RegionName="NotificationContentRegion" 
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Width="300"/>
     </Grid>
 </Window>
