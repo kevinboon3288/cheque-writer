@@ -88,16 +88,20 @@ public class UserLoginViewModel: BindableBase, INavigationAware
             throw new ArgumentNullException("Empty username or password.");
         }
 
-        if (UserName.InputValue != null && _userManager.IsValidUser(UserName.InputValue, Password, SelectedUserLevel!.Id)) 
+        if (UserName.InputValue != null && _userManager.IsValidUser(UserName.InputValue, Password, SelectedUserLevel!.Id))
         {
             IRegion region = _regionManager.Regions["UserContentRegion"];
-            region.RequestNavigate("MainView");               
+            region.RequestNavigate("MainView");
 
-            _eventAggregator.GetEvent<CurrentUserEvent>().Publish(new Dictionary<string, dynamic>() 
+            _eventAggregator.GetEvent<CurrentUserEvent>().Publish(new Dictionary<string, dynamic>()
             {
                 { "UserNoId", _userManager.GetCurrentUserId(UserName.InputValue, Password, _selectedUserLevel.Id) },
                 { "SelectedUserLevelId", _selectedUserLevel.Id  }
             });
+        }
+        else 
+        {
+            _eventAggregator.GetEvent<NotificationEvent>().Publish("Fail to login !");
         }
     }
 
