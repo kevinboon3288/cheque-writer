@@ -83,26 +83,28 @@ public class UserLoginViewModel: BindableBase, INavigationAware
 
     private void OnLogin()
     {
-        if (UserName == null || string.IsNullOrEmpty(Password) || _selectedUserLevel is null) 
+        if (UserName == null || string.IsNullOrEmpty(Password) || _selectedUserLevel is null || UserName.InputValue == null) 
         {
-            throw new ArgumentNullException("Empty username or password.");
+            _eventAggregator.GetEvent<NotificationEvent>().Publish("Invalid username, password or authority.");
+            return;
         }
 
-        if (UserName.InputValue != null && _userManager.IsValidUser(UserName.InputValue, Password, SelectedUserLevel!.Id))
+        if (!_userManager.IsValidUser(UserName.InputValue, Password, SelectedUserLevel!.Id)) 
         {
-            IRegion region = _regionManager.Regions["UserContentRegion"];
-            region.RequestNavigate("MainView");
+            _eventAggregator.GetEvent<NotificationEvent>().Publish("Unauthorized user. Please re-enter the username and password.");
+            return;
+        }
 
-            _eventAggregator.GetEvent<CurrentUserEvent>().Publish(new Dictionary<string, dynamic>()
-            {
-                { "UserNoId", _userManager.GetCurrentUserId(UserName.InputValue, Password, _selectedUserLevel.Id) },
-                { "SelectedUserLevelId", _selectedUserLevel.Id  }
-            });
-        }
-        else 
+        IRegion region = _regionManager.Regions["UserContentRegion"];
+        region.RequestNavigate("MainView");
+
+        _eventAggregator.GetEvent<CurrentUserEvent>().Publish(new Dictionary<string, dynamic>()
         {
-            _eventAggregator.GetEvent<NotificationEvent>().Publish("Fail to login !");
-        }
+            { "UserNoId", _userManager.GetCurrentUserId(UserName.InputValue, Password, _selectedUserLevel.Id) },
+            { "SelectedUserLevelId", _selectedUserLevel.Id  }
+        });
+
+        _eventAggregator.GetEvent<NotificationEvent>().Publish("Login successfully");
     }
 
     private void OnPasswordDisplay() 

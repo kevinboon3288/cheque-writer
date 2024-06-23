@@ -1,5 +1,4 @@
 ﻿global using ChequeWriter.Modules.CommonModule.Events;
-global using ChequeWriter.Modules.NotificationModule.Core;
 global using ChequeWriter.Modules.NotificationModule.Models;
 global using ChequeWriter.Modules.NotificationModule.ViewModels;
 global using ChequeWriter.Modules.NotificationModule.Views;

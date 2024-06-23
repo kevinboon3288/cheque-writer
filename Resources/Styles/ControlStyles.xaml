@@ -823,4 +823,38 @@
         <Setter Property="Margin" Value="23,70,0,0" />
     </Style>
 
+    <Style x:Key="NotificationMessageTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Sora"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="NotificationBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <!-- Fade-in animation -->
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     From="0" To="1" Duration="0:0:0.5"/>
+                        <!-- Fade-out animation -->
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     From="1" To="0" Duration="0:0:0.5" BeginTime="0:0:4.5"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>
