@@ -1,4 +1,5 @@
-﻿namespace ChequeWriter.Modules.ChequeModule;
+﻿
+namespace ChequeWriter.Modules.ChequeModule;
 
 public class ChequeModule : IModule
 {
@@ -24,5 +25,6 @@ public class ChequeModule : IModule
 
         ViewModelLocationProvider.Register<ChequeView, ChequeViewModel>();
         ViewModelLocationProvider.Register<ChequeManagementView, ChequeManagementViewModel>();
+        ViewModelLocationProvider.Register<ChequePreviewView, ChequePreviewViewModel>();
     }
 }

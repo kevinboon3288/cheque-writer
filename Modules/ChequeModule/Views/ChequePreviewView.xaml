@@ -17,67 +17,60 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Style="{StaticResource MiddleGridLayoutStyle}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Preview" Style="{StaticResource ChequeViewPreviewTitleStyle}"/>
-        <StackPanel Grid.Row="1" Style="{StaticResource ChequeViewPreviewContentStyle}"  HorizontalAlignment="Center">
-            <Canvas>
-                <Line X1="20" Y1="70"
-                        X2="250" Y2="70"
-                        Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
-                <Line X1="20" Y1="95"
-                        X2="250" Y2="95"
-                        Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
-                <Line X1="20" Y1="120"
-                        X2="250" Y2="120"
-                        Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
-                <Line X1="200" Y1="170"
-                        X2="400" Y2="170"
-                        Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
-                <Rectangle x:Name="chequeBorderRect" Style="{StaticResource ChequeViewPreviewCanvasRectangleStyle}" />
-            </Canvas>
+    <Border HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{StaticResource Primary}" BorderThickness="5" Background="White">
+        <Grid Style="{StaticResource MiddleGridLayoutStyle}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="1"  Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" Height="50">
+                <TextBlock Text="Date:" Style="{StaticResource ChequeViewPreviewDateStyle}" VerticalAlignment="Bottom"/>
+                <Line X1="10" Y1="20"
+				      X2="250" Y2="20"
+				      Style="{StaticResource ChequeViewPreviewCanvasLineStyle}"  VerticalAlignment="Bottom"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" HorizontalAlignment="Right">
+                <TextBlock Text="PAYEE" Style="{StaticResource ChequeViewPreviewPayeeStyle}"/>
+                <Line X1="0" Y1="10"
+	                  X2="400" Y2="10"
+	                  Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical" Margin="10" HorizontalAlignment="Right">
+                <TextBlock Text="RINGGIT MALAYSIA" Style="{StaticResource ChequeViewPreviewWordCurrencyStyle}"
+                           HorizontalAlignment="Left"/>
+                <Line X1="0" Y1="10"
+	                  X2="400" Y2="10"
+	                  Style="{StaticResource ChequeViewPreviewCanvasLineStyle}" />
+            </StackPanel>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                     Width="300"
+                     Height="60"
+                     Margin="10"
+                     IsReadOnly="True"
+                     HorizontalAlignment="Left"/>
+            <TextBlock Grid.Row="1"
+				       Grid.Column="1"
+				       Grid.RowSpan="2"
+				       Text="RM" 
+                       VerticalAlignment="Center"
+                       Margin="20,0"
+				       Style="{StaticResource ChequeViewPreviewNumericCurrencyStyle}" />
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Vertical" Margin="10" HorizontalAlignment="Right" Height="60">
+                <Line Grid.Row="4" Grid.Column="1"
+                      X1="0" Y1="20"
+				      X2="300" Y2="20"
+				      Style="{StaticResource ChequeViewPreviewCanvasLineStyle}"/>
+                <TextBlock Text="NO SIGNATURE BELOW THIS LINE" Style="{StaticResource ChequeViewPreviewWordBelowSignLineStyle}"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="48"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="1"
-                            Text="PAYEE" 
-                            Style="{StaticResource ChequeViewPreviewPayeeStyle}" />
-                <TextBlock Grid.Row="2"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="1"
-                            Text="RINGGIT MALAYSIA" 
-                            Style="{StaticResource ChequeViewPreviewWordCurrencyStyle}" />
-                <TextBlock Grid.Row="0"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="1"
-                            Text="DATE" 
-                            Style="{StaticResource ChequeViewPreviewDateStyle}" />
-                <TextBlock Grid.Row="2"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="1"
-                            Text="RM" 
-                            Style="{StaticResource ChequeViewPreviewNumericCurrencyStyle}" />
-                <TextBlock Grid.Row="3"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="2"
-                            Text="NO SIGNATURE BELOW THIS LINE"
-                            Style="{StaticResource ChequeViewPreviewWordBelowSignLineStyle}" />
-            </Grid>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </Border>
 </UserControl>
