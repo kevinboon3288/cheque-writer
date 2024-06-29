@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Microsoft.Identity.Client.NativeInterop;
+using System.Globalization;
 
 namespace ChequeWriter.Modules.ChequeModule.ViewModels;
 
@@ -64,14 +65,23 @@ public class ChequePreviewViewModel: BindableBase, INavigationAware
             return;
         }
 
-        if (chequeEventArgs.TryGetValue("Payee", out dynamic? payee) &&
-            chequeEventArgs.TryGetValue("Amount", out dynamic? amount) &&
-            chequeEventArgs.TryGetValue("AmountInWords", out dynamic? amountInWords) &&
-            chequeEventArgs.TryGetValue("DateCreated", out dynamic? dateCreated)) 
+        if (chequeEventArgs.TryGetValue(nameof(Payee), out dynamic? payee)) 
         {
             Payee = payee;
+        }
+
+        if (chequeEventArgs.TryGetValue(nameof(Amount), out dynamic? amount))
+        {
             Amount = (double)amount;
+        }
+
+        if (chequeEventArgs.TryGetValue(nameof(AmountInWords), out dynamic? amountInWords))
+        {
             AmountInWords = amountInWords;
+        }
+
+        if (chequeEventArgs.TryGetValue(nameof(DateCreated), out dynamic? dateCreated))
+        {
             DateCreated = dateCreated;
         }
     }
