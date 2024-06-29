@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Border HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{StaticResource Primary}" BorderThickness="5" Background="White">
+    <Border Style="{StaticResource ChequePreviewBorderStyle}">
         <Grid Style="{StaticResource MiddleGridLayoutStyle}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -33,16 +33,31 @@
             
             <!--Date Section-->
             <StackPanel Grid.Row="0" Grid.Column="1"  Style="{StaticResource ChequePreviewDateStackPanelStyle}">
-                <TextBlock Text="Date:" Style="{StaticResource ChequePreviewDateTextBlockStyle}"/>
-                <Line X1="10" Y1="20"
-				      X2="250" Y2="20"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Date:" Style="{StaticResource ChequePreviewDateTextBlockStyle}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding DateCreated}" Style="{StaticResource ChequePreviewPayeeTextBlockStyle}" HorizontalAlignment="Center" />
+                </Grid>
+                <Line X1="20" Y1="5"
+				      X2="250" Y2="5"
                       VerticalAlignment="Bottom"
 				      Style="{StaticResource ChequePreviewCanvasLineStyle}"  />
             </StackPanel>
             
             <!--Payee Section-->
             <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource ChequePreviewStackPanelStyle}">
-                <TextBlock Text="PAYEE" Style="{StaticResource ChequePreviewPayeeTextBlockStyle}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="PAYEE" Style="{StaticResource ChequePreviewPayeeTextBlockStyle}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Payee}" Style="{StaticResource ChequePreviewPayeeTextBlockStyle}" 
+                               Width="300" HorizontalAlignment="Center" />
+                </Grid>
                 <Line X1="0" Y1="10"
 	                  X2="400" Y2="10"
 	                  Style="{StaticResource ChequePreviewCanvasLineStyle}" />
@@ -50,7 +65,15 @@
             
             <!--Currency Section-->
             <StackPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource ChequePreviewStackPanelStyle}">
-                <TextBlock Text="RINGGIT MALAYSIA" Style="{StaticResource ChequePreviewCurrencyTextBlockStyle}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="RINGGIT MALAYSIA" Style="{StaticResource ChequePreviewCurrencyTextBlockStyle}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding AmountInWords}" Style="{StaticResource ChequePreviewPayeeTextBlockStyle}" 
+                               Width="300" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                </Grid>
                 <Line X1="0" Y1="10"
 	                  X2="400" Y2="10"
 	                  Style="{StaticResource ChequePreviewCanvasLineStyle}" />
@@ -58,16 +81,15 @@
             
             <!--Amount Section-->
             <TextBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource ChequePreviewCurrencyTextBoxStyle}"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Text="RM" Style="{StaticResource ChequePreviewNumericCurrencyTextBlockStyle}" />
             
             <!--Signature Section-->
             <StackPanel Grid.Row="4" Grid.Column="1" Height="60" Style="{StaticResource ChequePreviewStackPanelStyle}">
-                <Line X1="0" Y1="20"
-				      X2="300" Y2="20"
+                <Line X1="0" Y1="30"
+				      X2="300" Y2="30"
 				      Style="{StaticResource ChequePreviewCanvasLineStyle}"/>
                 <TextBlock Text="NO SIGNATURE BELOW THIS LINE" Style="{StaticResource ChequePreviewSignatureTextBlockStyle}"/>
             </StackPanel>
-            
+
         </Grid>
     </Border>
 </UserControl>
