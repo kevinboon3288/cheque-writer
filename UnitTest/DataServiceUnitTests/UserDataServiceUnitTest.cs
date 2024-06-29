@@ -115,40 +115,29 @@ public class UserDataServiceUnitTest
     }
 
     [Test]
-    public void GetCurrentUserId_ReturnId_WithUserInfo()
+    public void GetUserInfo_ReturnUser_WithExistUserInfo()
     {
         // Act
-        int userNoId = _dataService.GetCurrentUserId("Bob", "bob123", 1);
+        User? result = _dataService.GetUserByInfo("Bob", 1);
 
         // Assert
-        Assert.That(userNoId, Is.EqualTo(1));
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Id, Is.EqualTo(1));
+        Assert.That(result.Name, Is.Not.Null);
+        Assert.That(result.Name, Is.EqualTo("Bob"));
+        Assert.That(result.Password, Is.Not.Null);
+        Assert.That(result.Password, Is.EqualTo("bob123"));
+        Assert.That(result.UserLevelId, Is.EqualTo(1));
     }
 
     [Test]
-    public void GetCurrentUserId_ThrowDataServiceException_InvalidUserInfo()
-    {
-        // Assert
-        Assert.Throws<DataServiceException>(() => _dataService.GetCurrentUserId("Kevin", "kevin123", 1));
-    }
-
-    [Test]
-    public void IsValidUser_ReturnTrue_WithExistUserInfo()
+    public void GetUserInfo_ReturnNull_WithInvalidUserInfo()
     {
         // Act
-        bool result = _dataService.IsValidUser("Bob", "bob123", 1);
+        User? result = _dataService.GetUserByInfo("Kevin", 1);
 
         // Assert
-        Assert.That(result, Is.True);
-    }
-
-    [Test]
-    public void IsValidUser_ReturnFalse_WithInvalidUserInfo()
-    {
-        // Act
-        bool result = _dataService.IsValidUser("Kevin", "admin123", 1);
-
-        // Assert
-        Assert.That(result, Is.False);
+        Assert.That(result, Is.Null);
     }
 
     [Test]

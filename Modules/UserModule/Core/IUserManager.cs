@@ -3,7 +3,7 @@
 public interface IUserManager
 {
     List<UserLevel> GetUserLevels();
-    int GetCurrentUserId(string name, string password, int userLevel);
+    int? GetCurrentUserId(string name, string password, int userLevel);
     bool IsValidUser(string name, string password, int userLevel);
     bool IsExistUser(string name, int userLevel);
     List<User> GetAllUsers();
