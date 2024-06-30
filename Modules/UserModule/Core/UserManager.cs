@@ -1,4 +1,6 @@
-﻿namespace ChequeWriter.Modules.UserModule.Core;
+﻿using ChequeWriter.GenericModels.Common.Utils;
+
+namespace ChequeWriter.Modules.UserModule.Core;
 
 public class UserManager : IUserManager
 {
@@ -32,11 +34,19 @@ public class UserManager : IUserManager
         }
     }
 
-    public int GetCurrentUserId(string name, string password, int userLevel)
+    public int? GetCurrentUserId(string name, string password, int userLevel)
     {
         try
         {
-            return _dataService.GetCurrentUserId(name, password, userLevel);
+            var foundUser = _dataService.GetUserByInfo(name, userLevel);
+
+            if (foundUser != null && !string.IsNullOrEmpty(foundUser.Password) && 
+                EncryptionToolUtils.VerifyPassword(password, foundUser.Password))
+            {
+                return foundUser.Id;
+            }
+
+            return null;
         }
         catch (Exception ex)
         {
@@ -48,7 +58,14 @@ public class UserManager : IUserManager
     {
         try
         {
-            return _dataService.IsValidUser(name, password, userLevel);
+            var foundUser = _dataService.GetUserByInfo(name, userLevel);
+
+            if (foundUser != null && !string.IsNullOrEmpty(foundUser.Password)) 
+            {
+                return EncryptionToolUtils.VerifyPassword(password, foundUser.Password);
+            }
+
+            return false;
         }
         catch (Exception ex)
         {
@@ -100,7 +117,7 @@ public class UserManager : IUserManager
     {
         try
         {
-            return _dataService.AddUser(userName, password, jobTitle, userLevel, currentUserId);
+            return _dataService.AddUser(userName, EncryptionToolUtils.EncryptedPassword(password), jobTitle, userLevel, currentUserId);
         }
         catch (Exception ex)
         {

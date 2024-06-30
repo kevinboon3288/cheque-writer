@@ -98,11 +98,19 @@ public class UserLoginViewModel: BindableBase, INavigationAware
         IRegion region = _regionManager.Regions["UserContentRegion"];
         region.RequestNavigate("MainView");
 
-        _eventAggregator.GetEvent<CurrentUserEvent>().Publish(new Dictionary<string, dynamic>()
+        int? userId = _userManager.GetCurrentUserId(UserName.InputValue, Password, _selectedUserLevel.Id);
+        if (userId != null) 
         {
-            { "UserNoId", _userManager.GetCurrentUserId(UserName.InputValue, Password, _selectedUserLevel.Id) },
-            { "SelectedUserLevelId", _selectedUserLevel.Id  }
-        });
+            _eventAggregator.GetEvent<CurrentUserEvent>().Publish(new Dictionary<string, dynamic>()
+            {
+                { "UserNoId", userId.Value },
+                { "SelectedUserLevelId", _selectedUserLevel.Id  }
+            });        
+        }
+        else 
+        {
+            _eventAggregator.GetEvent<NotificationEvent>().Publish($"Unable to find the user with {UserName.InputValue}");
+        }
 
         _eventAggregator.GetEvent<NotificationEvent>().Publish("Login successfully");
     }

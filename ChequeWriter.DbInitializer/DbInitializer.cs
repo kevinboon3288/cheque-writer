@@ -1,4 +1,6 @@
-﻿namespace ChequeWriter.DbInitializer;
+﻿using ChequeWriter.GenericModels.Common.Utils;
+
+namespace ChequeWriter.DbInitializer;
 
 public static class DbInitializer
 {
@@ -25,7 +27,7 @@ public static class DbInitializer
     private static void AddDefaultAdminUser(ChequeWriterDbContext db) 
     {
         DataServices.Models.UserLevel? userLevel = db.UserLevel.FirstOrDefault(x => x.Name == "Admin");
-        db.User.Add(new DataServices.Models.User() { Name = "Admin", UserId = Guid.NewGuid(), Password="admin123", JobTitle = "Admin", CreatedBy = 0, UserLevel = userLevel });
+        db.User.Add(new DataServices.Models.User() { Name = "Admin", UserId = Guid.NewGuid(), Password=EncryptionToolUtils.EncryptedPassword("admin123"), JobTitle = "Admin", CreatedBy = 0, UserLevel = userLevel });
         db.SaveChanges();
     }
 

@@ -83,37 +83,17 @@ public class DataService : IDataService
         return userLevels;
     }
 
-    public int GetCurrentUserId(string? name, string? password, int userLevel)
+    public User? GetUserByInfo(string? name, int userLevel) 
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
         var queryResult =
             from u in db.User
             join ul in db.UserLevel on u.UserLevelId equals ul.Id
-            where u.Name == name && u.Password == password && u.UserLevelId == userLevel
+            where u.Name == name && u.UserLevelId == userLevel
             select u;
 
-        User? currentUser = queryResult.ToList().FirstOrDefault();
-
-        if (currentUser == null) 
-        {
-            throw new DataServiceException($"Couldn't find the user with {name}");
-        }
-
-        return currentUser.Id;
-    }
-
-    public bool IsValidUser(string? name, string? password, int userLevel) 
-    {
-        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
-
-        var queryResult =
-            from u in db.User
-            join ul in db.UserLevel on u.UserLevelId equals ul.Id
-            where u.Name == name && u.Password == password && u.UserLevelId == userLevel
-            select u;
-
-        return queryResult.ToList().Count != 0;
+        return queryResult.ToList().FirstOrDefault();
     }
 
     public bool IsExistUser(string? name, int userLevel)
