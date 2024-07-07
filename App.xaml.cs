@@ -10,7 +10,6 @@ using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
 using System.Configuration;
-using System.IO;
 using System.Runtime.Versioning;
 using System.Windows;
 using Unity;
@@ -77,6 +76,8 @@ namespace ChequeWriter
         private static void ConfigureOptions(IServiceCollection services)
         {
             string? connectionString = ConfigurationManager.ConnectionStrings["cheque-writer-ui"].ConnectionString;
+
+            ArgumentNullException.ThrowIfNullOrEmpty("Connection string is null or empty in app configuration file.", connectionString);
 
             ChequeWriterOption customOptions = new ChequeWriterOption
             {
