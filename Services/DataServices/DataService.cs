@@ -13,16 +13,10 @@ public class DataServiceException : Exception
 public class DataService : IDataService
 {
     private const string DbName = "cheque-writer-ui";
-    private string _connectionString = "Host=localhost;Database=cheque-writer-ui;Username=postgres;Password=postgres";
+    private string _connectionString;
     private readonly IDesignTimeDbContextFactory<ChequeWriterDbContext> _dbContextFactory;
 
-    public DataService(IDesignTimeDbContextFactory<ChequeWriterDbContext> dbContextFactory)
-    {
-        _dbContextFactory = dbContextFactory;
-    }
-
-    //TODO: This constructor is used for unit test configuration with SQL Lite database purpose
-    public DataService(IDesignTimeDbContextFactory<ChequeWriterDbContext> dbContextFactory,IOptions<ChequeWriterOption> options)
+    public DataService(IDesignTimeDbContextFactory<ChequeWriterDbContext> dbContextFactory, IOptions<ChequeWriterOption> options)
     {
         if (options.Value.ConnectionString == null || !options.Value.ConnectionString.TryGetValue(DbName, out string? connectionString)) 
         {

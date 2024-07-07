@@ -2,11 +2,14 @@
 using ChequeWriter.Modules.UserModule.Core;
 using DataServices;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
+using System.Configuration;
 using System.Runtime.Versioning;
 using System.Windows;
 using Unity;
@@ -26,9 +29,15 @@ namespace ChequeWriter
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            ServiceCollection serviceCollection = new ServiceCollection();
+            ConfigureOptions(serviceCollection);
+
+            ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+
+            containerRegistry.RegisterInstance(serviceProvider.GetService<IOptions<ChequeWriterOption>>());
+            containerRegistry.Register<IDesignTimeDbContextFactory<ChequeWriterDbContext>, ChequeWriterDbContextFactory>();
             containerRegistry.Register<IChequeManager, ChequeManager>();
             containerRegistry.Register<IUserManager, UserManager>();
-            containerRegistry.Register<IDesignTimeDbContextFactory<ChequeWriterDbContext>, ChequeWriterDbContextFactory>();
             containerRegistry.Register<IDataService, DataService>();
 
             IEventAggregator eventAggregator = containerRegistry.GetContainer().Resolve<IEventAggregator>();
@@ -62,6 +71,23 @@ namespace ChequeWriter
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
+        }
+
+        private static void ConfigureOptions(IServiceCollection services)
+        {
+            string? connectionString = ConfigurationManager.ConnectionStrings["cheque-writer-ui"].ConnectionString;
+
+            ArgumentNullException.ThrowIfNullOrEmpty("Connection string is null or empty in app configuration file.", connectionString);
+
+            ChequeWriterOption customOptions = new ChequeWriterOption
+            {
+                ConnectionString = new Dictionary<string, string>() { { "cheque-writer-ui", connectionString } }
+            };
+
+            services.Configure<ChequeWriterOption>(options =>
+            {
+                options.ConnectionString = customOptions.ConnectionString;
+            });
         }
     }
 }
