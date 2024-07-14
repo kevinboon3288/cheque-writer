@@ -24,7 +24,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Margin="50, 10" Padding="20" BorderThickness="5" BorderBrush="Black" CornerRadius="5" Background="{StaticResource Tertiary}">
+        <Border Grid.Row="0" Style="{StaticResource UserAdderBorderStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -40,7 +40,7 @@
                            Text="UserName :" 
                            Style="{StaticResource UserLoginTitleTextStyle}"/>
                 <TextBox Grid.Row="0" Grid.Column="1" 
-                            Text="{Binding UserName}" 
+                            Text="{Binding UserName.InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
                             Style="{StaticResource UserNameTextBoxStyle}"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" 
                             Text="Password :" 
@@ -60,7 +60,7 @@
                             Text="Job Title :" 
                             Style="{StaticResource UserLoginTitleTextStyle}"/>
                 <TextBox Grid.Row="2" Grid.Column="1" 
-                        Text="{Binding JobTitle}" 
+                        Text="{Binding JobTitle.InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
                         Style="{StaticResource UserJobTitleTextBoxStyle}"/>
                 <TextBlock Grid.Row="3" Grid.Column="0" 
                             Text="Authority :" 
