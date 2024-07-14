@@ -7,13 +7,13 @@ public class UserAdderViewModel: BindableBase, INavigationAware
     private readonly IUserManager _userManager;
     private List<UserLevel> _userLevels = new();
     private UserLevel? _selectedUserLevel = new();
-    private string? _userName;
-    private string? _jobTitle;
+    private NewUserInputParameter _userName = new();
+    private NewUserInputParameter _jobTitle = new();
     private string? _password;
     private bool _isVisible;
     private int? _currentUserId;
 
-    public string? UserName
+    public NewUserInputParameter UserName
     {
         get { return _userName; }
         set { SetProperty(ref _userName, value); }
@@ -31,7 +31,7 @@ public class UserAdderViewModel: BindableBase, INavigationAware
         set { SetProperty(ref _isVisible, value); }
     }
 
-    public string? JobTitle
+    public NewUserInputParameter JobTitle
     {
         get { return _jobTitle; }
         set { SetProperty(ref _jobTitle, value); }
@@ -85,11 +85,11 @@ public class UserAdderViewModel: BindableBase, INavigationAware
 
     private void OnRefresh()
     {
-        UserName = String.Empty;
+        UserName = new NewUserInputParameter();
+        JobTitle = new NewUserInputParameter();
         Password = String.Empty;
-        JobTitle = String.Empty;
         IsVisible = false;
-        SelectedUserLevel = new();
+        SelectedUserLevel = null;
         UserLevels = _userManager.GetUserLevels();
 
         OnClearPasswordReceived();
@@ -103,20 +103,41 @@ public class UserAdderViewModel: BindableBase, INavigationAware
 
     private void OnAddUser()
     {
-        if (SelectedUserLevel != null && !string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password)) 
+        if (_currentUserId == null)
         {
-            if (_currentUserId == null) 
-            {
-                throw new ArgumentNullException($"Empty current user is defined in {nameof(OnAddUser)}");
-            }
+            throw new ArgumentNullException($"Empty current user is defined in {nameof(OnAddUser)}");
+        }
 
-            if (!_userManager.IsExistUser(UserName, SelectedUserLevel.Id))
-            {
-                _userManager.AddUser(UserName, Password, JobTitle, SelectedUserLevel.Id, _currentUserId.Value);
+        if (string.IsNullOrEmpty(UserName.InputValue)) 
+        {
+            _eventAggregator.GetEvent<NotificationEvent>().Publish("Please enter a new user name.");
+            return;
+        }
 
-                IRegion region = _regionManager.Regions["ModuleContentRegion"];
-                region.RequestNavigate("UserManagementView");            
-            }
+        if (string.IsNullOrEmpty(Password))
+        {
+            _eventAggregator.GetEvent<NotificationEvent>().Publish("Please set a password.");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(JobTitle.InputValue))
+        {
+            _eventAggregator.GetEvent<NotificationEvent>().Publish("Please provide a job title.");
+            return;
+        }
+
+        if (SelectedUserLevel == null) 
+        {
+            _eventAggregator.GetEvent<NotificationEvent>().Publish("Please register an authority for the new user.");
+            return;
+        }
+
+        if (!_userManager.IsExistUser(UserName.InputValue, SelectedUserLevel.Id))
+        {
+            _userManager.AddUser(UserName.InputValue, Password, JobTitle.InputValue, SelectedUserLevel.Id, _currentUserId.Value);
+
+            IRegion region = _regionManager.Regions["ModuleContentRegion"];
+            region.RequestNavigate("UserManagementView");            
         }
     }
 
@@ -132,5 +153,23 @@ public class UserAdderViewModel: BindableBase, INavigationAware
 
     public void OnNavigatedFrom(NavigationContext navigationContext)
     {
+    }
+
+    public class NewUserInputParameter : UserInputNotifyDataErrorInfo
+    {
+        private string? _inputValue;
+
+        public string? InputValue
+        {
+            get { return _inputValue; }
+            set
+            {
+                SetProperty(ref _inputValue, value);
+                if (value != null)
+                {
+                    Validate(nameof(InputValue), value);
+                }
+            }
+        }
     }
 }

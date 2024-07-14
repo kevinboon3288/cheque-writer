@@ -112,6 +112,15 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <Style x:Key="UserAdderBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="Margin" Value="50,10" />
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="BorderThickness" Value="5" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Background" Value="{StaticResource Tertiary}" />
+    </Style>
+    
     <Style x:Key="RoundBtnStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="50" />
@@ -427,6 +436,16 @@
                         <Trigger Property="IsKeyboardFocused" Value="False">
                             <Setter Property="Foreground" Value="Gray"/>
                             <Setter TargetName="UserJobTitleText" Property="Text" Value="Enter a job title"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)/ErrorContent}"/>
+                            <Setter TargetName="UserJobTitleTextBoxBorder" Property="Background" Value="White" />
+                            <Setter TargetName="UserJobTitleTextBoxBorder" Property="BorderBrush" Value="Red"/>
+                            <Setter TargetName="UserJobTitleTextBoxBorder" Property="BorderThickness" Value="2"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="False">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

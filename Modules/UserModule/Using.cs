@@ -3,6 +3,7 @@ global using ChequeWriter.Modules.UserModule.ViewModels;
 global using ChequeWriter.Modules.UserModule.Models;
 global using ChequeWriter.Modules.CommonModule.Events;
 global using ChequeWriter.Modules.UserModule.Core;
+global using CommonModule.ValidationRules;
 global using DataServices;
 global using Prism.Ioc;
 global using Prism.Modularity;
