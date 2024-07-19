@@ -6,6 +6,6 @@ public interface IChequeManager
 
     void AddCheque(Cheque cheque);
     void DeleteCheque(int id);
-    Cheque? GetCheque(int id);
+    Cheque? GetChequeById(int id);
     void UpdateCheque(Cheque cheque);
 }

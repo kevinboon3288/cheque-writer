@@ -3,43 +3,33 @@
 public class ChequeManager : IChequeManager
 {
     private readonly IDataService _dataService;
-    private List<Cheque> _cheques = new();
-
-    public List<Cheque> Cheques => _cheques;
+    
 
     public ChequeManager(IDataService dataService)
     {
         _dataService = dataService;
     }
 
-    public Cheque? GetCheque(int id)
+    public Cheque? GetChequeById(int id)
     {
-        return _cheques.Any(x => x.Id == id) ? _cheques[id] : null;
+        var cheque = _dataService.GetChequeById(id);
+
+        return new Cheque() { Name = cheque!.Name!, Amount = cheque.Amount, Id = cheque.Id, DateCreated = cheque.DateCreated };
     }
 
     public void AddCheque(Cheque cheque)
     {
-        if (!_cheques.Any(x => x.Id == cheque.Id))
-        {
-            _cheques.Add(cheque);
-        }
+        _dataService.AddCheque(cheque);
     }
 
     public void UpdateCheque(Cheque cheque)
     {
-        Cheque? selectedCheque = _cheques.FirstOrDefault(x => x.Id == cheque.Id);
-
-        if (selectedCheque != null)
-        {
-            selectedCheque.Name = cheque.Name;
-            selectedCheque.Amount = selectedCheque.Amount;
-            selectedCheque.DateCreated = cheque.DateCreated;
-        }
+        _dataService.UpdateCheque(cheque);
     }
 
     public void DeleteCheque(int id)
     {
-        Cheque? selectedCheque = _cheques.FirstOrDefault(x => x.Id == id);
+        Cheque? selectedCheque = GetChequeById(id);
 
         if (selectedCheque != null)
         {
