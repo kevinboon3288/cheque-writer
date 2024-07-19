@@ -2,7 +2,13 @@
 
 public interface IDataService
 {
-    Cheque? GetCheques(int id);
+    #region ChequeModule
+    List<Cheque>? GetCheques();
+    Cheque? GetChequeById(int id);
+    void AddCheque(Cheque cheque);
+    void UpdateCheque(Cheque cheque);
+    #endregion
+    #region UserModule
     string? GetUserLevelNameById(int id);
     List<UserLevel>? GetUserLevels();
     int GetCurrentUserId(string? name, string? password, int userLevel);
@@ -11,4 +17,5 @@ public interface IDataService
     List<User> GetAllUsers();
     int AddUser(string userName, string password, string? jobTitle, int userLevel, int currentUserId);
     int DeleteUser(int userId);
+    #endregion
 }

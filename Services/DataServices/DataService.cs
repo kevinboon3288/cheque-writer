@@ -35,7 +35,20 @@ public class DataService : IDataService
 
     #region ChequeModule
 
-    public Cheque? GetCheques(int id)
+    public List<Cheque>? GetCheques()
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        var queryResult =
+            from c in db.Cheque
+            select c;
+
+        List<Cheque>? cheques = queryResult.ToList();
+
+        return cheques;
+    }
+
+    public Cheque? GetChequeById(int id)
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
@@ -45,6 +58,36 @@ public class DataService : IDataService
             select c;
 
         return queryResult.ToList().FirstOrDefault();
+    }
+
+    public void AddCheque(Cheque cheque)
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        db.Cheque.Add(cheque);
+        db.SaveChanges();
+    }
+
+    public void UpdateCheque(Cheque cheque)
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        db.Cheque.Update(selectedCheque);
+        db.SaveChanges();
+    }
+
+    public void DeleteCheque(int chequeId)
+    {
+        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
+
+        Cheque? selectedCheque = db.Cheque.SingleOrDefault(c => c.Id == chequeId);
+        if (selectedCheque == null)
+        {
+            throw new DataServiceException($"Cheque not found, cannot be deleted: {chequeId}");
+        }
+
+        db.Cheque.Remove(selectedCheque);
+        db.SaveChanges();
     }
 
     #endregion
