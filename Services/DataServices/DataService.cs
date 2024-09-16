@@ -1,4 +1,6 @@
-﻿namespace DataServices;
+﻿using DataServices.Models;
+
+namespace DataServices;
 
 public class DataServiceException : Exception
 {
@@ -29,7 +31,7 @@ public class DataService : IDataService
 
     #region ChequeModule
 
-    public List<Cheque>? GetCheques()
+    public List<Cheque>? GetAllCheques()
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
@@ -37,9 +39,7 @@ public class DataService : IDataService
             from c in db.Cheque
             select c;
 
-        List<Cheque>? cheques = queryResult.ToList();
-
-        return cheques;
+        return queryResult.ToList();
     }
 
     public Cheque? GetChequeById(int id)
@@ -54,23 +54,30 @@ public class DataService : IDataService
         return queryResult.ToList().FirstOrDefault();
     }
 
-    public void AddCheque(Cheque cheque)
+    public int AddCheque(string name, double amount, DateTime? dateCreated, int userId)
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
-        db.Cheque.Add(cheque);
-        db.SaveChanges();
+        Cheque newCheque = new Cheque()
+        {
+            Name = name,
+            Amount = amount,
+            DateCreated = dateCreated,
+            UserId = userId
+        };
+
+        db.Cheque.Add(newCheque);
+
+        int result = db.SaveChanges();
+        if (result == 0)
+        {
+            throw new DataServiceException("Couldn't add a new user to User table");
+        }
+
+        return newCheque.Id;
     }
 
-    public void UpdateCheque(Cheque cheque)
-    {
-        using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
-
-        db.Cheque.Update(selectedCheque);
-        db.SaveChanges();
-    }
-
-    public void DeleteCheque(int chequeId)
+    public int DeleteCheque(int chequeId)
     {
         using ChequeWriterDbContext db = _dbContextFactory.CreateDbContext([_connectionString]);
 
@@ -81,7 +88,9 @@ public class DataService : IDataService
         }
 
         db.Cheque.Remove(selectedCheque);
-        db.SaveChanges();
+        int result = db.SaveChanges();
+
+        return result;
     }
 
     #endregion
