@@ -101,23 +101,23 @@ public class ChequeDataServiceUnitTest
         // Act
         int newChequeId = _dataService.AddCheque("E&E Company", 178.45, DateTime.Now, 1);
 
-        bool isNewUserAdded = _dataService.GetAllCheques().Any(x => x.Id == newChequeId);
+        bool isNewChequeAdded = _dataService.GetAllCheques().Any(x => x.Id == newChequeId);
 
         // Assert
         Assert.That(newChequeId, Is.EqualTo(2));
-        Assert.That(isNewUserAdded, Is.True);
+        Assert.That(isNewChequeAdded, Is.True);
     }
 
     [Test]
     public void DeleteCheque_ReturnTrue_WithExistCheque()
     {
         // Act
-        _dataService.DeleteUser(1);
+        _dataService.DeleteCheque(1);
 
-        bool isDeletedUserFound = _dataService.GetAllCheques().Any(x => x.Id == 1);
+        bool isDeletedChequeFound = _dataService.GetAllCheques().Any(x => x.Id == 1);
 
         // Assert
-        Assert.That(isDeletedUserFound, Is.False);
+        Assert.That(isDeletedChequeFound, Is.False);
     }
 
     [Test]
