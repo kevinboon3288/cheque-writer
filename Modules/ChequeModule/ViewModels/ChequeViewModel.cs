@@ -32,6 +32,11 @@ public class ChequeViewModel : BindableBase, INavigationAware
     public void OnNavigatedTo(NavigationContext navigationContext)
     {
         _eventAggregator.GetEvent<HeaderTitleUIControlEvent>().Publish("Cheque");
+
+        IRegion region1 = _regionManager.Regions["ChequeFormContentRegion"];
+        region1.RequestNavigate("ChequeFormView");
+        IRegion region2 = _regionManager.Regions["ChequePreviewContentRegion"];
+        region2.RequestNavigate("ChequePreviewView");
     }
 
     public bool IsNavigationTarget(NavigationContext navigationContext)

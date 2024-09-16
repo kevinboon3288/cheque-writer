@@ -70,14 +70,16 @@ public class ChequePreviewViewModel: BindableBase, INavigationAware
             Payee = payee;
         }
 
-        if (chequeEventArgs.TryGetValue(nameof(Amount), out dynamic? amount))
+        if (chequeEventArgs.TryGetValue(nameof(Amount), out dynamic? amountString))
         {
-            Amount = (double)amount;
-        }
+            if (!double.TryParse(amountString, out double amount)) 
+            {
+                _eventAggregator.GetEvent<NotificationEvent>().Publish("Unable to convert amount to double");
+                return;
+            }
 
-        if (chequeEventArgs.TryGetValue(nameof(AmountInWords), out dynamic? amountInWords))
-        {
-            AmountInWords = amountInWords;
+            Amount = amount;
+            AmountInWords = AmountUtils.Convert(amount);
         }
 
         if (chequeEventArgs.TryGetValue(nameof(DateCreated), out dynamic? dateCreated))
