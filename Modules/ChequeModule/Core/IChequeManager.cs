@@ -2,10 +2,8 @@
 
 public interface IChequeManager
 {
-    List<Cheque> Cheques { get; }
-
-    void AddCheque(Cheque cheque);
+    public List<Cheque> GetAllCheques();
+    void AddCheque(string name, double amount, DateTime? dateCreated, int userId);
     void DeleteCheque(int id);
-    Cheque? GetCheque(int id);
-    void UpdateCheque(Cheque cheque);
+    Cheque? GetChequeById(int id);
 }

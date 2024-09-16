@@ -2,7 +2,10 @@
 
 public interface IDataService
 {
-    Cheque? GetCheques(int id);
+    List<Cheque>? GetAllCheques();
+    Cheque? GetChequeById(int id);
+    int AddCheque(string name, double amount, DateTime? dateCreated, int userId);
+    int DeleteCheque(int chequeId);
     string? GetUserLevelNameById(int id);
     List<UserLevel>? GetUserLevels();
     User? GetUserByInfo(string? name, int userLevel);

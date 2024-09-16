@@ -3,48 +3,46 @@
 public class ChequeManager : IChequeManager
 {
     private readonly IDataService _dataService;
-    private List<Cheque> _cheques = new();
-
-    public List<Cheque> Cheques => _cheques;
+    
 
     public ChequeManager(IDataService dataService)
     {
         _dataService = dataService;
     }
 
-    public Cheque? GetCheque(int id)
+    public List<Cheque> GetAllCheques() 
     {
-        return _cheques.Any(x => x.Id == id) ? _cheques[id] : null;
+        List<Cheque> cheques = new List<Cheque>();
+
+        foreach (var cheque in _dataService.GetAllCheques()!) 
+        {
+            cheques.Add(new Cheque() 
+            { 
+                Id = cheque.Id,
+                Name = cheque.Name,
+                Amount = cheque.Amount,
+                DateCreated = cheque.DateCreated
+            });
+        }
+
+        return cheques;
     }
 
-    public void AddCheque(Cheque cheque)
+    public Cheque? GetChequeById(int id)
     {
-        if (!_cheques.Any(x => x.Id == cheque.Id))
-        {
-            _cheques.Add(cheque);
-        }
+        var cheque = _dataService.GetChequeById(id);
+
+        return new Cheque() { Name = cheque!.Name!, Amount = cheque.Amount, Id = cheque.Id, DateCreated = cheque.DateCreated };
     }
 
-    public void UpdateCheque(Cheque cheque)
+    public void AddCheque(string name, double amount, DateTime? dateCreated, int userId)
     {
-        Cheque? selectedCheque = _cheques.FirstOrDefault(x => x.Id == cheque.Id);
-
-        if (selectedCheque != null)
-        {
-            selectedCheque.Name = cheque.Name;
-            selectedCheque.Amount = selectedCheque.Amount;
-            selectedCheque.DateCreated = cheque.DateCreated;
-        }
+        int result = _dataService.AddCheque(name, amount, dateCreated, userId);
     }
 
     public void DeleteCheque(int id)
     {
-        Cheque? selectedCheque = _cheques.FirstOrDefault(x => x.Id == id);
-
-        if (selectedCheque != null)
-        {
-            _cheques.Remove(selectedCheque);
-        }
+        _dataService.DeleteCheque(id);
     }
 
     public static string TranslateToWord(double amount)

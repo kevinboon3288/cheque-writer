@@ -33,7 +33,7 @@ public class ChequeManagementViewModel: BindableBase, INavigationAware
 
     private void OnRefresh() 
     {
-        Cheques = new ObservableCollection<Cheque>(_chequeManager.Cheques);
+        Cheques = new ObservableCollection<Cheque>(_chequeManager.GetAllCheques());
     }
 
     private void OnReturn()
